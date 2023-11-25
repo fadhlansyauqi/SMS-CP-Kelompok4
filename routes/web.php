@@ -14,12 +14,32 @@
 Route::get('/', function() {
     return redirect(route('login'));
 });
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::get('/starter', function() {
     return view('starter');
 });
 
 Auth::routes(['verify' => false, 'reset' => false]);
 
-Route::middleware('auth')->group(function() {
+// auth general
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 });
+
+// auth admin
+Route::group(['middleware' => 'ADMIN'], function () {
+    Route::get('/admin/dashboard-admin', 'admin\DashboardAdminController@index')->name('admin.dashboard');
+});
+
+// auth teacher
+Route::group(['middleware' => 'TEACHER'], function () {
+    Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
+});
+
+// auth student`
+Route::group(['middleware' => 'STUDENT'], function () {
+    Route::get('/student/dashboard-teacher', 'student\DashboardStudentController@index')->name('student.dashboard');
+});
+

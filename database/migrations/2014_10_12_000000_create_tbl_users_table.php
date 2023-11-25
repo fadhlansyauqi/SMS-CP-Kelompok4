@@ -15,7 +15,7 @@ class CreateTblUsersTable extends Migration
     {
         Schema::create('tbl_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('role');
+            $table->enum('role', ['ADMIN', 'TEACHER', 'STUDENT'])->default('STUDENT');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

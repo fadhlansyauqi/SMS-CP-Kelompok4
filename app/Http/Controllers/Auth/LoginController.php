@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,23 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    public function redirectTo() {
+        $role = Auth::user()->role; 
+        switch ($role) {
+            case 'ADMIN':
+                return route('admin.dashboard');
+                break;
+            case 'TEACHER':
+                return route('teacher.dashboard');
+                break;
+            case 'STUDENT':
+                return route('student.dashboard');
+                break;
+            default:
+                return Session::get('previous', url('/'));
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -35,5 +53,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
