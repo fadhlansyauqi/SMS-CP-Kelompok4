@@ -27,13 +27,13 @@ php artisan serve
 
 ### 5. Default account:
 Admin:
-admin@mail.com
-password
+admin@mail.com (email),
+password (password)
 
 Teacher:
-teacher@mail.com
-password
+teacher@mail.com (email),
+password (password)
 
 student:
-student@mail.com
-password
+student@mail.com (email),
+password (password)
