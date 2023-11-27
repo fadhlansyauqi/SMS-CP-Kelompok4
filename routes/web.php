@@ -15,18 +15,19 @@ Route::get('/', function() {
     return redirect(route('login'));
 });
 
+Route::get('/register', function() {
+    return view('login');
+});
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/starter', function() {
-    return view('starter');
-});
 
 Auth::routes(['verify' => false, 'reset' => false]);
 
-// auth general
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-});
+// // auth general
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+// });
 
 // auth admin
 Route::group(['middleware' => 'ADMIN'], function () {

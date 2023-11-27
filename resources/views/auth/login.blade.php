@@ -1,70 +1,54 @@
 @extends('auth.master')
 
 @section('content')
-<!-- /.login-logo -->
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Login') }}</p>
-
-        <form action="{{route('login')}}" method="post">
+    <!--begin::Signin-->
+    <div class="login-form login-signin py-11">
+        <!--begin::Form-->
+        <form class="form" method="POST" action="{{ route('login') }}">
             @csrf
-            <div class="input-group mb-3">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                    value="{{old('email')}}" placeholder="Email" required autocomplete="email" autofocus>
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-envelope"></span>
-                </div>
+            <!--begin::Title-->
+            <div class="text-center pb-8">
+                <h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h2>
+                <span class="text-muted font-weight-bold font-size-h4">Dont have an account? <br>
+                    <a href="https://wa.me/087775543485" class="text-primary font-weight-bolder" id="kt_login_signup">Contact admin</a></span>
             </div>
-            @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-            <div class="input-group mb-3">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                    placeholder="Password" name="password" required autocomplete="current-password">
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-lock"></span>
-                </div>
+            <!--end::Title-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                <input
+                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('email') is-invalid @enderror"
+                    name="email" value="{{ old('email') }}" id="email" type="email" name="email" />
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
-            @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-            <div class="row">
-                <div class="col-8">
-                    {{-- <div class="icheck-primary">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                        {{ old('remember') ? 'checked' : '' }}>
-                        <label for="remember">
-                            Remember Me
-                        </label>
-                    </div> --}}
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <div class="d-flex justify-content-between mt-n5">
+                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
                 </div>
-                <!-- /.col -->
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Login') }}</button>
-                </div>
-                <!-- /.col -->
+                <input
+                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg  @error('password') is-invalid @enderror"
+                    name="password" id="password" type="password" />
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
+            <!--end::Form group-->
+            <!--begin::Action-->
+            <div class="text-center pt-2">
+                <button id="kt_login_signin_submit" class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3">Sign
+                    In</button>
+            </div>
+            <!--end::Action-->
         </form>
-
-        <hr>
-
-        @if (Route::has('password.request'))
-        <p class="mb-0">
-            <a href="{{ route('password.request') }}">{{ __('Lupa Password?') }}</a>
-        </p>
-        @endif
-        @if (Route::has('register'))
-        <p class="mb-0">
-            <a href="{{ route('register') }}" class="text-center">{{ __('Belum punya akun? Daftar sekarang') }}</a>
-        </p>
-        @endif
+        <!--end::Form-->
     </div>
-    <!-- /.login-card-body -->
-</div>
+    <!--end::Signin-->
 @endsection

@@ -11,47 +11,39 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     @yield('addCss')
 </head>
 
-<body class="hold-transition sidebar-mini sidebar-collapse">
-    <div class="wrapper">
+<body>
 
-        @include('layouts.navbar')
+    @include('layouts.navbar')
 
 		{{-- sidebar --}}
         @if (auth()->user()->role == 'ADMIN')
-            @include('layouts.admin.sidebar-admin')
+            @include('layouts.sidebar.sidebar-admin')
         @elseif(auth()->user()->role == 'TEACHER')
-            @include('layouts.teacher.sidebar-teacher')
+            @include('layouts.sidebar.sidebar-teacher')
         @else
-            @include('layouts.student.sidebar-student')
+            @include('layouts.sidebar.sidebar-student')
         @endif
 
+        
+
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            @yield('content')
-        </div>
+        
         <!-- /.content-wrapper -->
 
-        @include('layouts.footer')
-    </div>
+        {{-- @include('layouts.footer') --}}
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('js/adminlte.min.js') }}"></script>
-    <!-- Sweetalert -->
-    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+
 
     @yield('addJavascript')
 </body>
