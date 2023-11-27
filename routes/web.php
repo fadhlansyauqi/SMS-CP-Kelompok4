@@ -37,6 +37,10 @@ Route::group(['middleware' => 'ADMIN'], function () {
 // auth teacher
 Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
+    Route::get('/teacher/student-grade', 'teacher\StudentGradeController@index')->name('teacher.student-grade');
+    Route::get('/teacher/student-attendance', 'teacher\StudentAttendanceController@index')->name('teacher.student-attendance');
+    Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
+    Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
 });
 
 // auth student`
