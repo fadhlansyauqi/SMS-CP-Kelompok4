@@ -40,7 +40,7 @@ class LoginController extends Controller
                 return route('student.dashboard');
                 break;
             default:
-                return Session::get('previous', url('/'));
+                return Session::get('previous', url('/login'));
                 break;
         }
     }

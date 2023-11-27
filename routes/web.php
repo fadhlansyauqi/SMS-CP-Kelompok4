@@ -19,15 +19,15 @@ Route::get('/register', function() {
     return view('login');
 });
 
+Route::get('/dashboard', function() {
+    return redirect(route('login'));
+});
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Auth::routes(['verify' => false, 'reset' => false]);
 
-// // auth general
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-// });
 
 // auth admin
 Route::group(['middleware' => 'ADMIN'], function () {
@@ -41,6 +41,11 @@ Route::group(['middleware' => 'TEACHER'], function () {
 
 // auth student`
 Route::group(['middleware' => 'STUDENT'], function () {
-    Route::get('/student/dashboard-teacher', 'student\DashboardStudentController@index')->name('student.dashboard');
+    Route::get('/student/dashboard-student', 'student\DashboardStudentController@index')->name('student.dashboard');
+    Route::get('/student/class-schedule', 'student\ClassScheduleController@index')->name('student.class-schedule');
+    Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
+    Route::get('/student/attendance', 'student\AttendanceController@index')->name('student.attendance');
+    Route::get('/student/class', 'student\ClassController@index')->name('student.class');
+    Route::get('/student/tuition-payment', 'student\TuitionPaymentController@index')->name('student.tuition-payment');
 });
 

@@ -128,7 +128,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         data-menu-dropdown-timeout="500">
                         <!--begin::Menu Nav-->
                         <ul class="menu-nav">
-                            <li class="menu-item menu-item-here" aria-haspopup="true">
+                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="{{ route('student.dashboard') }}" class="menu-link">
                                     <i class="menu-icon flaticon-home"></i>
                                     <span class="menu-text ">Dashboard</span>
@@ -139,9 +139,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Jadwal</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('student.class-schedule') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('student.dashboard') }}" class="menu-link">
+                                <a href="{{ route('student.class-schedule') }}" class="menu-link">
                                     <i class="menu-icon flaticon-event-calendar-symbol"></i>
                                     <span class="menu-text">Jadwal Pelajaran</span>
                                 </a>
@@ -150,9 +150,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Nilai</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('student.grade') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('student.dashboard') }}" class="menu-link">
+                                <a href="{{ route('student.grade') }}" class="menu-link">
                                     <i class="menu-icon flaticon2-open-text-book"></i>
                                     <span class="menu-text">Nilai Saya</span>
                                 </a>
@@ -162,9 +162,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Absensi</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('student.attendance') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('student.dashboard') }}" class="menu-link">
+                                <a href="{{ route('student.attendance') }}" class="menu-link">
                                     <i class="menu-icon flaticon-clipboard"></i>
                                     <span class="menu-text">Absen Saya</span>
                                 </a>
@@ -174,9 +174,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Kelas</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('student.class') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('student.dashboard') }}" class="menu-link">
+                                <a href="{{ route('student.class') }}" class="menu-link">
                                     <i class="menu-icon flaticon2-group"></i>
                                     <span class="menu-text">Kelas Saya</span>
                                 </a>
@@ -186,9 +186,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Pembayaran</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('student.tuition-payment') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('student.dashboard') }}" class="menu-link">
+									<a href="{{ route('student.tuition-payment') }}" class="menu-link">
 										<i class="menu-icon flaticon2-crisp-icons"></i>
 										<span class="menu-text">SPP Saya</span>
 									</a>
