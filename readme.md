@@ -26,14 +26,14 @@ php artisan migrate:refresh --seed
 php artisan serve
 
 ### 5. Default account:
-Admin
+Admin:
 admin@mail.com
 password
 
-Teacher
+Teacher:
 teacher@mail.com
 password
 
-student
+student:
 student@mail.com
 password
