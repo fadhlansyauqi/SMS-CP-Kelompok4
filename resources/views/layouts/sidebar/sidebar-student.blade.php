@@ -180,7 +180,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="menu-icon flaticon2-group"></i>
                                     <span class="menu-text">Kelas Saya</span>
                                 </a>
-                            </li>	
+                            </li>
+                            
+                            <li class="menu-section">
+                                <h4 class="menu-text">Pembayaran</h4>
+                                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                            </li>
+                            <li class="menu-item {{ Route::currentRouteNamed('student.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('student.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-crisp-icons"></i>
+										<span class="menu-text">SPP Saya</span>
+									</a>
+								</li>
                         </ul>
                         <!--end::Menu Nav-->
                     </div>
