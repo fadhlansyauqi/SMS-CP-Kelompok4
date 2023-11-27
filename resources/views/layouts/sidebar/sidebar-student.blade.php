@@ -180,8 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="menu-icon flaticon2-group"></i>
                                     <span class="menu-text">Kelas Saya</span>
                                 </a>
-                            </li>
-							
+                            </li>	
                         </ul>
                         <!--end::Menu Nav-->
                     </div>

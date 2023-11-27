@@ -118,64 +118,89 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</li>
 								
+								{{-- menu siswa --}}
 								<li class="menu-section">
-									<h4 class="menu-text">Laptops</h4>
+									<h4 class="menu-text">Siswa</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-									<a href="javascript:;" class="menu-link menu-toggle">
-										<i class="menu-icon flaticon-laptop"></i>
-										<span class="menu-text">Laptop</span>
-										<i class="menu-arrow"></i>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-user-outline-symbol"></i>
+										<span class="menu-text">Data Siswa</span>
 									</a>
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item menu-item-parent" aria-haspopup="true">
-												<span class="menu-link">
-													<span class="menu-text">Laptop</span>
-												</span>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-dot">
-														<span></span>
-													</i>
-													<span class="menu-text">Laptop List</span>
-												</a>
-											</li>
-										</ul>
-									</div>
 								</li>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-group"></i>
+										<span class="menu-text">Daftar Kelas Siswa</span>
+									</a>
+								</li>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon-clipboard"></i>
+										<span class="menu-text">Absen Siswa</span>
+									</a>
+								</li>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-open-text-book"></i>
+										<span class="menu-text">Nilai Siswa</span>
+									</a>
+								</li>
+
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-crisp-icons"></i>
+										<span class="menu-text">Data SPP Siswa</span>
+									</a>
+								</li>
+
+								{{-- menu guru --}}
 								<li class="menu-section">
-									<h4 class="menu-text">Rent</h4>
+									<h4 class="menu-text">Guru</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="javascript:;" class="menu-link menu-toggle">
-										<i class="menu-icon flaticon2-user"></i>
-										<span class="menu-text">Rent</span>
-										<i class="menu-arrow"></i>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon-users"></i>
+										<span class="menu-text">Data Guru</span>
 									</a>
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item menu-item-parent" aria-haspopup="true">
-												<span class="menu-link">
-													<span class="menu-text">Rent</span>
-												</span>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-dot">
-														<span></span>
-													</i>
-													<span class="menu-text">Rent Log</span>
-												</a>
-											</li>
-										</ul>
-									</div>
 								</li>
+
+								{{-- menu jadwal --}}
+								<li class="menu-section">
+									<h4 class="menu-text">Jadwal</h4>
+									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+								</li>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon-event-calendar-symbol"></i>
+										<span class="menu-text">Jadwal Pelajaran</span>
+									</a>
+								</li>
+
+								{{-- menu akun --}}
+								<li class="menu-section">
+									<h4 class="menu-text">Akun</h4>
+									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+								</li>
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+										<i class="menu-icon flaticon2-user-1"></i>
+										<span class="menu-text">Kelola Akun</span>
+									</a>
+								</li>
+
+								
+								
 							</ul>
 							<!--end::Menu Nav-->
 						</div>
