@@ -32,6 +32,14 @@ Auth::routes(['verify' => false, 'reset' => false]);
 // auth admin
 Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/dashboard-admin', 'admin\DashboardAdminController@index')->name('admin.dashboard');
+    Route::get('/admin/student', 'admin\StudentController@index')->name('admin.student');
+    Route::get('/admin/student-class', 'admin\StudentClassController@index')->name('admin.student-class');
+    Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
+    Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
+    Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
+    Route::get('/admin/teacher', 'admin\TeacherController@index')->name('admin.teacher');
+    Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
+    Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');
 });
 
 // auth teacher

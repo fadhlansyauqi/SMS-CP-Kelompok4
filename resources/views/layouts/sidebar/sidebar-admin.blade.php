@@ -111,7 +111,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav">
-								<li class="menu-item menu-item-here" aria-haspopup="true">
+								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard') ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('admin.dashboard') }}" class="menu-link">
 										<i class="menu-icon flaticon-home"></i>
 										<span class="menu-text ">Dashboard</span>
@@ -123,38 +123,38 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h4 class="menu-text">Siswa</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.student') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.student') }}" class="menu-link">
 										<i class="menu-icon flaticon2-user-outline-symbol"></i>
 										<span class="menu-text">Data Siswa</span>
 									</a>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.student-class') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.student-class') }}" class="menu-link">
 										<i class="menu-icon flaticon2-group"></i>
 										<span class="menu-text">Daftar Kelas Siswa</span>
 									</a>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.student-attendance') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.student-attendance') }}" class="menu-link">
 										<i class="menu-icon flaticon-clipboard"></i>
 										<span class="menu-text">Absen Siswa</span>
 									</a>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.student-grade') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.student-grade') }}" class="menu-link">
 										<i class="menu-icon flaticon2-open-text-book"></i>
 										<span class="menu-text">Nilai Siswa</span>
 									</a>
 								</li>
 
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.student-tuition-payment') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.student-tuition-payment') }}" class="menu-link">
 										<i class="menu-icon flaticon2-crisp-icons"></i>
 										<span class="menu-text">Data SPP Siswa</span>
 									</a>
@@ -165,9 +165,9 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h4 class="menu-text">Guru</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.teacher') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.teacher') }}" class="menu-link">
 										<i class="menu-icon flaticon-users"></i>
 										<span class="menu-text">Data Guru</span>
 									</a>
@@ -178,9 +178,9 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h4 class="menu-text">Jadwal</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.class-schedule') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.class-schedule') }}" class="menu-link">
 										<i class="menu-icon flaticon-event-calendar-symbol"></i>
 										<span class="menu-text">Jadwal Pelajaran</span>
 									</a>
@@ -191,9 +191,9 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h4 class="menu-text">Akun</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
-								<li class="menu-item {{ Route::currentRouteNamed('admin.dashboard.*') ? 'menu-item-active' : '' }}"
+								<li class="menu-item {{ Route::currentRouteNamed('admin.account') ? 'menu-item-active' : '' }}"
 									aria-haspopup="true">
-									<a href="{{ route('admin.dashboard') }}" class="menu-link">
+									<a href="{{ route('admin.account') }}" class="menu-link">
 										<i class="menu-icon flaticon2-user-1"></i>
 										<span class="menu-text">Kelola Akun</span>
 									</a>
