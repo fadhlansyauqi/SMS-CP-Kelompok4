@@ -47,6 +47,34 @@
     <div class="content">
         <div class="container-fluid">
 
+            <div class="card">
+                <div class="card-body">
+                    <table class="table mb-0 table-bordered">
+                        <thead class="text-center bg-secondary">
+                            <tr>
+                                <td style="width: 15%">NIS</td>
+                                <td>Nama Siswa</td>
+                                <td>Kelas</td>
+                                <td style="width: 15%">Aksi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($students as $student) 
+						    <tr> 
+                                <td> {{ $student->nis }}</td> 
+                                <td> {{ $student->nama }} </td> 
+                                <td> {{ $student->kelas }} </td> 
+                                <td class="text-center"> 
+                                    <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a> 
+                                    <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                </td>
+                            @endforeach
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
