@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Jadwal Pelajaran</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Jadwal Pelajara</b></h3>
                     <!--end::Page Title-->
 
                 </div>
