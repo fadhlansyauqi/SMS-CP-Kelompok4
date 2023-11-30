@@ -34,11 +34,31 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                <h1>hai</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+            <div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kelas</th>
+                    <th>Nama Kelas</th>
+                    <!-- <th>Aksi</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>XII</td>
+                    <td>XII IPA 1</td>
+                    <!-- <td>
+                        <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
