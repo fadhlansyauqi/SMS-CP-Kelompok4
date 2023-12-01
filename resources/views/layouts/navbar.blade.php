@@ -68,7 +68,7 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label" style="background-image:url({{ asset('template/dist/assets/media/users/blank.png') }})">
+                <div class="symbol-label" style="background-image:url({{ asset('assets/media/users/blank.png') }})">
                 </div>
                 <i class="symbol-badge bg-success"></i>
             </div>

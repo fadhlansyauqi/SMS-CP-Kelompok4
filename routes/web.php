@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,23 +13,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => false, 'reset' => false]);
+
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/', function() {
     return redirect(route('login'));
 });
 
 Route::get('/register', function() {
-    return view('login');
-});
-
-Route::get('/dashboard', function() {
     return redirect(route('login'));
 });
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
-
-Auth::routes(['verify' => false, 'reset' => false]);
+Route::get('/home', function() {
+    return redirect(route('login'));
+});
 
 
 // auth admin

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
@@ -23,8 +23,8 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Nilai Siswa</a>
-                    </li>
+                        <a href="javascript:void(0);" class="text-muted">Nilai Siswa</a>
+                    </li>                    
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
