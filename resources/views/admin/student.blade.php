@@ -48,13 +48,17 @@
         <div class="container-fluid">
 
             <div class="card">
+                <div class="card-header text-right"> 
+                    <a href="{{ route('create.student') }}" class="btn btn-primary" role="button">Tambah data siswa</a> 
+                </div>
+
                 <div class="card-body">
                     <table class="table mb-0 table-bordered">
                         <thead class="text-center bg-secondary">
                             <tr>
                                 <td style="width: 15%">NIS</td>
                                 <td>Nama Siswa</td>
-                                <td>Kelas</td>
+                                <td>Jenis Kelamin</td>
                                 <td style="width: 15%">Aksi</td>
                             </tr>
                         </thead>
@@ -63,7 +67,7 @@
 						    <tr> 
                                 <td> {{ $student->nis }}</td> 
                                 <td> {{ $student->nama }} </td> 
-                                <td> {{ $student->kelas }} </td> 
+                                <td> {{ $student->jk }} </td> 
                                 <td class="text-center"> 
                                     <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a> 
                                     <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>

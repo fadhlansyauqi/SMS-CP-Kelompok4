@@ -28,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/create-student');
     }
 
     /**
@@ -39,7 +39,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = validator($request->all(), [
+            'nis' => 'required|integer',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|string|max:20',
+            'nama_ortu' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'status' => 'required|string|max:50',
+        ])->validate();
+
+        $student = new Student($validateData);
+        $student->save();
+
+        return redirect(route('admin.student'));
     }
 
     /**

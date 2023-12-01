@@ -48,6 +48,10 @@
         <div class="container-fluid">
 
             <div class="card">
+                <div class="card-header text-right"> 
+                    <a href="{{ route('create.teacher') }}" class="btn btn-primary" role="button">Tambah data guru</a> 
+                </div>
+
                 <div class="card-body">
                     <table class="table mb-0 table-bordered">
                         <thead class="text-center bg-secondary">

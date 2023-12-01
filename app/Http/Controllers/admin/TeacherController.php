@@ -28,7 +28,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/create-teacher');
     }
 
     /**
@@ -39,7 +39,19 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = validator($request->all(), [
+            'nip' => 'required|integer',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|string|max:20',
+            'alamat' => 'required|string',
+        ])->validate();
+
+        $teacher = new Teacher($validateData);
+        $teacher->save();
+
+        return redirect(route('admin.teacher'));
     }
 
     /**
