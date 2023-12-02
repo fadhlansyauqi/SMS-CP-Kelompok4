@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--begin::Head-->
 	<head><base href="../../../">
 		<meta charset="utf-8" />
-		<title>Login Page 2 | Keenthemes</title>
+		<title>Login | SMS</title>
 		<meta name="description" content="Login page example" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -56,13 +56,13 @@ License: You must have a valid license purchased only from themeforest(the above
 							<!--begin::Signin-->
 							<div class="login-form login-signin py-11">
 								<!--begin::Form-->
-                                <form class="form" method="POST" action="{{ route('login') }}">
+                                <form class="form" method="POST">
                                     @csrf
 									<!--begin::Title-->
 									<div class="text-center pb-8">
 										<h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h2>
-										<span class="text-muted font-weight-bold font-size-h4">Or
-										<a href="" class="text-primary font-weight-bolder" id="kt_login_signup">Create An Account</a></span>
+										<span class="text-muted font-weight-bold font-size-h4">Dont have an account? <br>
+											<a href="https://wa.me/087775543485" class="text-primary font-weight-bolder" id="kt_login_signup">Contact admin</a></span>
 									</div>
 									<!--end::Title-->
                                         <!--begin::Form group-->
@@ -102,25 +102,6 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Form-->
 							</div>
 							<!--end::Signin-->
-							<!--begin::Signup-->
-							<div class="login-form login-signup">
-								<!--begin::Form-->
-								<form class="form" novalidate="novalidate" id="kt_login_signup_form">
-									<div class="text-center pb-13 pt-lg-0">
-                                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Hi there!</h3>
-                                        <p class="text-muted font-weight-bold font-size-h4">Seems like you dont have an account?</p>
-                                        <a href="" class="text-primary font-weight-bolder" id="kt_login_signup_cancel">Back to Login</a>
-                                        <div class="text-center">
-                                            <a href="https://wa.me/087775543485">
-                                                <button type="button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Contact admin</button>
-                                            </a>
-                                        </div>
-                                        
-                                    </div>
-								</form>
-								<!--end::Form-->
-							</div>
-							<!--end::Signup-->
 						</div>
 						<!--end::Aside body-->
 					</div>
@@ -131,9 +112,9 @@ License: You must have a valid license purchased only from themeforest(the above
 				<div class="content order-1 order-lg-2 d-flex flex-column w-100 pb-0" style="background-color: #B1DCED;">
 					<!--begin::Title-->
 					<div class="d-flex flex-column justify-content-center text-center pt-lg-40 pt-md-5 pt-sm-5 px-lg-0 pt-5 px-7">
-						<h3 class="display4 font-weight-bolder my-7 text-dark" style="color: #986923;">Amazing Wireframes</h3>
-						<p class="font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70">User Experience &amp; Interface Design, Product Strategy
-						<br />Web Application SaaS Solutions</p>
+						<h3 class="display4 font-weight-bolder my-7 text-dark" style="color: #986923;">Sistem Manajemen Sekolah</h3>
+						<p class="font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70">Platform pengelolaan berbagai aspek operasional 
+						<br/>dan administratif di lingkungan sekolah</p>
 					</div>
 					<!--end::Title-->
 					<!--begin::Image-->
