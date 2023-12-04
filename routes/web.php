@@ -13,20 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::get('/login', 'Auth\LoginController@index')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::get('/register', function() {
+Route::get('/register', function () {
     return redirect(route('login'));
 });
 
-Route::get('/home', function() {
+Route::get('/home', function () {
     return redirect(route('login'));
 });
 
@@ -63,6 +64,8 @@ Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/student-attendance', 'teacher\StudentAttendanceController@index')->name('teacher.student-attendance');
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
+    Route::get('/teacher/student-grade-create', 'teacher\StudentGradeController@create')->name('teacher.student-grade-create');
+    Route::post('/teacher/student-grade-create', 'teacher\StudentGradeController@store')->name('teacher.store-student-grade');
 });
 
 // auth student`
@@ -74,4 +77,3 @@ Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/class', 'student\ClassController@index')->name('student.class');
     Route::get('/student/tuition-payment', 'student\TuitionPaymentController@index')->name('student.tuition-payment');
 });
-
