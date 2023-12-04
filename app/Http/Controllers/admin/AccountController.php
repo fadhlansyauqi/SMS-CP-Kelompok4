@@ -8,13 +8,19 @@ use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all(); 
-        return view('admin/account', [ 
-            'users' => $users 
-        ]);;
-    }
+        // $users = User::all(); 
+        // return view('admin/account', [ 
+        //     'users' => $users 
+        // ]);;
+
+        $search = $request->input('search');
+        $users = User::where('email', 'like', "%$search%")
+                        ->paginate(10); // Set your desired pagination limit here
+    
+        return view('admin.account', compact('users'));
+    } 
 
     public function create()
     {
