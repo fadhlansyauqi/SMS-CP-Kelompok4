@@ -74,8 +74,10 @@
 
                         <div class="form-group">
                             <label for="jk">Jenis Kelamin: </label>
-                            <label><input class="form-check-input" type="radio" name="jk" value="laki-laki" checked> Laki-laki</label> 
-                            <label><input class="form-check-input" type="radio" name="jk" value="perempuan"> Perempuan</label>
+                            <input type="radio" id="laki-laki" name="jk" value="laki-laki">
+                            <label for="laki-laki">Laki-laki</label>
+                            <input type="radio" id="perempuan" name="jk" value="perempuan">
+                            <label for="perempuan">Perempuan</label><br>
                         </div>
 
                         <div class="form-group"> 

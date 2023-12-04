@@ -53,7 +53,7 @@ class StudentController extends Controller
         $student = new Student($validateData);
         $student->save();
 
-        return redirect(route('admin.student'));
+        return redirect(route('admin.student'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -75,7 +75,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('admin/edit-student', [
+            'student' => $student
+        ]);
     }
 
     /**
@@ -87,7 +89,28 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $validateData = validator($request->all(), [
+            'nis' => 'required|integer',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|string|max:20',
+            'nama_ortu' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'status' => 'required|string|max:50',
+        ])->validate();
+
+        $student->nis =$validateData['nis'];
+        $student->nama =$validateData['nama'];
+        $student->tempat_lahir =$validateData['tempat_lahir'];
+        $student->tanggal_lahir =$validateData['tanggal_lahir'];
+        $student->jk =$validateData['jk'];
+        $student->nama_ortu =$validateData['nama_ortu'];
+        $student->alamat =$validateData['alamat'];
+        $student->status =$validateData['status'];
+        $student->save();
+
+        return redirect(route('admin.student'))->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -98,6 +121,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete(); 
+        return redirect(route('admin.student'))->with('success', 'Data Berhasil Dihapus');
     }
 }

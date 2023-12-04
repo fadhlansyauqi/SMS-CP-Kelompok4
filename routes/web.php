@@ -36,13 +36,21 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/dashboard-admin', 'admin\DashboardAdminController@index')->name('admin.dashboard');
     Route::get('/admin/student', 'admin\StudentController@index')->name('admin.student');
     Route::get('/admin/create-student', 'admin\StudentController@create')->name('create.student');
-    Route::post('/admin/create-student', 'admin\StudentController@store')->name('store.student'); 
+    Route::post('/admin/create-student', 'admin\StudentController@store')->name('store.student');
+    Route::get('/admin/{student}/edit-student', 'admin\StudentController@edit')->name('edit.student');
+    Route::post('/admin/{student}/edit-student', 'admin\StudentController@update')->name('update.student');
+    Route::get('/admin/{student}/delete-student', 'admin\StudentController@destroy')->name('delete.student');
+
     Route::get('/admin/student-class', 'admin\StudentClassController@index')->name('admin.student-class');
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
     Route::get('/admin/teacher', 'admin\TeacherController@index')->name('admin.teacher');
     Route::get('/admin/create-teacher', 'admin\TeacherController@create')->name('create.teacher');
+    Route::get('/admin/{teacher}/edit-teacher', 'admin\teacherController@edit')->name('edit.teacher');
+    Route::post('/admin/{teacher}/edit-teacher', 'admin\teacherController@update')->name('update.teacher');
+    Route::get('/admin/{teacher}/delete-teacher', 'admin\teacherController@destroy')->name('delete.teacher');
+
     Route::post('/admin/create-teacher', 'admin\TeacherController@store')->name('store.teacher');
     Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');

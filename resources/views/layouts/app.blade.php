@@ -64,6 +64,7 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+    @include('sweetalert::alert')
 
     <!-- jQuery -->
     <script>
@@ -140,6 +141,8 @@
     <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
     <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
     <script src="{{ asset('assets/plugins/custom/gmaps/gmaps.js') }}"></script>
+    <!-- Sweetalert -->
+	<script src="{{ asset('js/sweetalert.min.js')}}"></script>
     @yield('addJavascript')
 </body>
 

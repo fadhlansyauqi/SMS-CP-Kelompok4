@@ -73,7 +73,9 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return view('admin/edit-teacher', [
+            'teacher' => $teacher
+        ]);
     }
 
     /**
@@ -85,7 +87,24 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $validateData = validator($request->all(), [
+            'nip' => 'required|integer',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required|string|max:20',
+            'alamat' => 'required|string',
+        ])->validate();
+
+        $teacher->nip =$validateData['nip'];
+        $teacher->nama =$validateData['nama'];
+        $teacher->tempat_lahir =$validateData['tempat_lahir'];
+        $teacher->tanggal_lahir =$validateData['tanggal_lahir'];
+        $teacher->jk =$validateData['jk'];
+        $teacher->alamat =$validateData['alamat'];
+        $teacher->save();
+
+        return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -96,6 +115,7 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete(); 
+        return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Dihapus');
     }
 }

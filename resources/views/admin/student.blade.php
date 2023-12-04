@@ -69,8 +69,9 @@
                                 <td> {{ $student->nama }} </td> 
                                 <td> {{ $student->jk }} </td> 
                                 <td class="text-center"> 
-                                    <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a> 
-                                    <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                    <a href="{{route('edit.student', ['id' => $student->id])}}" class="btn btn-warning btn-sm" role="button">Edit</a> 
+                                    <a onclick="confirmDelete(this)" data-url="{{ route('delete.student', ['id' => $student->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                    {{-- <a href="{{ route('delete.student', ['id' => $student->id])}}" class="btn btn-danger btn-sm" role="button">Hapus</a> --}}
                                 </td>
                             @endforeach
                             </tr>
@@ -82,4 +83,23 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+@endsection
+
+@section('addJavascript')
+	<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+	<script>
+		confirmDelete = function(button) {
+			var url = $(button).data('url');
+			swal({
+				'title': 'Konfirmasi Hapus',
+				'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+				'dangermode': true,
+				'buttons': true
+			}).then(function(value) {
+				if (value) {
+					window.location = url;
+				}
+			})
+		}
+	</script>
 @endsection
