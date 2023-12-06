@@ -73,8 +73,8 @@
                                     <td>{{ $user->role }}</td>
                                     <td>
                                         <!-- Action buttons -->
-                                        <a href=""><i class="flaticon2-edit mr-3"></i></a>
-                                        <a href=""><i class="flaticon2-trash mr-3"></i></a>
+                                        <a href="{{route('admin.account.edit', ['id' => $user->id])}}"><i class="flaticon2-edit mr-3"></i></a>
+                                        <a onclick="confirmDelete(this)" data-url="{{ route('admin.account.delete', ['user' => $user->id]) }}"><i class="flaticon2-trash mr-3"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -121,4 +121,23 @@
         });
     </script>
     <!--end::content-->
+@endsection
+
+@section('addJavascript')
+	<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+	<script>
+		confirmDelete = function(button) {
+			var url = $(button).data('url');
+			swal({
+				'title': 'Konfirmasi Hapus',
+				'text': 'Apakah Kamu Yakin Ingin Menghapus user Ini?',
+				'dangermode': true,
+				'buttons': true
+			}).then(function(value) {
+				if (value) {
+					window.location = url;
+				}
+			})
+		}
+	</script>
 @endsection

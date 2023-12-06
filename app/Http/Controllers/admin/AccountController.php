@@ -4,16 +4,16 @@ namespace App\Http\Controllers\admin;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('per_page', 5); 
+        $perPage = $request->input('per_page', 5);
         $users = User::where('email', 'like', "%$search%")->paginate($perPage);
 
         return view('admin.account', compact('users'));
@@ -26,28 +26,57 @@ class AccountController extends Controller
 
     public function store(Request $request)
     {
-        // $validateData = validator($request->all(), [
-        //     'role' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|min:3',
-        // ])->validate();
+        $validatedData = $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:3',
+                'role' => ['required', Rule::in(['TEACHER', 'STUDENT'])],
+            ],
+            [
+                'email.required' => 'Email harus diisi',
+                'email.email' => 'Format email tidak valid',
+                'password.required' => 'Password harus diisi',
+                'password.min' => 'Password minimal harus 3 karakter',
+                'role.required' => 'Role harus dipilih',
+                'role.in' => 'Role yang dipilih tidak valid',
+            ],
+        );
 
-        $validatedData = $request->validate([
+        $user = new User($validatedData);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+
+        return redirect(route('admin.account'))->with('success', 'User Berhasil Ditambahkan');
+    }
+
+    public function edit(User $user)
+    {
+
+        return view('admin/account-edit', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $validateData = validator($request->all(), [
             'email' => 'required|email',
             'password' => 'required|min:3',
             'role' => ['required', Rule::in(['TEACHER', 'STUDENT'])],
-        ], [
-            'email.required' => 'Email harus diisi',
-            'email.email' => 'Format email tidak valid',
-            'password.required' => 'Password harus diisi',
-            'password.min' => 'Password minimal harus 3 karakter',
-            'role.required' => 'Role harus dipilih',
-            'role.in' => 'Role yang dipilih tidak valid',
-        ]);
+        ])->validate();
 
-        $user = new User($validatedData);
+        $user->email = $validateData['email'];
+        $user->password = Hash::make($validateData['password']);
+        $user->role = $validateData['role'];
         $user->save();
 
-        return redirect(route('admin.account'))->with('success', 'User Berhasil Ditambahkan');
+        return redirect(route('admin.account'))->with('success', 'User Berhasil Diupdate');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect(route('admin.account'))->with('success', 'User Berhasil Dihapus');
     }
 }

@@ -60,6 +60,9 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');
     Route::get('/admin/account-create', 'admin\AccountController@create')->name('admin.account.create');
     Route::post('/admin/account-create', 'admin\AccountController@store')->name('admin.account.store');
+    Route::get('/admin/{user}/account-edit', 'admin\AccountController@edit')->name('admin.account.edit');
+    Route::post('/admin/{user}/account-edit', 'admin\AccountController@update')->name('admin.account.update');
+    Route::get('/admin/{user}/account-delete', 'admin\AccountController@destroy')->name('admin.account.delete');
 });
 
 // auth teacher
