@@ -41,7 +41,8 @@
                         <form action="{{ route('admin.account') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
-                                    <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search..." />
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        class="form-control" placeholder="Search..." />
                                     <span><i class="flaticon2-search-1 icon-md"></i></span>
                                 </div>
                             </div>
@@ -49,7 +50,8 @@
                     </div>
                     <div class="col-3"></div>
                     <div class="col-5 text-right">
-                        <a href="{{ route('admin.account.create') }}" type="button" class="btn btn-primary"><i class="flaticon2-add-1"></i><strong> New Account</strong></a>
+                        <a href="{{ route('admin.account.create') }}" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong> New Account</strong></a>
                     </div>
                 </div>
 
@@ -85,13 +87,17 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <select id="entries" class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light" style="width: 75px;">
-                                <option value="5" selected>5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <!-- Add more options as needed -->
-                            </select>
+                            <form method="GET" action="{{ route('admin.account') }}">
+                                <select id="entries"
+                                    class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
+                                    style="width: 75px;" name="per_page" onchange="this.form.submit()">
+                                    <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                    <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
+                                    <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                </select>
+                            </form>
                         </div>
 
                         <div id="paginationLinks">
@@ -101,13 +107,16 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $(document).on('change', '#entries', function () {
-                window.location = "{{ route('admin.account') }}?search={{ request('search') }}&per_page=" + $(this).val();
+        $(document).ready(function() {
+            $(document).on('change', '#entries', function() {
+                window.location =
+                    "{{ route('admin.account') }}?search={{ request('search') }}&per_page=" + $(this)
+                    .val();
             });
         });
     </script>

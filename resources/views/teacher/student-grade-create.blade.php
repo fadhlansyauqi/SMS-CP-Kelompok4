@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
@@ -49,7 +49,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="{{ route('teacher.store-student-grade') }}" method="post">
                         @csrf
                         <!--begin::Group-->
                         <div class="form-group row">

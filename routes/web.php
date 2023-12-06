@@ -59,6 +59,7 @@ Route::group(['middleware' => 'ADMIN'], function () {
 
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');
     Route::get('/admin/account-create', 'admin\AccountController@create')->name('admin.account.create');
+    Route::post('/admin/account-create', 'admin\AccountController@store')->name('admin.account.store');
 });
 
 // auth teacher
