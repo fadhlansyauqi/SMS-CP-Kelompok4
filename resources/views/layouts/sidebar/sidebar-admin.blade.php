@@ -186,6 +186,14 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</li>
 
+								<li class="menu-item {{ Route::currentRouteNamed('admin.course') ? 'menu-item-active' : '' }}"
+									aria-haspopup="true">
+									<a href="{{ route('admin.course') }}" class="menu-link">
+										<i class="menu-icon flaticon-notes"></i>
+										<span class="menu-text">Mata Pelajaran</span>
+									</a>
+								</li>
+
 								{{-- menu akun --}}
 								<li class="menu-section">
 									<h4 class="menu-text">Akun</h4>

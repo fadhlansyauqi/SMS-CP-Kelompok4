@@ -55,7 +55,7 @@
                         <div class="form-group"> 
                             <label for="nis">NIS</label> 
                             <input type="text" name="nis" id="nis" class="form-control" required="required"
-                            value="{{ $student->nis }}" placeholder="Masukkan NIS siswa"> 
+                            value="{{ $student->nis }}" placeholder="Masukkan nomor induk siswa"> 
                         </div>
 
                         <div class="form-group"> 
@@ -83,7 +83,7 @@
 
                         <div class="form-group"> 
                             <label for="nama_ortu">Nama Orang Tua</label> 
-                            <input type="text" name="nama_ortu" id="nama_ortu" class="form-control" value="{{ $student->nama_ortu }}" placeholder="Masukkan nama siswa"> 
+                            <input type="text" name="nama_ortu" id="nama_ortu" class="form-control" value="{{ $student->nama_ortu }}" placeholder="Masukkan nama orang tua siswa"> 
                         </div>
     
                         <div class="form-group"> 

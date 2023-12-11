@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Data Siswa</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Mata Pelajaran</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Data Siswa</a>
+                        <a href="" class="text-muted">Mata Pelajaran</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -49,28 +49,31 @@
 
             <div class="card">
                 <div class="card-header text-right"> 
-                    <a href="{{ route('create.student') }}" class="btn btn-primary" role="button">Tambah data siswa</a> 
+                    <a href="{{ route('create.course') }}" class="btn btn-primary" role="button">Tambah mapel</a> 
                 </div>
 
                 <div class="card-body">
                     <table class="table mb-0 table-bordered">
                         <thead class="text-center bg-secondary">
                             <tr>
-                                <td style="width: 15%">NIS</td>
-                                <td>Nama Siswa</td>
-                                <td>Jenis Kelamin</td>
+                                <td style="width: 4%">No</td>
+                                <td style="width: 15%">Kode Mapel</td>
+                                <td>Nama Mapel</td>
+                                <td>Guru Pengampu</td>
                                 <td style="width: 15%">Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $student) 
-						    <tr> 
-                                <td> {{ $student->nis }}</td> 
-                                <td> {{ $student->nama }} </td> 
-                                <td> {{ $student->jk }} </td> 
+                            @foreach ($courses as $course)
+						    <tr>
+                                <td class="text-center"> {{ $loop->index + 1 }}</td>
+                                <td> {{ $course->kode_mapel }}</td> 
+                                <td> {{ $course->nama_mapel }} </td> 
+                                <td> {{ $course->teacher ?
+                                    $course->teacher->nama : '-' }}</td> 
                                 <td class="text-center"> 
-                                    <a href="{{route('edit.student', ['id' => $student->id])}}" class="btn btn-warning btn-sm" role="button">Edit</a> 
-                                    <a onclick="confirmDelete(this)" data-url="{{ route('delete.student', ['id' => $student->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                    <a href="{{route('edit.course', ['id' => $course->id])}}" class="btn btn-warning btn-sm" role="button">Edit</a> 
+                                    <a onclick="confirmDelete(this)" data-url="{{ route('delete.course', ['id' => $course->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
                                 </td>
                             @endforeach
                             </tr>
