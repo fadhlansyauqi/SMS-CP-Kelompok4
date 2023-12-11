@@ -50,10 +50,17 @@ Route::group(['middleware' => 'ADMIN'], function () {
 
     Route::get('/admin/teacher', 'admin\TeacherController@index')->name('admin.teacher');
     Route::get('/admin/create-teacher', 'admin\TeacherController@create')->name('create.teacher');
-    Route::get('/admin/{teacher}/edit-teacher', 'admin\teacherController@edit')->name('edit.teacher');
-    Route::post('/admin/{teacher}/edit-teacher', 'admin\teacherController@update')->name('update.teacher');
-    Route::get('/admin/{teacher}/delete-teacher', 'admin\teacherController@destroy')->name('delete.teacher');
     Route::post('/admin/create-teacher', 'admin\TeacherController@store')->name('store.teacher');
+    Route::get('/admin/{teacher}/edit-teacher', 'admin\TeacherController@edit')->name('edit.teacher');
+    Route::post('/admin/{teacher}/edit-teacher', 'admin\TeacherController@update')->name('update.teacher');
+    Route::get('/admin/{teacher}/delete-teacher', 'admin\TeacherController@destroy')->name('delete.teacher');
+
+    Route::get('/admin/course', 'admin\CourseController@index')->name('admin.course');
+    Route::get('/admin/create-course', 'admin\CourseController@create')->name('create.course');
+    Route::post('/admin/create-course', 'admin\CourseController@store')->name('store.course');
+    Route::get('/admin/{course}/edit-course', 'admin\CourseController@edit')->name('edit.course');
+    Route::post('/admin/{course}/edit-course', 'admin\CourseController@update')->name('update.course');
+    Route::get('/admin/{course}/delete-course', 'admin\CourseController@destroy')->name('delete.course');
 
     Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
 
