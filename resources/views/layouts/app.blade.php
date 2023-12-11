@@ -9,9 +9,6 @@
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
-		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<!--end::Page Vendors Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -65,6 +62,9 @@
 
     <!-- REQUIRED SCRIPTS -->
     @include('sweetalert::alert')
+
+    <!-- Sweetalert -->
+	<script src="{{ asset('js/sweetalert.min.js')}}"></script>
 
     <!-- jQuery -->
     <script>
@@ -137,12 +137,10 @@
     <script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
-    <!--begin::Page Vendors(used by this page)-->
-    <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
-    <script src="{{ asset('assets/plugins/custom/gmaps/gmaps.js') }}"></script>
-    <!-- Sweetalert -->
-	<script src="{{ asset('js/sweetalert.min.js')}}"></script>
+    
+
+    
+    
     @yield('addJavascript')
 </body>
 

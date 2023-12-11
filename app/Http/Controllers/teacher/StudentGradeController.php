@@ -17,7 +17,7 @@ class StudentGradeController extends Controller
 
     public function create()
     {
-        return view('teacher.create-student-grade');
+        return view('teacher.student-grade-create');
     }
 
 
