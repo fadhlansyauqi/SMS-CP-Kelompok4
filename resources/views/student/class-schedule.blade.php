@@ -93,7 +93,7 @@ p{
               	<th class="jam">07.00</th>
                 <td style="background-color: #ff7aa2;">
                   <div class="abu">
-                    <p>Biologi <br> Pak. alam</p>
+                    <p>Biologi <br> Pak. rijal</p>
                   </div>
                 </td>
                 <td style="background-color: #FEED30;">
@@ -103,7 +103,7 @@ p{
                 </td>
                 <td style="background-color: #ff7aa2;">
                   <div class="abu">
-                    <p>Biologi <br> Pak. alam</p>
+                    <p>Biologi <br> Pak. rijal</p>
                   </div>
                 </td>
                 <td style="background-color: #FF6868;">
@@ -166,7 +166,7 @@ p{
                 </td>
                 <td style="background-color: #ff7aa2;">
                   <div class="abu">
-                    <p>Biologi <br> Pak. alam</p>
+                    <p>Biologi <br> Pak. rijal</p>
                   </div>
                 </td>
                 <td style="background-color: #FF6868;">
@@ -238,7 +238,7 @@ p{
                 </td>
                 <td style="background-color: #ff7aa2;">
                   <div class="abu">
-                    <p>Biologi <br> Pak. alam</p>
+                    <p>Biologi <br> Pak. rijal</p>
                   </div>
                 </td>
                 <td style="background-color: #FF6868;">
