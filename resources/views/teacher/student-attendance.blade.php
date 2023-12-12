@@ -44,10 +44,48 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
 
-        </div><!-- /.container-fluid -->
+    <div class="card">
+        <div class="card-header text-right">
+            <a href='{{ route('create.attendance') }}' class="btn btn-primary" role="button">Tambah
+                Absen</a>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table mb-0 table-bordered">
+                    <thead class="text-center bg-secondary">
+                        <tr>
+                            <td>No.</td>
+                            <td>NIS</td>
+                            <td>Nama Pembelajaran</td>
+                            <td>Pertemuan</td>
+                            <td>Tanggal</td>
+                            <td>Keterangan</td>
+                            <td style="width: 15%">Aksi</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($attendances as $attendance)
+                            <tr>
+                                <td> {{ $loop->index + 1 }} </td>
+                                <td> {{ $attendance->nis }}</td>
+                                <td> {{ $attendance->nama }} </td>
+                                <td> {{ $attendance->pertemuan }} </td>
+                                <td> {{ $attendance->tgl }} </td>
+                                <td> {{ $attendance->ket }} </td>
+                                <td class="text-center">
+                                    <a href="{{ route('edit.attendance', ['nis' => $attendance->nis]) }}"
+                                        class="btn btn-warning btn-sm" role="button">Edit</a>
+                                    <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                </td>
+                        @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
 @endsection
