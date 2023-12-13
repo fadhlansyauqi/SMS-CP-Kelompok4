@@ -14,4 +14,13 @@ class Grade extends Model
         'jenis_nilai',
         'nilai',
     ];
+    public function course()
+    {
+        return $this->belongsTo('App\Course', 'id_mapel');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo('App\Student', 'id_siswa');
+    }
 }

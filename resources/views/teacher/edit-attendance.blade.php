@@ -57,7 +57,9 @@
                                 <select class="form-control form-control-solid form-control-lg" name="nis"
                                     id="nis" required="required">
                                     @foreach ($students as $student)
-                                        <option value="{{ $student->nis }}">{{ $student->nama }}</option>
+                                        <option value="{{ $student->nis }}"
+                                            {{ $student->nis == $attendance->nis ? 'selected' : '' }}>{{ $student->nama }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
