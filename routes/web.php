@@ -75,12 +75,21 @@ Route::group(['middleware' => 'ADMIN'], function () {
 // auth teacher
 Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
+
     Route::get('/teacher/student-grade', 'teacher\StudentGradeController@index')->name('teacher.student-grade');
+    Route::get('/teacher/create-grade', 'teacher\StudentGradeController@create')->name('create.grade');
+    Route::post('/teacher/create-grade', 'teacher\StudentGradeController@store')->name('store.grade');
+    Route::get('/teacher/{grade}/edit-grade', 'teacher\StudentAttendanceController@edit')->name('edit.grade');
+    Route::post('/teacher/{grade}/edit-grade', 'teacher\StudentAttendanceController@update')->name('update.grade');
+
     Route::get('/teacher/student-attendance', 'teacher\StudentAttendanceController@index')->name('teacher.student-attendance');
+    Route::get('/teacher/create-attendance', 'teacher\StudentAttendanceController@create')->name('create.attendance');
+    Route::post('/teacher/create-attendance', 'teacher\StudentAttendanceController@store')->name('store.attendance');
+    Route::get('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@edit')->name('edit.attendance');
+    Route::post('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@update')->name('update.attendance');
+
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
-    Route::get('/teacher/student-grade-create', 'teacher\StudentGradeController@create')->name('teacher.student-grade-create');
-    Route::post('/teacher/student-grade-create', 'teacher\StudentGradeController@store')->name('teacher.store-student-grade');
 });
 
 // auth student`
