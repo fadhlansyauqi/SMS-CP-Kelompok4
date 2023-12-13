@@ -63,6 +63,16 @@
                             <input type="text" name="nama" id="nama" class="form-control" value="{{ $student->nama }}" placeholder="Masukkan nama siswa"> 
                         </div>
 
+                        <div class="form-group">
+                            <label for="id_kelas">Class</label>
+                            <select class="form-select" name="id_kelas" id="id_kelas">
+                                @foreach($student_classes as $student_class)
+                                <option value="{{ $student_class->id }}" {{ $student->student_class ? $student->student_class->id == $student_class->id ? 'selected' : '' : '' }}>{{ $student_class->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                         </div>
+                         
+
                         <div class="form-group"> 
                             <label for="tempat_lahir">Tempat Lahir</label> 
                             <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" value="{{ $student->tempat_lahir }}" placeholder="Masukkan tempat lahir siswa"> 

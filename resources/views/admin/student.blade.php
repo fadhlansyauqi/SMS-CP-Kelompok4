@@ -64,7 +64,7 @@
                         <div class="col-3"></div>
                         <div class="col-5 text-right">
                             <a href="{{ route('create.student') }}" type="button" class="btn btn-primary"><i
-                                    class="flaticon2-add-1"></i><strong> Tambah Mapel</strong></a>
+                                    class="flaticon2-add-1"></i><strong> Tambah Siswa</strong></a>
                         </div>
                     </div>
     
@@ -76,23 +76,25 @@
                                     <td style="width: 15%">NIS</td>
                                     <td>Nama Siswa</td>
                                     <td>Jenis Kelamin</td>
+                                    <td>Kelas</td> <!-- New column -->
                                     <td style="width: 15%">Aksi</td>
                                 </tr>
-                            </thead>
-                            <tbody>
+                             </thead>
+                             <tbody>
                                 @foreach ($students as $student) 
-						        <tr> 
+                                <tr> 
                                     <td class="text-center"> {{ $loop->iteration}}</td>
                                     <td> {{ $student->nis }}</td> 
                                     <td> {{ $student->nama }} </td> 
                                     <td> {{ $student->jk }} </td>
+                                    <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }} </td><!-- Display class name -->
                                     <td> 
-                                        <a href="{{route('edit.student', ['id' => $student->id])}}"><i class="flaticon2-edit mr-3"></i></a> 
+                                        <a href="{{ route('edit.student', ['student' => $student->id]) }}"><i class="flaticon2-edit mr-3"></i></a>
                                         <a onclick="confirmDelete(this)" data-url="{{ route('delete.student', ['id' => $student->id]) }}"><i class="flaticon2-trash mr-3"></i></a></a>
                                     </td>
                                 @endforeach
-                                </tr>
-                            </tbody>
+                             </tbody>
+                             
                         </table>
     
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
