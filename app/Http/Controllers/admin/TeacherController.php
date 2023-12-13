@@ -13,12 +13,19 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::all(); 
-        return view('admin/teacher', [ 
-            'teachers' => $teachers 
-        ]);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $teachers = Teacher::where(function ($query) use ($search) {
+            $query->where('nip', 'like', "%$search%")
+                  ->orWhere('nama', 'like', "%$search%")
+                  ->orWhere('jk', 'like', "%$search%")
+                  ->orWhere('alamat', 'like', "%$search%");
+        })
+        ->paginate($perPage);
+        return view('admin.teacher', compact('teachers'));
+
     }
 
     /**
@@ -51,7 +58,7 @@ class TeacherController extends Controller
         $teacher = new Teacher($validateData);
         $teacher->save();
 
-        return redirect(route('admin.teacher'));
+        return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**

@@ -13,12 +13,23 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all(); 
-        return view('admin/student', [ 
-            'students' => $students 
-        ]);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $students = Student::where(function ($query) use ($search) {
+            $query->where('nis', 'like', "%$search%")
+                  ->orWhere('nama', 'like', "%$search%")
+                  ->orWhere('jk', 'like', "%$search%");
+
+        })
+        ->paginate($perPage);
+        return view('admin.student', compact('students'));
+
+        // $students = Student::all(); 
+        // return view('admin/student', [ 
+        //     'students' => $students 
+        // ]);
     }
 
     /**
