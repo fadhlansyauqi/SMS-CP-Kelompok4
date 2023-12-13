@@ -15,8 +15,7 @@ class CreateTblClassesTable extends Migration
     {
         Schema::create('tbl_classes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_kelas');
-            $table->string('nama_kelas', 255);
+            $table->string('nama_kelas');
             $table->timestamps();
         });
     }
