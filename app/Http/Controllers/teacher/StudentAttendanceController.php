@@ -25,8 +25,10 @@ class StudentAttendanceController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(), [
-            'nis' => 'required|integer',
-            'nama' => 'required|string|max:255',
+            'id_absen' => 'required|integer',
+            'id_student' => 'required|integer',
+            // 'id_jadwal' => 'required|integer',
+            'materi' => 'required|string|max:255',
             'pertemuan' => 'required|string|max:20',
             'tgl' => 'required|date',
             'ket' => 'required|string|max:255',

@@ -15,9 +15,10 @@ class CreateTblAttendancesTable extends Migration
     {
         Schema::create('tbl_attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('nis');
+            $table->integer('id_absen');
+            $table->integer('id_student');
             // $table->integer('id_jadwal');
-            $table->string('nama', 255);
+            $table->string('materi', 255);
             $table->string('pertemuan', 20);
             $table->date('tgl');
             $table->string('ket', 255);
