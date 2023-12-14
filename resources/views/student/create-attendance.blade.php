@@ -46,42 +46,43 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <div class="card-header text-right">
-                <a href="{{ route('student.create-attendance.create')}}" class="btn btn-primary" role="button">Absen</a>
-            </div>
+        <div class="card">
+			<div class="card-body">
+				<form action="{{route('student.create-attendance.store')}}" method="post">
+					@csrf
 
-            <div class="card-body mt-5 rounded-bottom text-center" style="background-color: white;" >
-				<table class="table table-hover table-bordered" id="data-table">
-					<thead>
-						<tr>
-							<th>No.</th>
-							<th>Nis</th>
-							<th>Nama</th>
-							<th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Keterangan</th>
-						</tr>
-					</thead>
-					<tbody>
+					<div class="form-group">
+						<label for="nis">NIS</label>
+						<input type="text" name="nis" id="nis" class="form-control" required="required" placeholder="Masukkan NIS">
+					</div>
 
-		@foreach ($attendance as $attendances)
-    <tr>
-        <td>{{ $loop->index + 1 }}</td>
-        <td>{{ $attendances->nis }}</td>
-        <td>{{ $attendances->nama }}</td>
-        <td>{{ $attendances->tanggal_masuk }}</td>
-        <td>{{ $attendances->jam_masuk }}</td>
-        <td>{{ $attendances->keterangan }}</td>
-        <td>
-            <a href="{{ route('student.edit-attendance.edit', ['id' => $attendances->id]) }}" class="btn btn-warning btn-sm" role="button">Edit</a>
-            <a onclick="confirmDelete(this)" data-url="{{ route('student.edit-attendance.delete', ['id' => $attendances->id]) }}" class="btn btn-warning btn-danger btn-sm" role="button">Hapus</a>
-        </td>
-    </tr>
-@endforeach
+                    <div class="form-group">
+						<label for="nama">Nama Siswa</label>
+						<input type="text" name="nama" id="nama" class="form-control" required="required" placeholder="Masukkan Nama Siswa">
+					</div>
 
-					</tbody>
-				</table>
+					<div class="form-group">
+						<label for="tanggal_masuk">Tanggal</label>
+                        <input type="date" name="tanggal_masuk" id="tanggal_masuk" class="form-control" required="required">
+					</div>
+
+                    <div class="form-group">
+						<label for="jam_masuk">Jam Masuk</label>
+                        <input type="time" name="jam_masuk" id="jam_masuk" class="form-control" required="required">
+					</div>
+
+                    <div class="form-group">
+						<label for="keterangan">Keterangan</label>
+						<textarea name="keterangan" id="keterangan" rows="3" class="form-control" required="required" placeholder="Masukkan Keterangan"></textarea>
+					</div>
+
+					<div class="text-right">
+						<a href="{{route('student.attendance')}}" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
 			</div>
+		</div>                 
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
