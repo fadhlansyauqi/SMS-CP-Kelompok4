@@ -58,6 +58,7 @@
                             <thead class="text-center bg-secondary">
                                 <tr>
                                     <td>No.</td>
+                                    <td>ID Nilai</td>
                                     <td>Nama Mapel</td>
                                     <td>Nama Siswa</td>
                                     <td>Jenis Nilai</td>
@@ -69,13 +70,16 @@
                                 @foreach ($grades as $grade)
                                     <tr>
                                         <td> {{ $loop->index + 1 }} </td>
+                                        <td> {{ $grade->id_nilai }} </td>
                                         <td> {{ $grade->course ? $grade->course->nama_mapel : '-' }}</td>
                                         <td> {{ $grade->student ? $grade->student->nama : '-' }}</td>
                                         <td> {{ $grade->jenis_nilai }} </td>
                                         <td> {{ $grade->nilai }} </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a>
-                                            <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                            <a href="{{ route('edit.grade', ['id' => $grade->id]) }}"
+                                                class="btn btn-warning btn-sm" role="button">Edit</a>
+                                            <a href="{{ route('delete.grade', ['id' => $grade->id]) }}"
+                                                class="btn btn-danger btn-sm" role="button">Hapus</a>
                                         </td>
                                 @endforeach
                                 </tr>

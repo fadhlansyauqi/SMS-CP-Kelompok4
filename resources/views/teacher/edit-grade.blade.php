@@ -53,11 +53,19 @@
                         @csrf
                         <!--begin::Group-->
                         <div class="form-group">
-                            <label for="nama_mapel">Nama Mata Pelajaran</label>
+                            <label for="id_nilai">ID Nilai</label>
+                            <input type="text" name="id_nilai" id="id_nilai" class="form-control"
+                                value="{{ $grade->id_nilai }}" required="required" placeholder="Masukkan Nama Mapel">
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group">
+                            <label for="id_mapel">Mata Pelajaran</label>
                             <select class="form-control" name="id_mapel" id="id_mapel" required="required">
                                 @foreach ($courses as $course)
                                     <option value="{{ $course->id }}"
-                                        {{ $course->id == $grade->id_mapel ? 'selected' : '' }}>{{ $course->nama_mapel }}
+                                        {{ $course->id == $grade->id_mapel ? 'selected' : '' }}>
+                                        {{ $course->nama_mapel }}
                                     </option>
                                 @endforeach
                             </select>
@@ -65,11 +73,12 @@
                         <!--end::Group-->
                         <!--begin::Group-->
                         <div class="form-group">
-                            <label for="nis">Nama Mata Pelajaran</label>
+                            <label for="id_siswa">Siswa</label>
                             <select class="form-control" name="id_siswa" id="id_siswa" required="required">
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}"
-                                        {{ $student->id == $course->id_siswa ? 'selected' : '' }}>{{ $student->nama }}
+                                        {{ $student->id == $grade->id_siswa ? 'selected' : '' }}>
+                                        {{ $student->nama }}
                                     </option>
                                 @endforeach
                             </select>
@@ -78,15 +87,21 @@
                         <!--begin::Group-->
                         <div class="form-group">
                             <label for="jenis_nilai">Jenis Nilai</label>
-                            <select class="form-control" name="jenis_nilai" id="jenis_nilai" required="required">
-                                <option value="">Pilih Jenis Nilai...</option>
-                                <option value="{{ $grade->Quiz }}">Quiz</option>
-                                <option value="{{ $grade->Uji_Kompetensi }}">Uji Kompetensi</option>
-                                <option value="{{ $grade->Ulangan_Harian }}">Ulangan Harian</option>
-                                <option value="{{ $grade->UTS }}">UTS</option>
-                                <option value="{{ $grade->UAS }}">UAS</option>
+                            <select class="form-control" name="jenis_nilai" id="jenis_nilai">
+                                <option value="" {{ $grade->jenis_nilai === '' ? 'selected' : '' }}>Pilih Jenis
+                                    Nilai...</option>
+                                <option value="Quiz" {{ $grade->jenis_nilai === 'Quiz' ? 'selected' : '' }}>Quiz</option>
+                                <option value="Uji Kompetensi"
+                                    {{ $grade->jenis_nilai === 'Uji Kompetensi' ? 'selected' : '' }}>Uji Kompetensi
+                                </option>
+                                <option value="Ulangan Harian"
+                                    {{ $grade->jenis_nilai === 'Ulangan Harian' ? 'selected' : '' }}>Ulangan Harian
+                                </option>
+                                <option value="UTS" {{ $grade->jenis_nilai === 'UTS' ? 'selected' : '' }}>UTS</option>
+                                <option value="UAS" {{ $grade->jenis_nilai === 'UAS' ? 'selected' : '' }}>UAS</option>
                             </select>
                         </div>
+
                         <!--end::Group-->
                         <!--begin::Group-->
                         <div class="form-group">

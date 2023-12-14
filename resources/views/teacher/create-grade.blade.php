@@ -53,6 +53,13 @@
                         @csrf
                         <!--begin::Group-->
                         <div class="form-group">
+                            <label for="id_nilai">ID Nilai</label>
+                            <input type="text" name="id_nilai" id="id_nilai" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group">
                             <label for="nama_mapel">Nama Mata Pelajaran</label>
                             <select class="form-control" name="id_mapel" id="id_mapel" required="required">
                                 @foreach ($courses as $course)
