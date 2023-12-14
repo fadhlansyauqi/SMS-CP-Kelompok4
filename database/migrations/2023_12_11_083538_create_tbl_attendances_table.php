@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblGradesTable extends Migration
+class CreateTblAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTblGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_grades', function (Blueprint $table) {
+        Schema::create('tbl_attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_mapel');
-            $table->integer('id_siswa');
-            $table->string('jenis_nilai', 50);
-            $table->integer('nilai');
+            $table->integer('nis');
+            // $table->integer('id_jadwal');
+            $table->string('nama', 255);
+            $table->string('pertemuan', 20);
+            $table->date('tgl');
+            $table->string('ket', 255);
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateTblGradesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_grades');
+        Schema::dropIfExists('tbl_attendances');
     }
 }

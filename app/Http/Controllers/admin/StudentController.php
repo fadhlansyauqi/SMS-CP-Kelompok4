@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Student;
+use App\StudentClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class StudentController extends Controller
@@ -13,13 +15,33 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all(); 
-        return view('admin/student', [ 
-            'students' => $students 
-        ]);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $students = Student::where(function ($query) use ($search) {
+            $query
+                ->where('nis', 'like', "%$search%")
+                ->orWhere('nama', 'like', "%$search%")
+                ->orWhere('jk', 'like', "%$search%");
+        })->paginate($perPage);
+        return view('admin.student', compact('students'));
     }
+
+    // public function index(Request $request)
+    // {
+    //     $search   = $request->input('search');
+    //     $perPage  = $request->input('per_page', 5);
+    //     $students = Student::join('tbl_classes', 'tbl_students.id_kelas', '=', 'tbl_classes.id')
+    //         ->where(function ($query) use ($search) {
+    //             $query
+    //                 ->where('tbl_students.nis', 'like', "%$search%")
+    //                 ->orWhere('tbl_students.nama', 'like', "%$search%")
+    //                 ->orWhere('tbl_students.jk', 'like', "%$search%");
+    //         })
+    //         ->paginate($perPage);
+    //     return view('admin.student', compact('students'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +50,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('admin/create-student');
+        $student_classes = DB::table('tbl_classes')->get();
+        return view('admin/create-student', compact('student_classes'));
     }
 
     /**
@@ -40,6 +63,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(), [
+            'id_kelas' => 'required',
             'nis' => 'required|integer',
             'nama' => 'required|string|max:255',
             'tempat_lahir' => 'required|string|max:255',
@@ -73,11 +97,12 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+
+    public function edit($id)
     {
-        return view('admin/edit-student', [
-            'student' => $student
-        ]);
+        $student = Student::findOrFail($id);
+        $student_classes = StudentClass::all();
+        return view('admin/edit-student', compact('student', 'student_classes'));
     }
 
     /**
@@ -90,24 +115,26 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $validateData = validator($request->all(), [
-            'nis' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'tempat_lahir' => 'required|string|max:255',
+            'id_kelas'      => 'required',
+            'nis'           => 'required|integer',
+            'nama'          => 'required|string|max:255',
+            'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
-            'jk' => 'required|string|max:20',
-            'nama_ortu' => 'required|string|max:255',
-            'alamat' => 'required|string',
-            'status' => 'required|string|max:50',
+            'jk'            => 'required|string|max:20',
+            'nama_ortu'     => 'required|string|max:255',
+            'alamat'        => 'required|string',
+            'status'        => 'required|string|max:50',
         ])->validate();
 
-        $student->nis =$validateData['nis'];
-        $student->nama =$validateData['nama'];
-        $student->tempat_lahir =$validateData['tempat_lahir'];
-        $student->tanggal_lahir =$validateData['tanggal_lahir'];
-        $student->jk =$validateData['jk'];
-        $student->nama_ortu =$validateData['nama_ortu'];
-        $student->alamat =$validateData['alamat'];
-        $student->status =$validateData['status'];
+        $student->id_kelas      = $validateData['id_kelas'];
+        $student->nis           = $validateData['nis'];
+        $student->nama          = $validateData['nama'];
+        $student->tempat_lahir  = $validateData['tempat_lahir'];
+        $student->tanggal_lahir = $validateData['tanggal_lahir'];
+        $student->jk            = $validateData['jk'];
+        $student->nama_ortu     = $validateData['nama_ortu'];
+        $student->alamat        = $validateData['alamat'];
+        $student->status        = $validateData['status'];
         $student->save();
 
         return redirect(route('admin.student'))->with('success', 'Data Berhasil Diupdate');
@@ -121,7 +148,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student->delete(); 
+        $student->delete();
         return redirect(route('admin.student'))->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -15,6 +15,7 @@ class TblUsersTableSeeder extends Seeder
     {
         // Admin
         DB::table('tbl_users')->insert([
+            'name'     => 'Admin',
             'role'     => 'ADMIN',
             'email'    => 'admin@mail.com',
             'password' => Hash::make('password'),
@@ -22,6 +23,7 @@ class TblUsersTableSeeder extends Seeder
 
         // Teacher
         DB::table('tbl_users')->insert([
+            'name'     => 'Teacher',
             'role'     => 'TEACHER',
             'email'    => 'teacher@mail.com',
             'password' => Hash::make('password'),
@@ -29,6 +31,7 @@ class TblUsersTableSeeder extends Seeder
 
         // Student
         DB::table('tbl_users')->insert([
+            'name'     => 'Student',
             'role'     => 'STUDENT',
             'email'    => 'student@mail.com',
             'password' => Hash::make('password'),

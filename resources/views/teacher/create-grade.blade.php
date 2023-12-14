@@ -49,53 +49,57 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('teacher.store-student-grade') }}" method="post">
+                    <form action="{{ route('store.grade') }}" method="post">
                         @csrf
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Mata Pelajaran</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="id_mapel"
-                                    type="text" value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="id_nilai">ID Nilai</label>
+                            <input type="text" name="id_nilai" id="id_nilai" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Siswa</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="nis" type="text"
-                                    value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="nama_mapel">Nama Mata Pelajaran</label>
+                            <select class="form-control" name="id_mapel" id="id_mapel" required="required">
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->nama_mapel }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-form-label col-xl-3 col-lg-3">Jenis Nilai</label>
-                            <div class="col-xl-9 col-lg-9">
-                                <select class="form-control form-control-lg form-control-solid" name="jenis_nilai">
-                                    <option value="">Pilih Jenis Nilai...</option>
-                                    <option value="id">Quiz</option>
-                                    <option value="msa">Bahasa Melayu - Malay</option>
-                                    <option value="ca">Català - Catalan</option>
-                                    <option value="cs">Čeština - Czech</option>
-                                    <option value="da">Dansk - Danish</option>
-                                    <option value="de">Deutsch - German</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="nis">Nama Mata Pelajaran</label>
+                            <select class="form-control" name="id_siswa" id="id_siswa" required="required">
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nilai Siswa</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="nilai" type="text"
-                                    value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="jenis_nilai">Jenis Nilai</label>
+                            <select class="form-control" name="jenis_nilai" id="jenis_nilai" required="required">
+                                <option value="">Pilih Jenis Nilai...</option>
+                                <option value="Quiz">Quiz</option>
+                                <option value="Uji Kompetensi">Uji Kompetensi</option>
+                                <option value="Ulangan Harian">Ulangan Harian</option>
+                                <option value="UTS">UTS</option>
+                                <option value="UAS">UAS</option>
+                            </select>
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group">
+                            <label for="nilai">Nilai Siswa</label>
+                            <input type="text" name="nilai" id="nilai" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <div class="text-right">
-                            <a href="#" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
+                            <a href="teacher.student-grade" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

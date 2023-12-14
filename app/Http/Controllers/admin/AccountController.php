@@ -28,17 +28,19 @@ class AccountController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'email' => 'required|email',
+                'name'     => 'required',
+                'email'    => 'required|email',
                 'password' => 'required|min:3',
-                'role' => ['required', Rule::in(['TEACHER', 'STUDENT'])],
+                'role'     => ['required', Rule::in(['TEACHER', 'STUDENT'])],
             ],
             [
-                'email.required' => 'Email harus diisi',
-                'email.email' => 'Format email tidak valid',
+                'name.required'     => 'Nama harus diisi',
+                'email.required'    => 'Email harus diisi',
+                'email.email'       => 'Format email tidak valid',
                 'password.required' => 'Password harus diisi',
-                'password.min' => 'Password minimal harus 3 karakter',
-                'role.required' => 'Role harus dipilih',
-                'role.in' => 'Role yang dipilih tidak valid',
+                'password.min'      => 'Password minimal harus 3 karakter',
+                'role.required'     => 'Role harus dipilih',
+                'role.in'           => 'Role yang dipilih tidak valid',
             ],
         );
 
@@ -61,11 +63,13 @@ class AccountController extends Controller
     public function update(Request $request, User $user)
     {
         $validateData = validator($request->all(), [
+            'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:3',
             'role' => ['required', Rule::in(['TEACHER', 'STUDENT'])],
         ])->validate();
 
+        $user->name = $validateData['name'];
         $user->email = $validateData['email'];
         $user->password = Hash::make($validateData['password']);
         $user->role = $validateData['role'];

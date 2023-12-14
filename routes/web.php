@@ -44,6 +44,12 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{student}/delete-student', 'admin\StudentController@destroy')->name('delete.student');
 
     Route::get('/admin/student-class', 'admin\StudentClassController@index')->name('admin.student-class');
+    Route::get('/admin/student-class-create', 'admin\StudentClassController@create')->name('admin.student-class.create');
+    Route::post('/admin/student-class-create', 'admin\StudentClassController@store')->name('admin.student-class.store');
+    Route::get('/admin/{student_class}/student-class-edit', 'admin\StudentClassController@edit')->name('admin.student-class.edit');
+    Route::post('/admin/{student_class}/student-class-edit', 'admin\StudentClassController@update')->name('admin.student-class.update');
+    Route::get('/admin/{student_class}/student-class-delete', 'admin\StudentClassController@destroy')->name('admin.student-class.delete');
+
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
@@ -75,13 +81,25 @@ Route::group(['middleware' => 'ADMIN'], function () {
 // auth teacher
 Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
+
     Route::get('/teacher/student-grade', 'teacher\StudentGradeController@index')->name('teacher.student-grade');
+    Route::get('/teacher/create-grade', 'teacher\StudentGradeController@create')->name('create.grade');
+    Route::post('/teacher/create-grade', 'teacher\StudentGradeController@store')->name('store.grade');
+    Route::get('/teacher/{grade}/edit-grade', 'teacher\StudentGradeController@edit')->name('edit.grade');
+    Route::post('/teacher/{grade}/edit-grade', 'teacher\StudentGradeController@update')->name('update.grade');
+    Route::get('/teacher/{grade}/delete-grade', 'teacher\StudentGradeController@destroy')->name('delete.grade');
+
     Route::get('/teacher/student-attendance', 'teacher\StudentAttendanceController@index')->name('teacher.student-attendance');
+    Route::get('/teacher/create-attendance', 'teacher\StudentAttendanceController@create')->name('create.attendance');
+    Route::post('/teacher/create-attendance', 'teacher\StudentAttendanceController@store')->name('store.attendance');
+    Route::get('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@edit')->name('edit.attendance');
+    Route::post('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@update')->name('update.attendance');
+
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
+
     Route::get('/teacher/student-grade-create', 'teacher\StudentGradeController@create')->name('teacher.student-grade-create');
     Route::post('/teacher/student-grade-create', 'teacher\StudentGradeController@store')->name('teacher.store-student-grade');
-
 });
 
 // auth student`

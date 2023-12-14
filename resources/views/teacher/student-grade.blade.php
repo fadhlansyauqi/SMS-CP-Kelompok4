@@ -49,7 +49,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header text-right">
-                    <a href='{{ route('teacher.student-grade-create') }}' class="btn btn-primary" role="button">Tambah
+                    <a href='{{ route('create.grade') }}' class="btn btn-primary" role="button">Tambah
                         Nilai</a>
                 </div>
                 <div class="card">
@@ -57,6 +57,8 @@
                         <table class="table mb-0 table-bordered">
                             <thead class="text-center bg-secondary">
                                 <tr>
+                                    <td>No.</td>
+                                    <td>ID Nilai</td>
                                     <td>Nama Mapel</td>
                                     <td>Nama Siswa</td>
                                     <td>Jenis Nilai</td>
@@ -65,15 +67,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tbl_grades as $Grade)
+                                @foreach ($grades as $grade)
                                     <tr>
-                                        <td> {{ $Grade->id_mapel }}</td>
-                                        <td> {{ $Grade->id_siswa }} </td>
-                                        <td> {{ $Grade->jenis_nilai }} </td>
-                                        <td> {{ $Grade->nilai }} </td>
+                                        <td> {{ $loop->index + 1 }} </td>
+                                        <td> {{ $grade->id_nilai }} </td>
+                                        <td> {{ $grade->course ? $grade->course->nama_mapel : '-' }}</td>
+                                        <td> {{ $grade->student ? $grade->student->nama : '-' }}</td>
+                                        <td> {{ $grade->jenis_nilai }} </td>
+                                        <td> {{ $grade->nilai }} </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a>
-                                            <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                            <a href="{{ route('edit.grade', ['id' => $grade->id]) }}"
+                                                class="btn btn-warning btn-sm" role="button">Edit</a>
+                                            <a href="{{ route('delete.grade', ['id' => $grade->id]) }}"
+                                                class="btn btn-danger btn-sm" role="button">Hapus</a>
                                         </td>
                                 @endforeach
                                 </tr>
