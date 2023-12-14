@@ -15,7 +15,7 @@ class CreateTblStudentsTable extends Migration
     {
         Schema::create('tbl_students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->integer('id_kelas');
+            $table->integer('id_kelas');
             $table->integer('nis');
             $table->string('nama', 255);
             $table->string('tempat_lahir', 255);
@@ -25,6 +25,12 @@ class CreateTblStudentsTable extends Migration
             $table->text('alamat');
             $table->string('status', 50);
             $table->timestamps();
+
+            // Add foreign key constraint
+            $table
+                ->foreign('id_kelas')
+                ->references('id')
+                ->on('tbl_classes');
         });
     }
 

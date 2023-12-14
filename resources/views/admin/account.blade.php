@@ -51,7 +51,7 @@
                     <div class="col-3"></div>
                     <div class="col-5 text-right">
                         <a href="{{ route('admin.account.create') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong> New Account</strong></a>
+                                class="flaticon2-add-1"></i><strong>User Baru</strong></a>
                     </div>
                 </div>
 
@@ -60,6 +60,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Action</th>
@@ -69,6 +70,7 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td>

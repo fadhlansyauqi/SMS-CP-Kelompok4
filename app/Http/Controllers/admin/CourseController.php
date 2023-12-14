@@ -13,12 +13,22 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all(); 
-        return view('admin/course', [ 
-            'courses' => $courses 
-        ]);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $courses = Course::where(function ($query) use ($search) {
+            $query->where('kode_mapel', 'like', "%$search%")
+                  ->orWhere('nama_mapel', 'like', "%$search%");
+        })
+        ->paginate($perPage);
+
+        return view('admin.course', compact('courses'));
+
+        // $courses = Course::all(); 
+        // return view('admin/course', [ 
+        //     'courses' => $courses 
+        // ]);
     }
 
     /**

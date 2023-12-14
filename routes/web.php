@@ -44,6 +44,12 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{student}/delete-student', 'admin\StudentController@destroy')->name('delete.student');
 
     Route::get('/admin/student-class', 'admin\StudentClassController@index')->name('admin.student-class');
+    Route::get('/admin/student-class-create', 'admin\StudentClassController@create')->name('admin.student-class.create');
+    Route::post('/admin/student-class-create', 'admin\StudentClassController@store')->name('admin.student-class.store');
+    Route::get('/admin/{student_class}/student-class-edit', 'admin\StudentClassController@edit')->name('admin.student-class.edit');
+    Route::post('/admin/{student_class}/student-class-edit', 'admin\StudentClassController@update')->name('admin.student-class.update');
+    Route::get('/admin/{student_class}/student-class-delete', 'admin\StudentClassController@destroy')->name('admin.student-class.delete');
+
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');

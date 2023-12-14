@@ -51,6 +51,15 @@
                         @csrf
 
                         <div class="form-group mt-5">
+                            <label for=""><strong>Nama User</strong></label>
+                            <input type="text" name="name" id="name" class="form-control"
+                                placeholder="Masukkan Nama">
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-5">
                             <label for=""><strong>Email User</strong></label>
                             <input type="text" name="email" id="email" class="form-control"
                                 placeholder="Masukkan Email">
