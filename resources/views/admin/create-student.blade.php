@@ -49,36 +49,45 @@
 
             <div class="card">
                 <div class="card-body">
+                    <a href="{{ route('admin.student') }}">
+                        <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
+                    </a>
+                    <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>Tambah Siswa Baru</b></h3>
                     <form action="{{ route('store.student') }}" method="post">
                         @csrf
 
-                        <div class="form-group"> 
-                            <label for="nis">NIS</label> 
-                            <input type="text" name="nis" id="nis" class="form-control" required="required" placeholder="Masukkan nomor induk siswa"> 
+                        <div class="form-group">
+                            <label for="nis">NIS</label>
+                            <input type="text" name="nis" id="nis" class="form-control" required="required"
+                                placeholder="Masukkan nomor induk siswa">
                         </div>
 
-                        <div class="form-group"> 
-                            <label for="nama">Nama Lengkap</label> 
-                            <input type="text" name="nama" id="nama" class="form-control"   placeholder="Masukkan nama siswa"> 
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" name="nama" id="nama" class="form-control"
+                                placeholder="Masukkan nama siswa">
                         </div>
 
                         <div class="form-group">
                             <label for="id_kelas">Class</label>
-                            <select class="form-select" name="id_kelas" id="id_kelas">
-                                @foreach($student_classes as $student_class)
+                            <select class="form-control" name="id_kelas" id="id_kelas">
+                                <option value="" disabled selected hidden>Pilih Kelas</option>
+                                @foreach ($student_classes as $student_class)
                                     <option value="{{ $student_class->id }}">{{ $student_class->nama_kelas }}</option>
                                 @endforeach
                             </select>
-                          </div>
-
-                        <div class="form-group"> 
-                            <label for="tempat_lahir">Tempat Lahir</label> 
-                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"   placeholder="Masukkan tempat lahir siswa"> 
                         </div>
 
-                        <div class="form-group"> 
-                            <label for="tanggal_lahir">Tanggal Lahir</label> 
-                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"   placeholder="Masukkan tanggal lahir siswa"> 
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
+                                placeholder="Masukkan tempat lahir siswa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                                placeholder="Masukkan tanggal lahir siswa">
                         </div>
 
                         <div class="form-group">
@@ -89,27 +98,31 @@
                             <label for="perempuan">Perempuan</label><br>
                         </div>
 
-                        <div class="form-group"> 
-                            <label for="nama_ortu">Nama Orang Tua</label> 
-                            <input type="text" name="nama_ortu" id="nama_ortu" class="form-control"   placeholder="Masukkan nama orang tua siswa"> 
+                        <div class="form-group">
+                            <label for="nama_ortu">Nama Orang Tua</label>
+                            <input type="text" name="nama_ortu" id="nama_ortu" class="form-control"
+                                placeholder="Masukkan nama orang tua siswa">
                         </div>
-    
-                        <div class="form-group"> 
-                            <label for="alamat">Alamat</label> 
-                            <br><textarea name="alamat" id="alamat" rows="3" class="form-control"   placeholder="Masukkan alamat siswa"></textarea>
+
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <br>
+                            <textarea name="alamat" id="alamat" rows="3" class="form-control" placeholder="Masukkan alamat siswa"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <select class="form-select" name="status">
+                            <select class="form-control" name="status">
+                                <option value="" disabled selected hidden>Pilih Status</option>
                                 <option value="Belum Lulus">Belum Lulus</option>
                                 <option value="Sudah Lulus">Sudah Lulus</option>
                             </select>
                         </div>
-    
-                        <div class="text-right"> 
-                            <a href="{{ route('admin.student') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a> 
-                            <button type="submit" class="btn btn-primary">Simpan</button> 
+
+                        <div class="text-right">
+                            <a href="{{ route('admin.student') }}" class="btn btn-outline-danger mr-2"
+                                role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>
