@@ -34,8 +34,8 @@ class StudentAttendanceController extends Controller
             'ket' => 'required|string|max:255',
         ])->validate();
 
-        $attendance = new Attendance($validateData);
-        $attendance->save();
+        $attendances = new Attendance($validateData);
+        $attendances->save();
 
         return redirect(route('teacher.student-attendance'));
     }
@@ -43,7 +43,7 @@ class StudentAttendanceController extends Controller
     public function edit(Attendance $attendance)
     {
         $students = \App\Student::all();
-        return view('teacher.edit.attendance', [
+        return view('teacher/edit-attendance', [
             'attendance' => $attendance,
             'students' => $students
         ]);
@@ -51,21 +51,30 @@ class StudentAttendanceController extends Controller
 
     public function update(Request $request, Attendance $attendance)
     {
-        //     $validateData = validator($request->all(), [
-        //         'nis' => 'required|integer',
-        //         'nama' => 'required|string|max:255',
-        //         'pertemuan' => 'required|string|max:20',
-        //         'tgl' => 'required|date',
-        //         'ket' => 'required|string|max:255',
-        //     ])->validate();
+        $validateData = validator($request->all(), [
+            'id_absen' => 'required|integer',
+            'id_student' => 'required|integer',
+            // 'id_jadwal' => 'required|integer',
+            'materi' => 'required|string|max:255',
+            'pertemuan' => 'required|string|max:20',
+            'tgl' => 'required|date',
+            'ket' => 'required|string|max:255',
+        ])->validate();
 
-        //     $attendance->nis = $validateData['nis'];
-        //     $attendance->nama = $validateData['nama'];
-        //     $attendance->pertemuan = $validateData['pertemuan'];
-        //     $attendance->tgl = $validateData['tgl'];
-        //     $attendance->ket = $validateData['ket'];
-        //     $attendance->save();
+        $attendance->id_absen = $validateData['id_absen'];
+        $attendance->id_student = $validateData['id_student'];
+        $attendance->materi = $validateData['materi'];
+        $attendance->pertemuan = $validateData['pertemuan'];
+        $attendance->tgl = $validateData['tgl'];
+        $attendance->ket = $validateData['ket'];
+        $attendance->save();
 
-        //     return redirect(route('teacher.student-attendance'));
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Diupdate');
+    }
+
+    public function destroy(Attendance $attendance)
+    {
+        $attendance->delete();
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Dihapus');
     }
 }

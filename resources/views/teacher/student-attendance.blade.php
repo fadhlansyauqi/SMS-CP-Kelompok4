@@ -56,7 +56,8 @@
                     <thead class="text-center bg-secondary">
                         <tr>
                             <td>No.</td>
-                            <td>NIS</td>
+                            <td>ID Absen</td>
+                            <td>Nama Siswa</td>
                             <td>Nama Pembelajaran</td>
                             <td>Pertemuan</td>
                             <td>Tanggal</td>
@@ -68,15 +69,17 @@
                         @foreach ($attendances as $attendance)
                             <tr>
                                 <td> {{ $loop->index + 1 }} </td>
-                                <td> {{ $attendance->nis }}</td>
-                                <td> {{ $attendance->nama }} </td>
+                                <td> {{ $attendance->id_absen }}</td>
+                                <td> {{ $attendance->student ? $attendance->student->nama : '-' }}</td>
+                                <td> {{ $attendance->materi }} </td>
                                 <td> {{ $attendance->pertemuan }} </td>
                                 <td> {{ $attendance->tgl }} </td>
                                 <td> {{ $attendance->ket }} </td>
                                 <td class="text-center">
-                                    <a href="{{ route('edit.attendance', ['nis' => $attendance->nis]) }}"
+                                    <a href="{{ route('edit.attendance', ['id' => $attendance->id]) }}"
                                         class="btn btn-warning btn-sm" role="button">Edit</a>
-                                    <a onclick="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
+                                    <a href="{{ route('delete.attendance', ['id' => $attendance->id]) }}"
+                                        class="btn btn-danger btn-sm" role="button">Hapus</a>
                                 </td>
                         @endforeach
                         </tr>
