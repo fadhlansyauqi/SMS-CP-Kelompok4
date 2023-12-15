@@ -52,21 +52,19 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kelas</th>
+                                <th>ID Kelas</th>
                                 <th>Nama Kelas</th>
-                                <!-- <th>Aksi</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>XII</td>
-                                <td>XII IPA 1</td>
-                                <!-- <td>
-                                <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm" role="button">Hapus</a>
-                            </td> -->
-                            </tr>
+                            @foreach ($student_classes as $student_class)
+                                <tr>
+                                    <td> {{ $loop->index + 1 }} </td>
+                                    <td> {{ $student_class->id }} </td>
+                                    <td> {{ $student_class->nama_kelas }} </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

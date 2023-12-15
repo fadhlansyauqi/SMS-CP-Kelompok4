@@ -47,7 +47,29 @@
     <div class="content">
         <div class="container-fluid">
 
-            {{--  --}}
+            <div class="card">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Mata Pelajaran</th>
+                                <th>Nama Kelas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($class_schedules as $class_schedule)
+                                <tr>
+                                    <td> {{ $loop->index + 1 }} </td>
+                                    <td> {{ $class_schedule->id_course }} </td>
+                                    <td> {{ $class_schedule->id_class }} </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div><!-- /.container-fluid -->
     </div>
