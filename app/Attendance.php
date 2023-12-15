@@ -10,16 +10,17 @@ class Attendance extends Model
     protected $table = 'tbl_attendances';
 
     protected $fillable = [
-        'nis',
+        'id_absen',
+        'id_student',
         // 'id_jadwal',
-        'nama',
+        'materi',
         'pertemuan',
         'tgl',
         'ket',
     ];
     public function student()
     {
-        return $this->belongsTo('App\student', 'nis');
+        return $this->belongsTo('App\Student', 'id_student');
     }
 }
 

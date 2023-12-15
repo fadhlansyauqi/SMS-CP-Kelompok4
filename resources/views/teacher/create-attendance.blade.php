@@ -51,66 +51,69 @@
                     <form action="{{ route('store.attendance') }}" method="post">
                         @csrf
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Siswa</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <select class="form-control form-control-solid form-control-lg" name="nis"
-                                    id="nis" required="required">
-                                    @foreach ($students as $student)
-                                        <option value="{{ $student->nis }}">{{ $student->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="id_absen">ID Absen</label>
+                            <input type="text" name="id_absen" id="id_absen" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Pembelajaran</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="nama" type="text"
-                                    value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="id_student">Nama Siswa</label>
+                            <select class="form-control" name="id_student" id="id_student" required="required">
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label" for="jadwal">Pertemuan Ke -</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <select id="jadwal" class="form-control" name="pertemuan">
-                                    <option selected>Minggu 1</option>
-                                    <option>Minggu 2</option>
-                                    <option>Minggu 3</option>
-                                    <option>Minggu 4</option>
-                                    <option>Minggu 5</option>
-                                    <option>Minggu 6</option>
-                                    <option>Minggu 7</option>
-                                    <option>Minggu 8</option>
-                                    <option>Minggu 9</option>
-                                    <option>Minggu 10</option>
-                                    <option>Minggu 11</option>
-                                    <option>Minggu 12</option>
-                                    <option>Minggu 13</option>
-                                    <option>Minggu 14</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="materi">Nama Pembelajaran</label>
+                            <input type="text" name="materi" id="materi" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Tanggal</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="tgl" type="date"
-                                    value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="jenis_nilai">Pertemuan</label>
+                            <select id="jadwal" class="form-control" name="pertemuan">
+                                <option value="">Pertemuan Ke-</option>
+                                <option value="Minggu 1">Minggu 1</option>
+                                <option value="Minggu 2">Minggu 2</option>
+                                <option value="Minggu 3">Minggu 3</option>
+                                <option value="Minggu 4">Minggu 4</option>
+                                <option value="Minggu 5">Minggu 5</option>
+                                <option value="Minggu 6">Minggu 6</option>
+                                <option value="Minggu 7">Minggu 7</option>
+                                <option value="Minggu 8">Minggu 8</option>
+                                <option value="Minggu 9">Minggu 9</option>
+                                <option value="Minggu 10">Minggu 10</option>
+                                <option value="Minggu 11">Minggu 11</option>
+                                <option value="Minggu 12">Minggu 12</option>
+                                <option value="Minggu 13">Minggu 13</option>
+                                <option value="Minggu 14">Minggu 14</option>
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Keterangan</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="ket" type="text"
-                                    value="" />
-                            </div>
+                        <div class="form-group">
+                            <label for="tgl">tgl Siswa</label>
+                            <input type="date" name="tgl" id="tgl" class="form-control" required="required"
+                                placeholder="Masukkan Nama Mapel">
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group">
+                            <label for="ket">Keterangan: </label><br>
+                            <input type="radio" id="Alpa" name="ket" value="Alpa">
+                            <label for="Alpa">Alpa</label><br>
+                            <input type="radio" id="Izin" name="ket" value="Izin">
+                            <label for="Izin">Izin</label><br>
+                            <input type="radio" id="Sakit" name="ket" value="Sakit">
+                            <label for="Sakit">Sakit</label><br>
+                            <input type="radio" id="Terlambat" name="ket" value="Terlambat">
+                            <label for="Terlambat">Terlambat</label><br>
                         </div>
                         <!--end::Group-->
                         <div class="text-right">

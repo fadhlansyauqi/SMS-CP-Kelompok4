@@ -48,91 +48,99 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('update.attendance', ['nis' => $attendance->nis]) }}" method="post">
+                    <form action="{{ route('update.attendance', ['id' => $attendance->id]) }}" method="post">
                         @csrf
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Siswa</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <select class="form-control form-control-solid form-control-lg" name="nis"
-                                    id="nis" required="required">
-                                    @foreach ($students as $student)
-                                        <option value="{{ $student->nis }}"
-                                            {{ $student->nis == $attendance->nis ? 'selected' : '' }}>{{ $student->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="id_absen">ID Absen</label>
+                            <input type="text" name="id_absen" id="id_absen" class="form-control"
+                                value="{{ $attendance->id_absen }}" required="required" placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Nama Pembelajaran</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="nama" type="text"
-                                    value="{{ $attendance->nama }}" />
-                            </div>
+                        <div class="form-group">
+                            <label for="id_student">Nama Siswa</label>
+                            <select class="form-control" name="id_student" id="id_student" required="required">
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}"
+                                        {{ $student->id == $attendance->id_student ? 'selected' : '' }}>
+                                        {{ $student->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label" for="jadwal">Pertemuan Ke -</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <select id="jadwal" class="form-control" name="pertemuan">
-                                    <option selected {{ $attendance->pertemuan === 'Minggu 1' ? 'checked' : '' }}>
-                                        Minggu 1
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 2' ? 'checked' : '' }}>Minggu 2
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 3' ? 'checked' : '' }}>Minggu 3
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 4' ? 'checked' : '' }}>Minggu 4
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 5' ? 'checked' : '' }}>Minggu 5
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 6' ? 'checked' : '' }}>Minggu 6
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 7' ? 'checked' : '' }}>Minggu 7
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 8' ? 'checked' : '' }}>Minggu 8
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 9' ? 'checked' : '' }}>Minggu 9
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 10' ? 'checked' : '' }}>Minggu 10
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 11' ? 'checked' : '' }}>Minggu 11
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 12' ? 'checked' : '' }}>Minggu 12
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 13' ? 'checked' : '' }}>Minggu 13
-                                    </option>
-                                    <option {{ $attendance->pertemuan === 'Minggu 14' ? 'checked' : '' }}>Minggu 14
-                                    </option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="materi">Nama Pembelajaran</label>
+                            <input type="text" name="materi" id="materi" class="form-control"
+                                value="{{ $attendance->materi }}" required="required" placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Tanggal</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="tgl" type="date"
-                                    value="{{ $attendance->tgl }}" />
-                            </div>
+                        <div class="form-group">
+                            <label for="jenis_nilai">Pertemuan</label>
+                            <select id="jadwal" class="form-control" name="pertemuan">
+                                <option value="Minggu 1" {{ $attendance->pertemuan === 'Minggu 1' ? 'selected' : '' }}>
+                                    Minggu 1</option>
+                                <option value="Minggu 2" {{ $attendance->pertemuan === 'Minggu 2' ? 'selected' : '' }}>
+                                    Minggu 2</option>
+                                <option value="Minggu 3" {{ $attendance->pertemuan === 'Minggu 3' ? 'selected' : '' }}>
+                                    Minggu 3</option>
+                                <option value="Minggu 4" {{ $attendance->pertemuan === 'Minggu 4' ? 'selected' : '' }}>
+                                    Minggu 4</option>
+                                <option value="Minggu 5" {{ $attendance->pertemuan === 'Minggu 5' ? 'selected' : '' }}>
+                                    Minggu 5</option>
+                                <option value="Minggu 6" {{ $attendance->pertemuan === 'Minggu 6' ? 'selected' : '' }}>
+                                    Minggu 6</option>
+                                <option value="Minggu 7" {{ $attendance->pertemuan === 'Minggu 7' ? 'selected' : '' }}>
+                                    Minggu 7</option>
+                                <option value="Minggu 8" {{ $attendance->pertemuan === 'Minggu 8' ? 'selected' : '' }}>
+                                    Minggu 8</option>
+                                <option value="Minggu 9" {{ $attendance->pertemuan === 'Minggu 9' ? 'selected' : '' }}>
+                                    Minggu 9</option>
+                                <option value="Minggu 10"{{ $attendance->pertemuan === 'Minggu 10' ? 'selected' : '' }}>
+                                    Minggu 10</option>
+                                <option value="Minggu 11"{{ $attendance->pertemuan === 'Minggu 11' ? 'selected' : '' }}>
+                                    Minggu 11</option>
+                                <option value="Minggu 12"{{ $attendance->pertemuan === 'Minggu 12' ? 'selected' : '' }}>
+                                    Minggu 12</option>
+                                <option value="Minggu 13"{{ $attendance->pertemuan === 'Minggu 13' ? 'selected' : '' }}>
+                                    Minggu 13</option>
+                                <option value="Minggu 14"{{ $attendance->pertemuan === 'Minggu 14' ? 'selected' : '' }}>
+                                    Minggu 14</option>
+                            </select>
                         </div>
                         <!--end::Group-->
                         <!--begin::Group-->
-                        <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Keterangan</label>
-                            <div class="col-lg-9 col-xl-9">
-                                <input class="form-control form-control-solid form-control-lg" name="ket" type="text"
-                                    value="{{ $attendance->ket }}" />
-                            </div>
+                        <div class="form-group">
+                            <label for="tgl">tgl Siswa</label>
+                            <input type="date" name="tgl" id="tgl" class="form-control"
+                                value="{{ $attendance->tgl }}" required="required" placeholder="Masukkan Nama Mapel">
                         </div>
                         <!--end::Group-->
-                        <a href="{{ route('teacher.student-attendance') }}" class="btn btn-outline-secondary mr-2"
-                            role="button">Batal</a>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <!--begin::Group-->
+                        <div class="form-group">
+                            <label for="ket">Keterangan: </label><br>
+                            <input type="radio" id="Alpa" name="ket" value="Alpa"
+                                {{ $attendance->ket === 'Alpa' ? 'checked' : '' }}>
+                            <label for="Alpa">Alpa</label><br>
+                            <input type="radio" id="Izin" name="ket" value="Izin"
+                                {{ $attendance->ket === 'Izin' ? 'checked' : '' }}>
+                            <label for="Izin">Izin</label><br>
+                            <input type="radio" id="Sakit" name="ket" value="Sakit"
+                                {{ $attendance->ket === 'Sakit' ? 'checked' : '' }}>
+                            <label for="Sakit">Sakit</label><br>
+                            <input type="radio" id="Terlambat" name="ket" value="Terlambat"
+                                {{ $attendance->ket === 'Terlambat' ? 'checked' : '' }}>
+                            <label for="Terlambat">Terlambat</label><br>
+                        </div>
+                        <!--end::Group-->
+                        <div class="text-right">
+                            <a href="{{ route('teacher.student-attendance') }}" class="btn btn-outline-secondary mr-2"
+                                role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>

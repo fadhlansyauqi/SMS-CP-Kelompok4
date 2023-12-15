@@ -17,31 +17,17 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('per_page', 5);
+        $search   = $request->input('search');
+        $perPage  = $request->input('per_page', 5);
         $students = Student::where(function ($query) use ($search) {
             $query
                 ->where('nis', 'like', "%$search%")
                 ->orWhere('nama', 'like', "%$search%")
                 ->orWhere('jk', 'like', "%$search%");
-        })->paginate($perPage);
+        })  ->orderBy('id_kelas', 'ASC')
+            ->paginate($perPage);
         return view('admin.student', compact('students'));
     }
-
-    // public function index(Request $request)
-    // {
-    //     $search   = $request->input('search');
-    //     $perPage  = $request->input('per_page', 5);
-    //     $students = Student::join('tbl_classes', 'tbl_students.id_kelas', '=', 'tbl_classes.id')
-    //         ->where(function ($query) use ($search) {
-    //             $query
-    //                 ->where('tbl_students.nis', 'like', "%$search%")
-    //                 ->orWhere('tbl_students.nama', 'like', "%$search%")
-    //                 ->orWhere('tbl_students.jk', 'like', "%$search%");
-    //         })
-    //         ->paginate($perPage);
-    //     return view('admin.student', compact('students'));
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -63,15 +49,15 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(), [
-            'id_kelas' => 'required',
-            'nis' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'tempat_lahir' => 'required|string|max:255',
+            'id_kelas'      => 'required',
+            'nis'           => 'required|integer',
+            'nama'          => 'required|string|max:255',
+            'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
-            'jk' => 'required|string|max:20',
-            'nama_ortu' => 'required|string|max:255',
-            'alamat' => 'required|string',
-            'status' => 'required|string|max:50',
+            'jk'            => 'required|string|max:20',
+            'nama_ortu'     => 'required|string|max:255',
+            'alamat'        => 'required|string',
+            'status'        => 'required|string|max:50',
         ])->validate();
 
         $student = new Student($validateData);

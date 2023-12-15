@@ -94,6 +94,7 @@ Route::group(['middleware' => 'TEACHER'], function () {
     Route::post('/teacher/create-attendance', 'teacher\StudentAttendanceController@store')->name('store.attendance');
     Route::get('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@edit')->name('edit.attendance');
     Route::post('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@update')->name('update.attendance');
+    Route::get('/teacher/{attendance}/delete-attendance', 'teacher\StudentAttendanceController@destroy')->name('delete.attendance');
 
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
