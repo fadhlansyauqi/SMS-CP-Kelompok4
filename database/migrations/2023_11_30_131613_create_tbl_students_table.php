@@ -15,7 +15,7 @@ class CreateTblStudentsTable extends Migration
     {
         Schema::create('tbl_students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_kelas');
+            $table->bigInteger('id_kelas')->unsigned();
             $table->integer('nis');
             $table->string('nama', 255);
             $table->string('tempat_lahir', 255);
