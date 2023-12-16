@@ -46,42 +46,38 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <div class="card-header text-right">
-                <a href="{{ route('student.create-attendance.create')}}" class="btn btn-primary" role="button">Absen</a>
+       
+        <div class="card">
+            <div class="card-body">
+                <table class="table mb-0 table-bordered">
+                    <thead class="text-center bg-secondary">
+                        <tr >
+                            <td>No.</td>
+                            <td>ID Absen</td>
+                            <td>Nama Siswa</td>
+                            <td>Nama Pembelajaran</td>
+                            <td>Pertemuan</td>
+                            <td>Tanggal</td>
+                            <td>Keterangan</td> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($attendance as $attendances)
+                            <tr class="text-center">
+                                <td> {{ $loop->index + 1 }} </td>
+                                <td> {{ $attendances->id_absen }}</td>
+                                <td> {{ $attendances->student ? $attendances->student->nama : '-' }}</td>
+                                <td> {{ $attendances->materi }} </td>
+                                <td> {{ $attendances->pertemuan }} </td>
+                                <td> {{ $attendances->tgl }} </td>
+                                <td> {{ $attendances->ket }} </td>
+                                
+                        @endforeach
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="card-body mt-5 rounded-bottom text-center" style="background-color: white;" >
-				<table class="table table-hover table-bordered" id="data-table">
-					<thead>
-						<tr>
-							<th>No.</th>
-							<th>Nis</th>
-							<th>Nama</th>
-							<th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Keterangan</th>
-						</tr>
-					</thead>
-					<tbody>
-
-		@foreach ($attendance as $attendances)
-    <tr>
-        <td>{{ $loop->index + 1 }}</td>
-        <td>{{ $attendances->nis }}</td>
-        <td>{{ $attendances->nama }}</td>
-        <td>{{ $attendances->tanggal_masuk }}</td>
-        <td>{{ $attendances->jam_masuk }}</td>
-        <td>{{ $attendances->keterangan }}</td>
-        <td>
-            <a href="{{ route('student.edit-attendance.edit', ['id' => $attendances->id]) }}" class="btn btn-warning btn-sm" role="button">Edit</a>
-            <a onclick="confirmDelete(this)" data-url="{{ route('student.edit-attendance.delete', ['id' => $attendances->id]) }}" class="btn btn-warning btn-danger btn-sm" role="button">Hapus</a>
-        </td>
-    </tr>
-@endforeach
-
-					</tbody>
-				</table>
-			</div>
+        </div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
