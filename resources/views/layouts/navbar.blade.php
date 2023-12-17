@@ -72,23 +72,6 @@
                 </div>
                 <i class="symbol-badge bg-success"></i>
             </div>
-            {{-- <div class="d-flex flex-column">
-                <div class="font-weight-bold font-size-h6 text-dark-75">{{ Auth::user()->name }}</div>
-                <a href="#"
-                    class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->email }}</a>
-                <div class="text-muted mt-1">{{ Auth::user()->role }}</div>
-                <div class="navi mt-2">
-
-
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign
-                        Out</a>
-                    <form id="logout-form" method="POST" action="{{ route('logout') }}">
-                        @csrf
-                    </form>
-                </div>
-            </div> --}}
             <div class="d-flex flex-column">
                 <a href="#" class="font-weight-bold font-size-h5 text-dark-75">{{ Auth::user()->name }}</a>
                 <div class="navi">
