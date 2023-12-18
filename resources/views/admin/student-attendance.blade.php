@@ -37,6 +37,7 @@
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
                 <div class="row">
                     <div class="col-4">
                         <form action="{{ route('admin.student-attendance') }}" method="GET">

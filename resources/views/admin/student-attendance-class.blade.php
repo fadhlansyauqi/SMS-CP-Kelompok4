@@ -35,8 +35,12 @@
     <!-- Main content -->
     
     <div class="container">
-        <div class="card card-custom">
+        <div class="card card-custom ">
             <div class="card-body">
+                <a href="{{ route('admin.student-attendance') }}">
+                    <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
+                </a>
+                <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>List Data Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
                         <form action="{{ route('admin.student-attendance-class', ['idKelas' => $idKelas]) }}" method="GET">
@@ -49,8 +53,14 @@
                             </div>
                         </form>
                      </div>
-
-                <div class="row table-responsive">
+                     <div class="col-3"></div>
+                     <div class="col-5 text-right">
+                        <a href="" type="button" class="btn btn-success"><i
+                            class="la la-history"></i><strong>Data Absensi</strong></a>
+                        <a href="" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                    </div>
+                <div class="row table-responsive mx-3">
                     <table class="table">
                         <thead>
                             <tr>

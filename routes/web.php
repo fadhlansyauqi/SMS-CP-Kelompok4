@@ -19,18 +19,18 @@ Auth::routes(['verify' => false, 'reset' => false]);
 Route::get('/login', 'Auth\LoginController@index')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-// Route::get('/', function () {
-//     return redirect(route('login'));
-// });
+Route::get('/', function () {
+    return redirect(route('login'));
+});
 
 
-// Route::get('/register', function () {
-//     return redirect(route('login'));
-// });
+Route::get('/register', function () {
+    return redirect(route('login'));
+});
 
-// Route::get('/home', function () {
-//     return redirect(route('login'));
-// });
+Route::get('/home', function () {
+    return redirect(route('login'));
+});
 
 
 // auth admin
