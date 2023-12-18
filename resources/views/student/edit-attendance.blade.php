@@ -23,7 +23,7 @@
                         <a href="{{ route('student.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Saya</a>
+                        <a href="" class="text-muted">Update Absen</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -46,38 +46,43 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-       
         <div class="card">
-            <div class="card-body">
-                <table class="table mb-0 table-bordered">
-                    <thead class="text-center bg-secondary">
-                        <tr >
-                            <td>No.</td>
-                            <td>ID Absen</td>
-                            <td>Nama Siswa</td>
-                            <td>Nama Pembelajaran</td>
-                            <td>Pertemuan</td>
-                            <td>Tanggal</td>
-                            <td>Keterangan</td> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($attendance as $attendances)
-                            <tr class="text-center">
-                                <td> {{ $loop->index + 1 }} </td>
-                                <td> {{ $attendances->id_absen }}</td>
-                                <td> {{ $attendances->student ? $attendances->student->nama : '-' }}</td>
-                                <td> {{ $attendances->materi }} </td>
-                                <td> {{ $attendances->pertemuan }} </td>
-                                <td> {{ $attendances->tgl }} </td>
-                                <td> {{ $attendances->ket }} </td>
-                                
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+			<div class="card-body">
+				<form action="{{route('student.edit-attendance.update', ['id' => $attendance->id]) }}" method="post">
+					@csrf
+
+                    <div class="form-group">
+                        <label for="nis">NIS</label>
+                        <input type="text" name="nis" id="nis" class="form-control" required="required" value="{{ $attendance->nis }}" placeholder="Masukan Nis Siswa">
+                    </div>
+
+					<div class="form-group">
+                        <label for="nama">Nama Siswa</label>
+                        <input type="text" name="nama" id="nama" class="form-control" required="required" value="{{ $attendance->nama }}" placeholder="Masukan nama Siswa">
+                    </div>
+
+                    <div class="form-group">
+						<label for="tanggal_masuk">Tanggal</label>
+                        <input type="date" name="tanggal_masuk" id="tanggal_masuk" class="form-control" required="required" value="{{$attendance->tanggal_masuk}}">
+					</div>
+
+                    <div class="form-group">
+						<label for="jam_masuk">Jam Masuk</label>
+                        <input type="time" name="jam_masuk" id="jam_masuk" class="form-control" required="required" value="{{$attendance->jam_masuk}}">
+					</div>
+
+                    <div class="form-group">
+						<label for="keterangan">Keterangan</label>
+						<textarea name="keterangan" id="keterangan" rows="3" class="form-control" required="required" value="{{$attendance->keterangan}}" placeholder="Masukkan Keterangan"></textarea>
+					</div>
+
+					<div class="text-right">
+						<a href="{{route('student.attendance')}}" class="btn btn-outline-secondary mr-2" role="button"><b>Batal</b></a>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
+			</div>
+		</div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

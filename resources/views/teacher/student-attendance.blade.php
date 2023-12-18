@@ -47,7 +47,7 @@
 
     <div class="card">
         <div class="card-header text-right">
-            <a href='{{ route('create.attendance') }}' class="btn btn-primary" role="button">Tambah
+            <a href="{{ route('create.attendance') }}" class="btn btn-primary" role="button">Tambah
                 Absen</a>
         </div>
         <div class="card">
