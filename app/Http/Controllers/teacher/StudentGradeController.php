@@ -8,9 +8,17 @@ use App\Http\Controllers\Controller;
 
 class StudentGradeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $grades = Grade::all();
+        $search   = $request->input('search');
+        $perPage  = $request->input('per_page', 5);
+        $grades = Grade::where(function ($query) use ($search) {
+            $query
+                ->where('id_mapel', 'like', "%$search%")
+                ->orWhere('jenis_nilai', 'like', "%$search%")
+                ->orWhere('nilai', 'like', "%$search%");
+        })->orderBy('id_nilai', 'ASC')
+            ->paginate($perPage);
         return view('teacher/student-grade', compact('grades'));
     }
 
