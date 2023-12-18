@@ -103,7 +103,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.account') }}?search={{ request('search') }}&per_page=" + $(this)
+                    "{{ route('admin.student-attendance') }}?search={{ request('search') }}&per_page=" + $(this)
                     .val();
             });
         });

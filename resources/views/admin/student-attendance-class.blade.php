@@ -38,18 +38,17 @@
         <div class="card card-custom">
             <div class="card-body">
                 <div class="row">
-                    {{-- <div class="col-4">
+                    <div class="col-4">
                         <form action="{{ route('admin.student-attendance-class', ['idKelas' => $idKelas]) }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        class="form-control" placeholder="Search..." />
+                                    <input type="text" name="search" value="{{ $search }}"
+                                       class="form-control" placeholder="Search..." />
                                     <span><i class="flaticon2-search-1 icon-md"></i></span>
                                 </div>
                             </div>
                         </form>
-                    </div> --}}
-                </div>
+                     </div>
 
                 <div class="row table-responsive">
                     <table class="table">
@@ -80,7 +79,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            {{-- <form method="GET" action="{{ route('admin.student-attendance-class') }}">
+                            <form method="GET" action="{{ route('admin.student-attendance-class', ['idKelas' => $idKelas]) }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -88,14 +87,14 @@
                                     <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                                     <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
                                     <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
-                                    <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                    <!-- Add more options if needed -->
                                 </select>
-                            </form> --}}
+                             </form>                             
                         </div>
 
-                        {{-- <div id="paginationLinks">
+                        <div id="paginationLinks">
                             {{ $students->links() }}
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +107,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.account') }}?search={{ request('search') }}&per_page=" + $(this)
+                    "{{ route('admin.student-attendance-class', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" + $(this)
                     .val();
             });
         });

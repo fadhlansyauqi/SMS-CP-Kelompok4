@@ -19,17 +19,18 @@ Auth::routes(['verify' => false, 'reset' => false]);
 Route::get('/login', 'Auth\LoginController@index')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/', function () {
-    return redirect(route('login'));
-});
+// Route::get('/', function () {
+//     return redirect(route('login'));
+// });
 
-Route::get('/register', function () {
-    return redirect(route('login'));
-});
 
-Route::get('/home', function () {
-    return redirect(route('login'));
-});
+// Route::get('/register', function () {
+//     return redirect(route('login'));
+// });
+
+// Route::get('/home', function () {
+//     return redirect(route('login'));
+// });
 
 
 // auth admin
@@ -52,7 +53,7 @@ Route::group(['middleware' => 'ADMIN'], function () {
 
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
 
-    Route::get('/admin/student-attendance-class/{idKelas}', 'admin\StudentAttendanceClassController@index')->name('admin.student-attendance-class');
+    Route::get('admin/student-attendance-class/{idKelas}', 'admin\StudentAttendanceClassController@index')->name('admin.student-attendance-class');
 
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
