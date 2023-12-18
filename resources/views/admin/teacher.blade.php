@@ -64,7 +64,7 @@
                         <div class="col-3"></div>
                         <div class="col-5 text-right">
                             <a href="{{ route('create.teacher') }}" type="button" class="btn btn-primary"><i
-                                    class="flaticon2-add-1"></i><strong> Tambah Mapel</strong></a>
+                                    class="flaticon2-add-1"></i><strong> Tambah Data Guru</strong></a>
                         </div>
                     </div>
     

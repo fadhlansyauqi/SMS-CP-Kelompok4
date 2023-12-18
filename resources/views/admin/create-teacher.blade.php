@@ -53,7 +53,7 @@
                         <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
                     </a>
                     <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>Tambah Data Guru</b></h3>
-                    <form action="{{ route('store.teacher') }}" method="post">
+                    <form action="{{ route('store.teacher') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group"> 
@@ -90,8 +90,11 @@
                         </div>
 
                         <div class="form-group"> 
-                            <label for="foto">Foto Guru</label> 
-                            <input type="file" name="foto" id="foto" class="form-control-file" accept="image/*" />
+                            <label for="foto">Masukkan Foto</label> 
+                            <p>
+                                <img id="fotoPreview" src="#" alt="Pas Foto" style="display: none; width: 150px; height: 150px;">
+                            </p>
+                            <input type="file" name="foto" id="foto" class="form-control-file" onchange="previewFoto(event)" accept="image/*" />
                         </div>
     
                         <div class="text-right"> 
@@ -106,3 +109,15 @@
     </div>
     <!-- /.content -->
 @endsection
+
+<script>
+    function previewFoto(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var fotoPreview = document.getElementById('fotoPreview');
+            fotoPreview.src = reader.result;
+            fotoPreview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

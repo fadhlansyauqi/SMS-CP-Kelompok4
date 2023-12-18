@@ -49,7 +49,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('update.teacher', ['id' => $teacher->id]) }}" method="post">
+                    <form action="{{ route('update.teacher', ['id' => $teacher->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group"> 
@@ -84,6 +84,14 @@
                             <label for="alamat">Alamat</label> 
                             <br><textarea name="alamat" id="alamat" rows="3" class="form-control"   placeholder="Masukkan alamat siswa">{{ $teacher->alamat }}</textarea>
                         </div>
+
+                        <div class="form-group"> 
+                            <label for="foto">Masukkan Foto</label> 
+                            <p>
+                                <img id="fotoPreview" src="{{ asset('uploads/teachers'. $teacher->foto) }}" alt="Pas Foto" style="width: 150px; height: 150px;">
+                            </p>
+                            <input type="file" name="foto" id="foto" class="form-control-file" value="{{ $teacher->foto }}"onchange="previewFoto(event)" accept="image/*" />
+                        </div>
     
                         <div class="text-right"> 
                             <a href="{{ route('admin.teacher') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a> 
@@ -97,3 +105,15 @@
     </div>
     <!-- /.content -->
 @endsection
+
+<script>
+    function previewFoto(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var fotoPreview = document.getElementById('fotoPreview');
+            fotoPreview.src = reader.result;
+            fotoPreview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
