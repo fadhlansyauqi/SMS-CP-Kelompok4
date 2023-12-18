@@ -105,13 +105,12 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $validateData = validator($request->all(), [
-            'nip' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'tempat_lahir' => 'required|string|max:255',
+            'nip'           => 'required|integer',
+            'nama'          => 'required|string|max:255',
+            'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ])->validate();
 
         $teacher->nip =$validateData['nip'];
