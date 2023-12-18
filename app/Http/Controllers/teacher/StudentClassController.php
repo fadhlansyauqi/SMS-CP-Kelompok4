@@ -8,9 +8,15 @@ use App\Http\Controllers\Controller;
 
 class StudentClassController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $student_classes = StudentClass::all();
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $student_classes = StudentClass::where('nama_kelas', 'like', "%$search%")
+            ->orderBy('nama_kelas', 'ASC')
+            ->paginate($perPage);
+
+
         return view('teacher/student-class', compact('student_classes'));
     }
 }
