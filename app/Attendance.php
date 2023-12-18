@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
+
     protected $table = 'tbl_attendances';
 
     protected $fillable = [
@@ -22,3 +23,4 @@ class Attendance extends Model
         return $this->belongsTo('App\Student', 'id_student');
     }
 }
+
