@@ -23,7 +23,10 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Siswa kelas</a>
+                        <a href="{{ route('admin.student-attendance') }}" class="text-muted">Absen Siswa</a>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="javascript:void(0)" class="text-muted" disabled>List Data Siswa</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
