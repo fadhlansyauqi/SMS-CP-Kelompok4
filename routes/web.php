@@ -51,6 +51,10 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{student_class}/student-class-delete', 'admin\StudentClassController@destroy')->name('admin.student-class.delete');
 
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
+
+    Route::get('/admin/student-attendance-class/{idKelas}', 'admin\StudentAttendanceClassController@index')->name('admin.student-attendance-class');
+
+
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
 

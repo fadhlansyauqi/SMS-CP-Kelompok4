@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Siswa</a>
+                        <a href="" class="text-muted">Absen Siswa kelas</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -38,8 +38,8 @@
         <div class="card card-custom">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-4">
-                        <form action="{{ route('admin.student-attendance') }}" method="GET">
+                    {{-- <div class="col-4">
+                        <form action="{{ route('admin.student-attendance-class', ['idKelas' => $idKelas]) }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row table-responsive">
@@ -56,15 +56,20 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIS</th>
+                                <th>Nama</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Kelas</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($student_classes as $student_class)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><a href="{{ route('admin.student-attendance-class', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
-                                </tr>
+                            @foreach ($students as $student)
+                            <td> {{ $loop->iteration }}</td> 
+                            <td> {{ $student->nis }}</td> 
+                            <td> {{ $student->nama }} </td> 
+                            <td> {{ $student->jk }} </td>
+                            <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }} </td><!-- Display class name -->
+                            <td> 
                             @endforeach
                         </tbody>
                     </table>
@@ -75,7 +80,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('admin.student-attendance') }}">
+                            {{-- <form method="GET" action="{{ route('admin.student-attendance-class') }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -85,12 +90,12 @@
                                     <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
                                     <!-- Tambahkan lebih banyak opsi jika diperlukan -->
                                 </select>
-                            </form>
+                            </form> --}}
                         </div>
 
-                        <div id="paginationLinks">
-                            {{ $student_classes->links() }}
-                        </div>
+                        {{-- <div id="paginationLinks">
+                            {{ $students->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </div>
