@@ -21,8 +21,6 @@ class CreateTblTeachersTable extends Migration
             $table->date('tanggal_lahir');
             $table->string('jk', 20);
             $table->text('alamat');
-            $table->string('foto');
-            
             $table->timestamps();
         });
     }
