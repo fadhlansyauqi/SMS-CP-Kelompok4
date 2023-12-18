@@ -15,6 +15,6 @@ class Teacher extends Model
         'tanggal_lahir',
         'jk',
         'alamat',
-        // 'foto',
+        'foto',
     ];
 }

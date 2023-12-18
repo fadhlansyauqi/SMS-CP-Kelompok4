@@ -49,6 +49,10 @@
 
             <div class="card">
                 <div class="card-body">
+                    <a href="{{ route('admin.teacher') }}">
+                        <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
+                    </a>
+                    <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>Tambah Data Guru</b></h3>
                     <form action="{{ route('store.teacher') }}" method="post">
                         @csrf
 
@@ -83,6 +87,11 @@
                         <div class="form-group"> 
                             <label for="alamat">Alamat</label> 
                             <br><textarea name="alamat" id="alamat" rows="3" class="form-control"   placeholder="Masukkan alamat guru"></textarea>
+                        </div>
+
+                        <div class="form-group"> 
+                            <label for="foto">Foto Guru</label> 
+                            <input type="file" name="foto" id="foto" class="form-control-file" accept="image/*" />
                         </div>
     
                         <div class="text-right"> 

@@ -1,13 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\ClassSchedule;
-use App\LessonHours;
-use App\Course;
-use App\StudentClass;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ClassScheduleController extends Controller
 {
@@ -18,11 +13,7 @@ class ClassScheduleController extends Controller
      */
     public function index()
     {
-        $classSchedules = ClassSchedule::all(); // Mengambil semua data
-
-        // Kemudian, kirim data tersebut ke view untuk ditampilkan
-        return view('admin.class-schedule', compact('classSchedules'));
-        // return view('admin/class-schedule');
+        //
     }
 
     /**
@@ -32,11 +23,7 @@ class ClassScheduleController extends Controller
      */
     public function create()
     {
-        $lessonHours = LessonHours::all();
-        $courses = Course::all();
-        $classes = StudentClass::all();
-
-        return view('admin.create-class-schedule', compact('lessonHours', 'courses', 'classes'));
+        //
     }
 
     /**
@@ -47,16 +34,7 @@ class ClassScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = validator($request->all(), [
-            'id_lesson_hours' => 'integer',
-            'id_course' => 'integer',
-            'id_class' => 'integer',
-        ])->validate();
-
-        $class_schedule = new ClassSchedule($validateData);
-        $class_schedule->save();
-
-        return redirect(route('admin.class-schedule'))->with('success', 'Data Berhasil Ditambahkan');
+        //
     }
 
     /**

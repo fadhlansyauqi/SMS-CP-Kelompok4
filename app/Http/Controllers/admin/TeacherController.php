@@ -53,6 +53,7 @@ class TeacherController extends Controller
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
+            'foto' => 'required|string',
         ])->validate();
 
         $teacher = new Teacher($validateData);
@@ -101,6 +102,7 @@ class TeacherController extends Controller
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
+            'foto' => 'required|string',
         ])->validate();
 
         $teacher->nip =$validateData['nip'];
@@ -109,6 +111,8 @@ class TeacherController extends Controller
         $teacher->tanggal_lahir =$validateData['tanggal_lahir'];
         $teacher->jk =$validateData['jk'];
         $teacher->alamat =$validateData['alamat'];
+        $teacher->foto =$validateData['foto'];
+
         $teacher->save();
 
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Diupdate');
