@@ -114,6 +114,11 @@ Route::group(['middleware' => 'TEACHER'], function () {
 // auth student`
 Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/dashboard-student', 'student\DashboardStudentController@index')->name('student.dashboard');
+    Route::get('/dashboard/schedule', 'DashboardController@schedule')->name('schedule');
+Route::get('/dashboard/grades', 'DashboardController@grades')->name('grades');
+Route::get('/dashboard/attendance', 'DashboardController@attendance')->name('attendance');
+Route::get('/dashboard/payment', 'DashboardController@payment')->name('payment');
+    
     Route::get('/student/class-schedule', 'student\ClassScheduleController@index')->name('student.class-schedule');
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
     

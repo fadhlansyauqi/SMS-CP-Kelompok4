@@ -51,7 +51,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
         <a href="index.html">
-            <img alt="Logo" src="{{ asset('assets/media/logos/logo-dark.png') }}" />
+            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" />
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -94,7 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
                     <a href="index.html" class="brand-logo">
-                        <img alt="Logo" src="assets/media/logos/logo-dark.png" />
+                        <img alt="Logo" src="assets/media/logos/sms-logo.png" height="52" width="92" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->

@@ -33,13 +33,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
-            <div class="card">
-                <div class="card-body p-5">
-                    <div>Nama: Khaerul Anam</div>
-                    <div>Nis: 2022201</div>
-                    <div>Kelas: Teknik Informatika</div>
-                </div>
-            </div>
+            
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -54,7 +48,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Mata Pelajaran</th>
-                                <th>Nama Siswa</th>
                                 <th>Jenis</th>
                                 <th>Nilai</th>
                             </tr>
@@ -63,8 +56,7 @@
                             @foreach($tbl_grades as $grade)                          
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $grade->id_mapel }}</td>
-                                    <td>{{ $grade->id_siswa }}</td>
+                                    <td>{{ $grade->nama_mapel }}</td>
                                     <td>{{ $grade->jenis_nilai }}</td>
                                     <td>{{ $grade->nilai }}</td>
                                 </tr>
