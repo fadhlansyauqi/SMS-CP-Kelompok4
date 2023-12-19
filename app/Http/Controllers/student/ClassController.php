@@ -4,7 +4,7 @@ namespace App\Http\Controllers\student;
 
 //controller view class
 use App\StudentClass; 
-use App\Models\Student; 
+use App\Student; 
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,9 +18,8 @@ class ClassController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $tbl_classes = StudentClass::all(); 
-        return view('student.class', ['tbl_classes' => $tbl_classes]);
+        $tbl_students = Student::all();
+        return view('student.class', ['tbl_students' => $tbl_students]);
     }
-
     
 }
