@@ -51,6 +51,18 @@
                     </a>
                 </div>
 
+                <!-- Class Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.class') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="menu-icon flaticon2-group" style="color: #FFD700;"></i> Class</h5>
+                                <!-- Add your attendance content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
                 <!-- Payment Card -->
                 <div class="col-lg-3 col-md-6">
                     <a href="{{ route('student.tuition-payment') }}" class="text-decoration-none text-reset">
