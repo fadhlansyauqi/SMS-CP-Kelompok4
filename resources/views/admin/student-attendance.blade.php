@@ -33,11 +33,11 @@
     </div>
 
     <!-- Main content -->
-    
+
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
-                <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
                         <form action="{{ route('admin.student-attendance') }}" method="GET">
@@ -50,8 +50,12 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-3"></div>
+                    <div class="col-5 text-right">
+                        <a href="{{ route('admin.student-attendance-class') }}" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                    </div>
                 </div>
-
                 <div class="row table-responsive">
                     <table class="table">
                         <thead>
@@ -65,12 +69,14 @@
                         </thead>
                         <tbody>
                             @foreach ($attendances as $attendance)
-                            <tr>
-                            <td> {{ $loop->iteration }}</td> 
-                            <td> {{ $attendance->date }}</td> 
-                            <td> {{ $attendance->course->nama_mapel }} </td> 
-                            <td> {{ $attendance->student_class->nama_kelas }} </td> 
-                            <tr> 
+                                <tr>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $attendance->date }}</td>
+                                    <td> {{ $attendance->course->nama_mapel }} </td>
+                                    <td> {{ $attendance->student_class->nama_kelas }} </td>
+                                    <td> <a href="" type="button"
+                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                <tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -109,7 +115,8 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-attendance') }}?search={{ request('search') }}&per_page=" + $(this)
+                    "{{ route('admin.student-attendance') }}?search={{ request('search') }}&per_page=" +
+                    $(this)
                     .val();
             });
         });

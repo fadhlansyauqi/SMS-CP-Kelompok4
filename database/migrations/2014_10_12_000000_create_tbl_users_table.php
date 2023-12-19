@@ -15,12 +15,18 @@ class CreateTblUsersTable extends Migration
     {
         Schema::create('tbl_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('id_kelas')->unsigned()->nullable();
             $table->string('name');
             $table->enum('role', ['ADMIN', 'TEACHER', 'STUDENT'])->default('STUDENT');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table
+                ->foreign('id_kelas')
+                ->references('id')
+                ->on('tbl_classes');
         });
     }
 
