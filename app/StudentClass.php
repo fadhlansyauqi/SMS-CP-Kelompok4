@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Student;
+use App\Attendance;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentClass extends Model
@@ -14,5 +15,10 @@ class StudentClass extends Model
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

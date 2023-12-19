@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Course;
+use App\StudentClass;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
@@ -15,6 +16,7 @@ class Attendance extends Model
         'date',
         'id_student',
         'id_course',
+        'id_kelas',
         'status',
         'desc',
     ];
@@ -27,6 +29,11 @@ class Attendance extends Model
     public function course()
     {
         return $this->belongsTo(Course::class, 'id_course');
+    }
+
+    public function student_class()
+    {
+        return $this->belongsTo(StudentClass::class, 'id_kelas');
     }
 }
 

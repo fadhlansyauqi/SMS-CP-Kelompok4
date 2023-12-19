@@ -57,20 +57,15 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Mata Pelajaran</th>
                                 <th>Kelas</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($attendances as $attendance)
-                            <tr>
-                            <td> {{ $loop->iteration }}</td> 
-                            <td> {{ $attendance->date }}</td> 
-                            <td> {{ $attendance->course->nama_mapel }} </td> 
-                            <td> {{ $attendance->student_class->nama_kelas }} </td> 
-                            <tr> 
+                            @foreach ($student_classes as $student_class)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><a href="{{ route('admin.student-attendance-class', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -95,7 +90,7 @@
                         </div>
 
                         <div id="paginationLinks">
-                            {{ $attendances->links() }}
+                            {{ $student_classes->links() }}
                         </div>
                     </div>
                 </div>

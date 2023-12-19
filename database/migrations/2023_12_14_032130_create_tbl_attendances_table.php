@@ -18,6 +18,7 @@ class CreateTblAttendancesTable extends Migration
             $table->date('date');
             $table->bigInteger('id_student')->unsigned();
             $table->bigInteger('id_course')->unsigned();
+            $table->bigInteger('id_kelas')->unsigned();
             $table->string('status');
             $table->string('desc', 255);
             $table->timestamps();
@@ -31,6 +32,10 @@ class CreateTblAttendancesTable extends Migration
              ->foreign('id_course')
              ->references('id')
              ->on('tbl_courses');
+             $table
+                ->foreign('id_kelas')
+                ->references('id')
+                ->on('tbl_classes');
         });
     }
 
