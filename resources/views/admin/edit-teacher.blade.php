@@ -88,7 +88,7 @@
                         <div class="form-group"> 
                             <label for="foto">Masukkan Foto</label> 
                             <p>
-                                <img id="fotoPreview" src="{{ asset('uploads/teachers'. $teacher->foto) }}" alt="Pas Foto" style="width: 150px; height: 150px;">
+                                <img id="fotoPreview" src="{{ asset('uploads/teachers/'. $teacher->foto) }}" alt="Pas Foto" style="width: 150px; height: 150px;">
                             </p>
                             <input type="file" name="foto" id="foto" class="form-control-file" value="{{ $teacher->foto }}"onchange="previewFoto(event)" accept="image/*" />
                         </div>
