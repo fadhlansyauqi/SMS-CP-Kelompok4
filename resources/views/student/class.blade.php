@@ -49,16 +49,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tbl_students as $student)
+                            @foreach($tbl_students as $index => $student)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->nis }}</td>
                                     <td>{{ $student->nama }}</td>
                                     <td>{{ $student->jk }}</td>
-                                    <td>{{ $student->kelas->nama_kelas }}</td>
+                                    <td>{{ $student->kelas->nama_kelas }}</td> <!-- Pastikan properti sesuai -->
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

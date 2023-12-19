@@ -18,7 +18,7 @@ class ClassController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $tbl_students = Student::all();
+        $tbl_students = Student::where('id_kelas');
         return view('student.class', ['tbl_students' => $tbl_students]);
     }
     
