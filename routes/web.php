@@ -75,6 +75,8 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
     Route::get('/admin/create-class-schedule', 'admin\ClassScheduleController@create')->name('create.class-schedule');
     Route::post('/admin/create-class-schedule', 'admin\ClassScheduleController@store')->name('store.class-schedule');
+    Route::get('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@edit')->name('edit.class-schedule');
+    Route::post('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@update')->name('update.class-schedule');
 
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');
     Route::get('/admin/account-create', 'admin\AccountController@create')->name('admin.account.create');

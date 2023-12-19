@@ -45,7 +45,7 @@
 
     <!-- Main content -->
     <div class="content">
-        
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('store.class-schedule') }}" method="POST">
@@ -53,11 +53,11 @@
                     <table class="table">
                         <div>
                             <p class="h3 text-center mb-10">Kelas <select name="id_kelas" id="id_kelas">
-                                <option value="" disabled selected hidden>Pilih Kelas</option>
-                                @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
-                                @endforeach
-                            </select></p>
+                                    <option value="" disabled selected hidden>Pilih Kelas</option>
+                                    @foreach ($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
+                                    @endforeach
+                                </select></p>
                         </div>
                         <thead>
                             <tr>
@@ -71,63 +71,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($lessonHours as $lh)
-                            <tr>
-                                <td>{{ $lh->waktu }}</td>
-                                <!-- ... -->
-                                @for($j = 1; $j <= 6; $j++)
-                                @php
-                                $hari = '';
-                                switch($j) {
-                                    case 1:
-                                        $hari = "senin";
-                                        break;
-                                    case 2:
-                                        $hari = "selasa";
-                                        break;
-                                    case 3:
-                                        $hari = "rabu";
-                                        break;
-                                    case 4:
-                                        $hari = "kamis";
-                                        break;
-                                    case 5:
-                                        $hari = "jumat";
-                                        break;
-                                    case 6:
-                                        $hari = "sabtu";
-                                        break;
-                                    default:
-                                        $hari = "";
-                                }
-                                @endphp
-                                <td>
-                                
-                                    <input type="hidden" name="id_class" value="{{ $class->id }}">
-                                    <input type="hidden" name="hari" value="{{ $hari }}">
-                                    <input type="hidden" name="id_lesson_hours" value="{{  $lh->id }}">
-                                    <select class="form-control" name="id_course" id="id_course">
-                                        <option value="" disabled selected hidden>Pilih Mapel</option>
-                                        @foreach ($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->nama_mapel }}</option>
-                                        @endforeach
-                                    </select>
-                                
-                                </td>
-                                @endfor
-                            </tr>
-                            @endforeach            
+                            @foreach ($lessonHours as $lh)
+                                <tr>
+                                    <td>{{ $lh->waktu }}</td>
+                                    @foreach ($days as $day) {{-- loop dari tabel days --}}
+                                        <td>
+                                            <input type="hidden" name="id_lesson_hours[]" value="{{ $lh->id }}">
+                                            <input type="hidden" name="id_class[]" value="{{ $class->id }}">
+                                            <input type="hidden" name="hari[]" value="{{ $day->hari }}">
+                                            <select class="form-control" name="id_course[]">
+                                                <option value="" disabled selected hidden>Pilih Mapel</option>
+                                                @foreach ($courses as $course)
+                                                    <option value="{{ $course->id }}">{{ $course->nama_mapel }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
                         </tbody>
-                        
+
                     </table>
-                    <div class="text-right"> 
-                        <a href="{{ route('admin.class-schedule') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a> 
-                        <button type="submit" class="btn btn-primary">Simpan</button> 
+                    <div class="text-right">
+                        <a href="{{ route('admin.class-schedule') }}" class="btn btn-outline-danger mr-2"
+                            role="button">Batal</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
-
     </div>
     <!-- /.content -->
 @endsection
