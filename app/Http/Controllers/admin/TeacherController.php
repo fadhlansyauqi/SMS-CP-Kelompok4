@@ -60,12 +60,11 @@ class TeacherController extends Controller
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $fileName = time() . '_' . $file->getClientOriginalName(); // Memberikan nama unik pada foto
-            $path = $file->storeAs('public/uploads/teachers', $fileName);
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = $file->move(public_path().'/uploads/teachers', $fileName);
     
-            // Simpan data ke dalam database
             $teacher = new Teacher($validateData);
-            $teacher->foto = $fileName; // Simpan nama file foto
+            $teacher->foto = $fileName; 
             $teacher->save();
         }
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
@@ -105,33 +104,32 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $validateData = validator($request->all(), [
-            'nip'           => 'required|integer',
-            'nama'          => 'required|string|max:255',
-            'tempat_lahir'  => 'required|string|max:255',
+            'nip' => 'required|integer',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
         ])->validate();
 
-        $teacher->nip =$validateData['nip'];
-        $teacher->nama =$validateData['nama'];
-        $teacher->tempat_lahir =$validateData['tempat_lahir'];
-        $teacher->tanggal_lahir =$validateData['tanggal_lahir'];
-        $teacher->jk =$validateData['jk'];
-        $teacher->alamat =$validateData['alamat'];
+        $teacher->nip = $validateData['nip'];
+        $teacher->nama = $validateData['nama'];
+        $teacher->tempat_lahir = $validateData['tempat_lahir'];
+        $teacher->tanggal_lahir = $validateData['tanggal_lahir'];
+        $teacher->jk = $validateData['jk'];
+        $teacher->alamat = $validateData['alamat'];
         
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $fileName = time() . '_' . $file->getClientOriginalName(); // Memberikan nama unik pada foto
+            $fileName = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('public/uploads/teachers', $fileName);
     
-            // Hapus foto lama jika ada
             if ($teacher->foto) {
                 Storage::delete('public/uploads/teachers/' . $teacher->foto);
             }
     
-            $teacher->foto = $fileName; // Simpan nama file foto baru
+            $teacher->foto = $fileName;
         }
 
         $teacher->save();
