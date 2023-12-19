@@ -19,8 +19,15 @@ class CreateTblUsersTable extends Migration
             $table->enum('role', ['ADMIN', 'TEACHER', 'STUDENT'])->default('STUDENT');
             $table->string('email')->unique();
             $table->string('password');
+
+            $table->bigInteger('id_kelas');
             $table->rememberToken();
             $table->timestamps();
+
+            $table
+                ->foreign('id_kelas')
+                ->references('id')
+                ->on('tbl_classes');
         });
     }
 

@@ -19,8 +19,9 @@ class User extends Authenticatable
     protected $table = 'tbl_users';
 
     protected $fillable = [
-         'name','email', 'password', 'role',
+         'name','email', 'password', 'role', 'id_kelas',
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function isStudent()
     {
         return $this->role === 'STUDENT';
+    }
+
+     public function student_class()
+    {
+        return $this->belongsTo(StudentClass::class, 'id_kelas');
     }
 }
