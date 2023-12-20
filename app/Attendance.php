@@ -5,6 +5,7 @@ namespace App;
 use App\Course;
 use App\Attendance;
 use App\StudentClass;
+use App\SubAttendance;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
@@ -15,17 +16,9 @@ class Attendance extends Model
     protected $fillable = [
         'id',
         'date',
-        'id_student',
         'id_course',
         'id_kelas',
-        'status',
-        'desc',
     ];
-
-    public function student()
-    {
-        return $this->belongsTo(Attendance::class, 'id_student');
-    }
 
     public function course()
     {
@@ -35,6 +28,10 @@ class Attendance extends Model
     public function student_class()
     {
         return $this->belongsTo(StudentClass::class, 'id_kelas');
+    }
+    public function sub_attendance()
+    {
+        return $this->hasOne(SubAttendance::class);
     }
 }
 
