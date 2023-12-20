@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Student;
 use App\Attendance;
 use App\StudentClass;
+use App\SubAttendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -70,6 +71,13 @@ class StudentAttendanceController extends Controller
         $attendances = Attendance::where('id_kelas', $idKelas)->get();
   
         return view('admin/student-attendance-class-data', compact('attendances'));
+    }
+
+    public function detailAttendance($idAttendance){
+        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
+            ->with("attendance", "student")->get();
+
+        return view('admin/student-attendance-detail', compact('detailAttendances'));
     }
   
       

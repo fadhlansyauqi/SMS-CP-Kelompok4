@@ -61,21 +61,21 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
+                                <th>Siswa</th>
+                                <th>Status</th>
+                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($attendances as $attendance)
+                            @foreach ($detailAttendances as $detailAttendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $attendance->date }}</td>
-                                    <td> {{ $attendance->course->nama_mapel }} </td>
-                                    <td> {{ $attendance->student_class->nama_kelas }} </td>
-                                    <td> <a href="{{ route('admin.student-attendance-detail', ['id_attendance'=>$attendance->id]) }}" type="button"
-                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                    <td> {{ $detailAttendance->student->nama }}</td>
+                                    <td> {{ $detailAttendance->status }} </td>
+                                    <td> {{ $detailAttendance->desc }} </td>
+                                    {{-- <td> <a href="" type="button"
+                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td> --}}
                                 <tr>
                             @endforeach
                         </tbody>
@@ -100,9 +100,9 @@
                             </form>
                         </div>
 
-                        <div id="paginationLinks">
+                        {{-- <div id="paginationLinks">
                             {{ $attendances->links() }}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
