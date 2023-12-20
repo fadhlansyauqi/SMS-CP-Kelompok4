@@ -45,47 +45,51 @@
 
     <!-- Main content -->
     <div class="content">
-        <div class="container-fluid">
 
-            <div class="card">
-                {{-- <div class="card-header text-right"> 
-                    <a href="{{ route('create.course') }}" class="btn btn-primary" role="button">Tambah Jadwal Pelajaran</a> 
-                </div> --}}
+        <div class="container">
+            <a href="{{ route('create.class-schedule') }}" type="button" class="btn btn-primary"><i
+                class="flaticon2-add-1"></i><strong> Tambah Jadwal Pelajaran Kelas</strong></a>
+            
+                @foreach ($studentClasses as $class)
+                <div class="card card-custom my-5">
+                    <div class="card-body">
+                       <p class="h4"> Kelas  {{ $class->nama_kelas }} </p>
 
-                <div class="card-body">
-                    <table class="table mb-0 table-bordered">
-                        <thead class="text-center bg-secondary">
-                            <tr>
-                                <td colspan="5">senin</td>
-                            </tr>
-                            <tr>
-                                <td>Jam</td>
-                                <td>Waktu</td>
-                                <td>Kelas 7</td>
-                                <td>Kelas 8</td>
-                                <td>Kelas 9</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach ($courses as $course)
-						    <tr>
-                                <td class="text-center"> {{ $loop->index + 1 }}</td>
-                                <td> {{ $course->kode_mapel }}</td> 
-                                <td> {{ $course->nama_mapel }} </td> 
-                                <td> {{ $course->teacher ?
-                                    $course->teacher->nama : '-' }}</td> 
-                                <td class="text-center"> 
-                                    <a href="{{route('edit.course', ['id' => $course->id])}}" class="btn btn-warning btn-sm" role="button">Edit</a> 
-                                    <a onclick="confirmDelete(this)" data-url="{{ route('delete.course', ['id' => $course->id]) }}" class="btn btn-danger btn-sm" role="button">Hapus</a>
-                                </td>
-                            @endforeach
-                            </tr> --}}
-                        </tbody>
-                    </table>
+                       <a href="{{ route('edit.class-schedule', ['id' => $class->id]) }}"><i class="flaticon2-edit mr-3">Edit</i></a>
+
+                       <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Jam</th>
+                                    <th>Senin</th>
+                                    <th>Selasa</th>
+                                    <th>Rabu</th>
+                                    <th>Kamis</th>
+                                    <th>Jumat</th>
+                                    <th>Sabtu</th>
+                                </tr>
+                            </thead>
+                            {{-- <tbody>
+                                @foreach($lessonHours as $lh)
+                                <tr>
+                                    <td>{{ $lh->waktu }}</td>
+                                    @foreach ($days as $day) 
+                                    <td>
+                                        @foreach ($classSchedules as $schedule)
+                                        <p>{{ $schedule->course ? $schedule->course->nama_mapel : '-' }}</p>
+                                        @endforeach
+                                    </td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody> --}}
+
+                        </table>
+                        
+                    </div>
                 </div>
-            </div>
-
-        </div><!-- /.container-fluid -->
+                 @endforeach
+        </div>
     </div>
     <!-- /.content -->
 @endsection

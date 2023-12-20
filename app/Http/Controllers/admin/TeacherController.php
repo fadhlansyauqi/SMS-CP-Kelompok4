@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Teacher;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,8 +25,9 @@ class TeacherController extends Controller
                   ->orWhere('alamat', 'like', "%$search%");
         })
         ->paginate($perPage);
+        // $teachers = Teacher::all();
         return view('admin.teacher', compact('teachers'));
-
+        // return view('admin.teacher')->with('teachers', $teachers);
     }
 
     /**
@@ -53,11 +55,18 @@ class TeacherController extends Controller
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ])->validate();
 
-        $teacher = new Teacher($validateData);
-        $teacher->save();
-
+        // if ($request->hasFile('foto')) {
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $path = $file->move(public_path().'/uploads/teachers', $fileName);
+    
+        //     $teacher = new Teacher($validateData);
+        //     $teacher->foto = $fileName; 
+        //     $teacher->save();
+        // }
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -103,12 +112,26 @@ class TeacherController extends Controller
             'alamat' => 'required|string',
         ])->validate();
 
-        $teacher->nip =$validateData['nip'];
-        $teacher->nama =$validateData['nama'];
-        $teacher->tempat_lahir =$validateData['tempat_lahir'];
-        $teacher->tanggal_lahir =$validateData['tanggal_lahir'];
-        $teacher->jk =$validateData['jk'];
-        $teacher->alamat =$validateData['alamat'];
+        $teacher->nip = $validateData['nip'];
+        $teacher->nama = $validateData['nama'];
+        $teacher->tempat_lahir = $validateData['tempat_lahir'];
+        $teacher->tanggal_lahir = $validateData['tanggal_lahir'];
+        $teacher->jk = $validateData['jk'];
+        $teacher->alamat = $validateData['alamat'];
+        
+
+        // if ($request->hasFile('foto')) {
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $path = $file->storeAs('public/uploads/teachers', $fileName);
+    
+        //     if ($teacher->foto) {
+        //         Storage::delete('public/uploads/teachers/' . $teacher->foto);
+        //     }
+    
+        //     $teacher->foto = $fileName;
+        // }
+
         $teacher->save();
 
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Diupdate');

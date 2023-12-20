@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,9 +53,9 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{student_class}/student-class-delete', 'admin\StudentClassController@destroy')->name('admin.student-class.delete');
 
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
-
-    Route::get('admin/student-attendance-class/{idKelas}', 'admin\StudentAttendanceClassController@index')->name('admin.student-attendance-class');
-
+    Route::get('admin/student-attendance-class', 'admin\StudentAttendanceController@indexClass')->name('admin.student-attendance-class');
+    Route::get('admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@indexClassData')->name('admin.student-attendance-class-data');
+    // Route::get('admin/student-attendance-data', 'admin\StudentAttendanceController@indexData')->name('admin.student-attendance-data');
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
@@ -74,6 +75,10 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{course}/delete-course', 'admin\CourseController@destroy')->name('delete.course');
 
     Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
+    Route::get('/admin/create-class-schedule', 'admin\ClassScheduleController@create')->name('create.class-schedule');
+    Route::post('/admin/create-class-schedule', 'admin\ClassScheduleController@store')->name('store.class-schedule');
+    Route::get('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@edit')->name('edit.class-schedule');
+    Route::post('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@update')->name('update.class-schedule');
 
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');
     Route::get('/admin/account-create', 'admin\AccountController@create')->name('admin.account.create');
@@ -111,6 +116,11 @@ Route::group(['middleware' => 'TEACHER'], function () {
 // auth student`
 Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/dashboard-student', 'student\DashboardStudentController@index')->name('student.dashboard');
+    Route::get('/dashboard/schedule', 'DashboardController@schedule')->name('schedule');
+Route::get('/dashboard/grades', 'DashboardController@grades')->name('grades');
+Route::get('/dashboard/attendance', 'DashboardController@attendance')->name('attendance');
+Route::get('/dashboard/payment', 'DashboardController@payment')->name('payment');
+    
     Route::get('/student/class-schedule', 'student\ClassScheduleController@index')->name('student.class-schedule');
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
     
