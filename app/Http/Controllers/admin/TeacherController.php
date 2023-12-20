@@ -66,15 +66,10 @@ class TeacherController extends Controller
     
         //     $teacher->foto = $fileName; 
         // }
-<<<<<<< HEAD
 
         $teacher = new Teacher($validateData);
         $teacher->save();
         
-=======
-        $teacher = new Teacher($validateData);
-        $teacher->save();
->>>>>>> eb59d46e16170cd649923bcaa1e6d7f77c2f0c8f
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
