@@ -55,18 +55,18 @@ class TeacherController extends Controller
             'tanggal_lahir' => 'required|date',
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ])->validate();
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $path = $file->move(public_path().'/uploads/teachers', $fileName);
+        // if ($request->hasFile('foto')) {
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $path = $file->move(public_path().'/uploads/teachers', $fileName);
     
-            $teacher = new Teacher($validateData);
-            $teacher->foto = $fileName; 
-            $teacher->save();
-        }
+        //     $teacher->foto = $fileName; 
+        // }
+        $teacher = new Teacher($validateData);
+        $teacher->save();
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -120,17 +120,17 @@ class TeacherController extends Controller
         $teacher->alamat = $validateData['alamat'];
         
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/uploads/teachers', $fileName);
+        // if ($request->hasFile('foto')) {
+        //     $file = $request->file('foto');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $path = $file->storeAs('public/uploads/teachers', $fileName);
     
-            if ($teacher->foto) {
-                Storage::delete('public/uploads/teachers/' . $teacher->foto);
-            }
+        //     if ($teacher->foto) {
+        //         Storage::delete('public/uploads/teachers/' . $teacher->foto);
+        //     }
     
-            $teacher->foto = $fileName;
-        }
+        //     $teacher->foto = $fileName;
+        // }
 
         $teacher->save();
 

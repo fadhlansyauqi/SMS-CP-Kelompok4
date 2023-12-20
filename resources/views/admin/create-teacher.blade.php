@@ -89,13 +89,13 @@
                             <br><textarea name="alamat" id="alamat" rows="3" class="form-control"   placeholder="Masukkan alamat guru"></textarea>
                         </div>
 
-                        <div class="form-group"> 
+                        {{-- <div class="form-group"> 
                             <label for="foto">Masukkan Foto</label> 
                             <p>
                                 <img id="fotoPreview" src="#" alt="Pas Foto" style="display: none; width: 150px; height: 150px;">
                             </p>
                             <input type="file" name="foto" id="foto" class="form-control-file" onchange="previewFoto(event)" accept="image/*" />
-                        </div>
+                        </div> --}}
     
                         <div class="text-right"> 
                             <a href="{{ route('admin.teacher') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a> 

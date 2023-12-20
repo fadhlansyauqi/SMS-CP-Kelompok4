@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Course;
+use App\Attendance;
 use App\StudentClass;
 use Illuminate\Database\Eloquent\Model;
 

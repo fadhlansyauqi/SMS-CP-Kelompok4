@@ -17,10 +17,10 @@ class CreateTblAttendancesTable extends Migration
             $table->bigIncrements('id');
             $table->date('date');
             $table->bigInteger('id_student')->unsigned();
-            $table->bigInteger('id_course')->unsigned();
+            $table->bigInteger('id_course')->unsigned()->nullable();
             $table->bigInteger('id_kelas')->unsigned();
-            $table->string('status');
-            $table->string('desc', 255);
+            $table->string('status')->nullable();
+            $table->string('desc', 255)->nullable();
             $table->timestamps();
 
              // Add foreign key constraint

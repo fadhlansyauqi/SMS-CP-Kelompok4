@@ -10,16 +10,7 @@ use App\Http\Controllers\Controller;
 
 class StudentAttendanceController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $search = $request->input('search');
-    //     $perPage = $request->input('per_page', 5);
-    //     $student_classes = StudentClass::where('nama_kelas', 'like', "%$search%")
-    //                           ->orderBy('nama_kelas', 'ASC')
-    //                           ->paginate($perPage);
-
-    //     return view('admin/student-attendance', compact('student_classes'));
-    // }
+    
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -50,6 +41,7 @@ class StudentAttendanceController extends Controller
         $perPage = $request->get('per_page', 10);
 
         $students = Student::where('id_kelas', $idKelas);
+        $attendances = Attendance::all();
 
         if ($search) {
             $students = $students->where('nama', 'like', '%' . $search . '%');
@@ -57,19 +49,29 @@ class StudentAttendanceController extends Controller
 
         $students = $students->paginate($perPage);
 
-        return view('admin/student-attendance-class-data', compact('students', 'idKelas', 'search', 'perPage'));
+        return view('admin/student-attendance-class-data', compact('students', 'idKelas', 'search', 'perPage', 'attendances'));
     }
 
-    // public function indexData(Request $request)
-    // {
-    //     $search = $request->input('search');
-    //     $perPage = $request->input('per_page', 5);
-    //     $attendances = Attendance::where(function ($query) use ($search) {
-    //         $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
-    //     })
-    //         ->orderBy('date', 'ASC')
-    //         ->paginate($perPage);
+    public function store(Request $request, $idKelas, $idStudent)
+    {
+        $attendance = new Attendance;
+        $attendance->date = date('Y-m-d');
+        $attendance->id_student = $idStudent;
+        $attendance->id_kelas = $idKelas;
+        $attendance->status = $request->input('status');
+        $attendance->id_course = $request->input('id_course');
+        $attendance->save();
+  
+        return redirect()->back();
+    }
 
-    //     return view('admin/student-attendance-data', compact('attendances'));
-    // }
+    public function show($idKelas)
+    {
+        $attendances = Attendance::where('id_kelas', $idKelas)->get();
+  
+        return view('admin/student-attendance-class-data', compact('attendances'));
+    }
+  
+      
+
 }
