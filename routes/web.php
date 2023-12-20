@@ -55,7 +55,7 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
     Route::get('admin/student-attendance-class', 'admin\StudentAttendanceController@indexClass')->name('admin.student-attendance-class');
     Route::get('admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@indexClassData')->name('admin.student-attendance-class-data');
-    // Route::get('admin/student-attendance-data', 'admin\StudentAttendanceController@indexData')->name('admin.student-attendance-data');
+    Route::post('/admin/student-attendance-class-data/{idKelas}/{idStudent}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
@@ -92,6 +92,10 @@ Route::group(['middleware' => 'ADMIN'], function () {
 Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
 
+    Route::get('/teacher/student-grade-class', 'teacher\StudentGradeController@indexData')->name('teacher.student-grade-class');
+    Route::get('/teacher/student-grade-course', 'teacher\StudentGradeController@indexCourse')->name('teacher.student-grade-course');
+    Route::get('/teacher/student-grade-name', 'teacher\StudentGradeController@indexName')->name('teacher.student-grade-name');
+
     Route::get('/teacher/student-grade', 'teacher\StudentGradeController@index')->name('teacher.student-grade');
     Route::get('/teacher/create-grade', 'teacher\StudentGradeController@create')->name('create.grade');
     Route::post('/teacher/create-grade', 'teacher\StudentGradeController@store')->name('store.grade');
@@ -117,13 +121,13 @@ Route::group(['middleware' => 'TEACHER'], function () {
 Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/dashboard-student', 'student\DashboardStudentController@index')->name('student.dashboard');
     Route::get('/dashboard/schedule', 'DashboardController@schedule')->name('schedule');
-Route::get('/dashboard/grades', 'DashboardController@grades')->name('grades');
-Route::get('/dashboard/attendance', 'DashboardController@attendance')->name('attendance');
-Route::get('/dashboard/payment', 'DashboardController@payment')->name('payment');
-    
+    Route::get('/dashboard/grades', 'DashboardController@grades')->name('grades');
+    Route::get('/dashboard/attendance', 'DashboardController@attendance')->name('attendance');
+    Route::get('/dashboard/payment', 'DashboardController@payment')->name('payment');
+
     Route::get('/student/class-schedule', 'student\ClassScheduleController@index')->name('student.class-schedule');
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
-    
+
     Route::get('/student/attendance', 'student\AttendanceController@index')->name('student.attendance');
     Route::get('/student/create-attendace', 'student\AttendanceController@create')->name('student.create-attendance.create');
     Route::post('/student/create-attendace', 'student\AttendanceController@store')->name('student.create-attendance.store');
@@ -132,5 +136,4 @@ Route::get('/dashboard/payment', 'DashboardController@payment')->name('payment')
 
     Route::get('/student/class', 'student\ClassController@index')->name('student.class');
     Route::get('/student/tuition-payment', 'student\TuitionPaymentController@index')->name('student.tuition-payment');
-    
 });

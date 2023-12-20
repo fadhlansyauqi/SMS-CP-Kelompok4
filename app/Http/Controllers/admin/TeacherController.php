@@ -56,6 +56,7 @@ class TeacherController extends Controller
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
             // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ])->validate();
 
         // if ($request->hasFile('foto')) {
@@ -63,14 +64,17 @@ class TeacherController extends Controller
         //     $fileName = time() . '_' . $file->getClientOriginalName();
         //     $path = $file->move(public_path().'/uploads/teachers', $fileName);
     
-        //     $teacher = new Teacher($validateData);
         //     $teacher->foto = $fileName; 
-        //     $teacher->save();
         // }
+<<<<<<< HEAD
 
         $teacher = new Teacher($validateData);
         $teacher->save();
         
+=======
+        $teacher = new Teacher($validateData);
+        $teacher->save();
+>>>>>>> eb59d46e16170cd649923bcaa1e6d7f77c2f0c8f
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 

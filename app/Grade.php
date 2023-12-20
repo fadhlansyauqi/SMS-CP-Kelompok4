@@ -9,7 +9,6 @@ class Grade extends Model
     protected $table = 'tbl_grades';
 
     protected $fillable = [
-        'id_nilai',
         'id_mapel',
         'id_siswa',
         'jenis_nilai',
