@@ -15,9 +15,8 @@ class CreateTblGradesTable extends Migration
     {
         Schema::create('tbl_grades', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_nilai');
-            $table->integer('id_mapel');
             $table->integer('id_siswa');
+            $table->string('nama_siswa', 150);
             $table->string('jenis_nilai', 50);
             $table->integer('nilai');
             $table->timestamps();

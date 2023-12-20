@@ -2,50 +2,82 @@
 
 @section('content')
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                    <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Dashboard Student</b></h3>
-                    <!--end::Page Title-->
-
-                </div>
-                <!--end::Page Heading-->
-            </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
-            <div class="d-flex align-items-center">
-                <!--begin::Breadcrumb-->
-                Dashboard
-                <!--end::Breadcrumb-->
-            </div>
-            <!--end::Toolbar-->
-        </div>
+        <!-- ... (Your existing code) ... -->
     </div>
-    <!-- Content Header (Page header) -->
+
     <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+        <!-- ... (Your existing code) ... -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
 
+            <!-- Grid of Cards -->
+            <div class="row">
+
+                <!-- Schedule Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.class-schedule') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-calendar-alt" style="color: #FFD700;"></i> Schedule</h5>
+                                <!-- Add your schedule content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Grades Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.grade') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-graduation-cap" style="color: #00FF00;"></i> Grades</h5>
+                                <!-- Add your grades content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Attendance Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.attendance') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-info text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-check-circle" style="color: #87CEEB;"></i> Attendance</h5>
+                                <!-- Add your attendance content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Class Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.class') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="menu-icon flaticon2-group" style="color: #FFD700;"></i> Class</h5>
+                                <!-- Add your attendance content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Payment Card -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('student.tuition-payment') }}" class="text-decoration-none text-reset">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-money-bill" style="color: #00FF00;"></i> Payment</h5>
+                                <!-- Add your payment content here -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- End Grid of Cards -->
+
         </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+    </div><!-- /.content -->
 @endsection

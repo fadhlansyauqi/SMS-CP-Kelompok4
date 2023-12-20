@@ -6,8 +6,10 @@ use App\ClassSchedule;
 use App\LessonHours;
 use App\Course;
 use App\StudentClass;
+use App\Days;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ClassScheduleController extends Controller
 {
@@ -18,10 +20,23 @@ class ClassScheduleController extends Controller
      */
     public function index()
     {
-        $classSchedules = ClassSchedule::all(); // Mengambil semua data
+        $lessonHours = LessonHours::all();
+        $courses = Course::all();
+        $studentClass = StudentClass::all();
+        $classSchedules = ClassSchedule::all();
+        $days = Days::all();
 
         // Kemudian, kirim data tersebut ke view untuk ditampilkan
-        return view('admin.class-schedule', compact('classSchedules'));
+        // return view('admin.class-schedule', compact('lessonHours', 'courses', 'classes'));
+        return view('admin.class-schedule', [
+            // 'dump' => dd($studentClass),
+            'lessonHours' => ($lessonHours),
+            'courses' => ($courses),
+            'studentClasses' => ($studentClass),
+            'classSchedules' => ($classSchedules),
+            'days' => ($days)
+            
+        ]);
         // return view('admin/class-schedule');
     }
 
@@ -32,11 +47,12 @@ class ClassScheduleController extends Controller
      */
     public function create()
     {
+        $days = Days::all();
         $lessonHours = LessonHours::all();
         $courses = Course::all();
         $classes = StudentClass::all();
 
-        return view('admin.create-class-schedule', compact('lessonHours', 'courses', 'classes'));
+        return view('admin.create-class-schedule', compact('lessonHours', 'courses', 'classes', 'days'));
     }
 
     /**
@@ -48,13 +64,30 @@ class ClassScheduleController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(), [
-            'id_lesson_hours' => 'integer',
-            'id_course' => 'integer',
-            'id_class' => 'integer',
+            'id_lesson_hours.*' => 'integer',
+            'id_course.*' => 'integer',
+            'id_class.*' => 'integer',
+            'hari.*' => 'string',
         ])->validate();
 
-        $class_schedule = new ClassSchedule($validateData);
-        $class_schedule->save();
+        $count = count($validateData['id_lesson_hours']);
+        
+        if (
+            count($validateData['id_course']) !== $count ||
+            count($validateData['id_class']) !== $count ||
+            count($validateData['hari']) !== $count
+        ) {            
+            return redirect()->back()->withErrors(['message' => 'Panjang array tidak sesuai, Mohon isi semua jadwal']);
+        }
+
+        for ($i = 0; $i < $count; $i++) {
+            ClassSchedule::create([
+                'id_lesson_hours' => $validateData['id_lesson_hours'][$i],
+                'id_course' => $validateData['id_course'][$i],
+                'id_class' => $validateData['id_class'][$i],
+                'hari' => $validateData['hari'][$i],
+            ]);
+        }
 
         return redirect(route('admin.class-schedule'))->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -76,9 +109,19 @@ class ClassScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ClassSchedule $id)
     {
-        //
+        // return redirect('/admin/create-class-schedule');
+        // try {
+        //     $class = ClassSchedule::findOrFail($id);
+
+        //     return view('admin.class-schedule', [
+        //         'class' => $class,
+        //     ]);
+        // } catch (ModelNotFoundException $e) {
+
+        //     return redirect('/admin/create-class-schedule');
+        // }
     }
 
     /**

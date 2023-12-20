@@ -56,6 +56,7 @@ class TeacherController extends Controller
             'jk' => 'required|string|max:20',
             'alamat' => 'required|string',
             // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ])->validate();
 
         // if ($request->hasFile('foto')) {

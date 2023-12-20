@@ -16,7 +16,7 @@ class CreateTblClassSchedulesTable extends Migration
         Schema::create('tbl_class_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_lesson_hours');
-            $table->integer('id_course');
+            $table->integer('id_course')->nullable();
             $table->integer('id_class');
             $table->string('hari');
             $table->timestamps();
