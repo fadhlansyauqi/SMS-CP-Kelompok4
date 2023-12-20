@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Tambah Jadwal Pelajaran></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Tambah Jadwal Pelajaran</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -48,7 +48,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('store.class-schedule') }}" method="POST">
+                <form action="{{ route('update.class-schedule', ['id_class' => $class->id_class]) }}" method="POST">
                     @csrf
                     <table class="table">
                         <div>
