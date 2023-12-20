@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Siswa</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Kelas Siswa</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -20,10 +20,13 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
+                        <a href="{{ route('teacher.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Siswa</a>
+                        <a href="{{ route('teacher.student-class') }}" class="text-muted">Kelas Siswa</a>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="javascript:void(0)" class="text-muted" disabled>List Data Siswa</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -33,38 +36,47 @@
     </div>
 
     <!-- Main content -->
-    
+
     <div class="container">
-        <div class="card card-custom">
+        <div class="card card-custom ">
             <div class="card-body">
-                <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
+                <a href="{{ route('teacher.student-class') }}">
+                    <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
+                </a>
+                <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>List Data Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('admin.student-attendance') }}" method="GET">
+                        <form action="{{ route('teacher.student-class-data', ['idKelas' => $idKelas]) }}"
+                            method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        class="form-control" placeholder="Search..." />
+                                    <input type="text" name="search" value="{{ $search }}" class="form-control"
+                                        placeholder="Search..." />
                                     <span><i class="flaticon2-search-1 icon-md"></i></span>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
-                <div class="row table-responsive">
+                <div class="row table-responsive mx-3">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIS</th>
+                                <th>Nama</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Kelas</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($student_classes as $student_class)
+                            @foreach ($students as $student)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><a href="{{ route('admin.student-attendance-class-data', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $student->nis }}</td>
+                                    <td> {{ $student->nama }} </td>
+                                    <td> {{ $student->jk }} </td>
+                                    <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -76,21 +88,25 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('admin.student-attendance-class') }}">
+                            <form method="GET"
+                                action="{{ route('teacher.student-class-data', ['idKelas' => $idKelas]) }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
                                     <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                                    <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
-                                    <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
+                                    </option>
+                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
+                                    </option>
+                                    <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30
+                                    </option>
+                                    <!-- Add more options if needed -->
                                 </select>
                             </form>
                         </div>
 
                         <div id="paginationLinks">
-                            {{ $student_classes->links() }}
+                            {{ $students->links() }}
                         </div>
                     </div>
                 </div>
@@ -104,7 +120,8 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-attendance-class') }}?search={{ request('search') }}&per_page=" + $(this)
+                    "{{ route('teacher.student-class-data', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" +
+                    $(this)
                     .val();
             });
         });

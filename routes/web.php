@@ -111,7 +111,9 @@ Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/{attendance}/delete-attendance', 'teacher\StudentAttendanceController@destroy')->name('delete.attendance');
 
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
+
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
+    Route::get('teacher/student-class-data/{idKelas}', 'teacher\StudentClassController@indexClassData')->name('teacher.student-class-data');
 
     Route::get('/teacher/student-grade-create', 'teacher\StudentGradeController@create')->name('teacher.student-grade-create');
     Route::post('/teacher/student-grade-create', 'teacher\StudentGradeController@store')->name('teacher.store-student-grade');
