@@ -11,4 +11,6 @@ class ClassController extends Controller
     {
         return view('student/class');
     }
+
+    
 }

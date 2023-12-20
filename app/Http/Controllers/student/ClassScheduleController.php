@@ -9,12 +9,30 @@ class ClassScheduleController extends Controller
 {
     public function index()
     {
-        
-        return view('student.class-schedule',);
+        $schedule= ClassSchedule::all(); 
+        return view('student/class-schedule', [ 
+            'schedules' => $schedule
+        ]);
     }
 
     public function show()
     {
         
+    }
+
+    public function update(Request $request, ClassSchedule $schedule)
+    {
+        // $validateData = validator($request->all(), [
+        //     'kode_mapel' => 'required|string|max:10',
+        //     'nama_mapel' => 'required|string|max:100',
+        //     'id_teacher' => 'required|integer',
+        // ])->validate();
+
+        // $schedule->kode_mapel = $validateData['kode_mapel'];
+        // $schedule->nama_mapel = $validateData['nama_mapel'];
+        // $schedule->id_teacher = $validateData['id_teacher'];
+        // $schedule->save();
+
+        // return redirect(route('student.class-schedule'))->with('success', 'Data Berhasil Diupdate');
     }
 }

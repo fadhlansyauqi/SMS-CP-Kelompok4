@@ -46,14 +46,23 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-       
         <div class="card">
             <div class="card-body">
+            <div class="row">
+                <!-- <div class="col-4">
+                    <form action="{{ route('student.attendance') }}" method="GET">
+                        <div class="form-group">
+                            <div class="input-icon input-icon-right">
+                            <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search..." />
+                                <span><i class="flaticon2-search-1 icon-md"></i></span>
+                            </div>
+                        </div>
+                    </form>
+                </div> -->
                 <table class="table mb-0 table-bordered">
                     <thead class="text-center bg-secondary">
                         <tr >
                             <td>No.</td>
-                            <td>ID Absen</td>
                             <td>Nama Siswa</td>
                             <td>Nama Pembelajaran</td>
                             <td>Pertemuan</td>
@@ -65,13 +74,11 @@
                         @foreach ($attendance as $attendances)
                             <tr class="text-center">
                                 <td> {{ $loop->index + 1 }} </td>
-                                <td> {{ $attendances->id_absen }}</td>
                                 <td> {{ $attendances->student ? $attendances->student->nama : '-' }}</td>
                                 <td> {{ $attendances->materi }} </td>
                                 <td> {{ $attendances->pertemuan }} </td>
                                 <td> {{ $attendances->tgl }} </td>
-                                <td> {{ $attendances->ket }} </td>
-                                
+                                <td> {{ $attendances->ket }} </td> 
                         @endforeach
                         </tr>
                     </tbody>
