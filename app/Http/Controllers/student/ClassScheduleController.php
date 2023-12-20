@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\student;
 
+use App\ClassSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -9,9 +10,9 @@ class ClassScheduleController extends Controller
 {
     public function index()
     {
-        $schedule= ClassSchedule::all(); 
+        $class_schedule= ClassSchedule::all(); 
         return view('student/class-schedule', [ 
-            'schedules' => $schedule
+            'class_schedule' => $class_schedule
         ]);
     }
 
@@ -20,7 +21,7 @@ class ClassScheduleController extends Controller
         
     }
 
-    public function update(Request $request, ClassSchedule $schedule)
+    public function update(Request $request, ClassSchedule $class_schedule)
     {
         // $validateData = validator($request->all(), [
         //     'kode_mapel' => 'required|string|max:10',
