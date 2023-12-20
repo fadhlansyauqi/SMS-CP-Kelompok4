@@ -57,8 +57,25 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-3"></div>
+                    <div class="col-5 text-right">
+                        <form id="form1" class="form" method="POST"
+                            >
+                            @csrf
+                            <div class="form-group">
+                                <select class="form-control" id="id_course" name="id_course">
+                                    <option value="" disabled selected hidden>Pilih Mapel</option>
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course->id}}">{{ $course->nama_mapel ?? '' }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="row table-responsive mx-3">
+                    <form action="{{ route('admin.student-attendance-class-data.store', $idKelas) }}" id="form2" method="POST">
+                        @csrf
                     <table class="table">
                         <thead>
                             <tr>
@@ -72,7 +89,7 @@
                         </thead>
                         <tbody>
                             @foreach ($students as $student)
-                                <tr>
+                                <tr id_student="{{ $student->id }}">
                                     <td> {{ $loop->iteration }}</td>
                                     <td> {{ $student->nis }}</td>
                                     <td> {{ $student->nama }} </td>
@@ -80,32 +97,29 @@
                                     <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
                                     </td>
                                     <td>
-                                        <form id="form2" class="form" method="POST"
-                                            action="{{ route('admin.student-attendance-class-data.store', ['idKelas' => $idKelas, 'idStudent' => $student->id]) }}">
-                                            @csrf
                                             <div class="form-group row">
                                                 <div class="col-9 col-form-label">
                                                     <div class="radio-inline">
                                                         <label class="radio radio-success">
-                                                            <input type="radio" name="status" value="Hadir"
+                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Hadir"
                                                                 form="form2" />
                                                             <span></span>
                                                             Hadir
                                                         </label>
                                                         <label class="radio radio-primary">
-                                                            <input type="radio" name="status" value="Izin"
+                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Izin"
                                                                 form="form2" />
                                                             <span></span>
                                                             Izin
                                                         </label>
                                                         <label class="radio radio-warning">
-                                                            <input type="radio" name="status" value="Sakit"
+                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Sakit"
                                                                 form="form2" />
                                                             <span></span>
                                                             Sakit
                                                         </label>
                                                         <label class="radio radio-danger">
-                                                            <input type="radio" name="status" value="Alfa"
+                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Alfa"
                                                                 form="form2" />
                                                             <span></span>
                                                             Alfa
@@ -114,18 +128,19 @@
                                                 </div>
                                             </div>
 
-                                            <div class="text-right mt-5">
-                                                <a href="{{ route('admin.student-attendance-class') }}"
-                                                    class="btn btn-outline-danger mr-2" role="button">Batal</a>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
-
                                     </td><!-- Display class name -->
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                     
+                        <div class="text-right mt-5">
+                            <a href="{{ route('admin.student-attendance-class') }}"
+                                class="btn btn-outline-danger mr-2" role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                     </form>
 
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div class="d-flex align-items-center py-3">
@@ -174,15 +189,30 @@
 
     <script>
         $(document).ready(function() {
-            $('#form1').on('submit', function(e) {
+            $('#form2').on('submit', function(e) {
                 e.preventDefault();
+
+                let form = new FormData(this)
+
+                let id_course = $("#id_course").val()
+
+                let newInput = document.createElement("input");
+                newInput.setAttribute("type", "text");
+                newInput.setAttribute("name", "id_course");
+                newInput.setAttribute("hidden", true);
+
+                newInput.setAttribute("value", id_course);
+
+                this.appendChild(newInput);
 
                 // Submit the first form
                 this.submit();
-
-                // Submit the second form
-                $('#form2')[0].submit();
             });
+
+            // $('#form1').on('submit', function() {
+            //     // Submit the second form
+            //     $('#form2')[0].submit();
+            // });
         });
     </script>
     <!--end::content-->
