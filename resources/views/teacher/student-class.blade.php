@@ -61,23 +61,21 @@
                             </div>
                         </form>
                     </div>
-
+                </div>
 
                     <div class="row table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID Kelas</th>
-                                    <th>Nama Kelas</th>
+                                    <th>Kelas</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($student_classes as $student_class)
                                     <tr>
-                                        <td> {{ $loop->index + 1 }} </td>
-                                        <td> {{ $student_class->id }} </td>
-                                        <td> {{ $student_class->nama_kelas }} </td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="{{ route('teacher.student-class-data', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -89,7 +87,7 @@
                                     <span class="text-muted mr-2">Show</span>
                                 </div>
 
-                                <form method="GET" action="{{ route('admin.student-class') }}">
+                                <form method="GET" action="{{ route('teacher.student-class') }}">
                                     <select id="entries"
                                         class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                         style="width: 75px;" name="per_page" onchange="this.form.submit()">

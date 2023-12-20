@@ -53,7 +53,7 @@
                 @foreach ($studentClasses as $class)
                 <div class="card card-custom my-5">
                     <div class="card-body">
-                       <p class="h4"> Kelas  {{ $class->nama_kelas }} </p>
+                       <p class="h4 text-center"> Kelas  {{ $class->nama_kelas }} </p>
 
                        <a href="{{ route('edit.class-schedule', ['id' => $class->id]) }}"><i class="flaticon2-edit mr-3">Edit</i></a>
 
@@ -69,20 +69,20 @@
                                     <th>Sabtu</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @foreach($lessonHours as $lh)
                                 <tr>
                                     <td>{{ $lh->waktu }}</td>
-                                    @foreach ($days as $day) 
+                                    {{-- @foreach ($days as $day) 
                                     <td>
                                         @foreach ($classSchedules as $schedule)
                                         <p>{{ $schedule->course ? $schedule->course->nama_mapel : '-' }}</p>
                                         @endforeach
                                     </td>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
 
                         </table>
                         

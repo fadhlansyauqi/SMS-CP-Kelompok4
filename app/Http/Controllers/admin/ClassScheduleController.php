@@ -9,7 +9,7 @@ use App\StudentClass;
 use App\Days;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+// use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ClassScheduleController extends Controller
 {
@@ -37,7 +37,6 @@ class ClassScheduleController extends Controller
             'days' => ($days)
             
         ]);
-        // return view('admin/class-schedule');
     }
 
     /**
@@ -111,16 +110,17 @@ class ClassScheduleController extends Controller
      */
     public function edit(ClassSchedule $id)
     {
-        // return redirect('/admin/create-class-schedule');
+        
+        // return redirect('/admin/edit-class-schedule');
         // try {
         //     $class = ClassSchedule::findOrFail($id);
 
-        //     return view('admin.class-schedule', [
+        //     return view('admin.edit-class-schedule', [
         //         'class' => $class,
         //     ]);
         // } catch (ModelNotFoundException $e) {
 
-        //     return redirect('/admin/create-class-schedule');
+        //     return redirect('/admin/edit-class-schedule');
         // }
     }
 

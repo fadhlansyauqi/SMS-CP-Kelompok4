@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\teacher;
 
+use App\Student;
 use App\StudentClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,5 +19,21 @@ class StudentClassController extends Controller
 
 
         return view('teacher/student-class', compact('student_classes'));
+    }
+
+    public function indexClassData($idKelas, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 10);
+
+        $students = Student::where('id_kelas', $idKelas);
+
+        if ($search) {
+            $students = $students->where('nama', 'like', '%' . $search . '%');
+        }
+
+        $students = $students->paginate($perPage);
+
+        return view('teacher/student-class-data', compact('students', 'idKelas', 'search', 'perPage'));
     }
 }

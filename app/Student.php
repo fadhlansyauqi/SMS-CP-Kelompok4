@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Attendance;
+use App\SubAttendance;
 use App\StudentClass;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class Student extends Model
     
     public function attendance()
     {
-        return $this->hasOne(Attendance::class);
+        return $this->hasMany(SubAttendance::class);
     }
 }

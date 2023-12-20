@@ -65,7 +65,6 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td><a href="{{ route('admin.student-attendance-class-data', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
-                                    {{-- <td><a href="{{ route('admin.student-attendance-class', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
