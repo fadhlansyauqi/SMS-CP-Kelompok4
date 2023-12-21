@@ -40,7 +40,7 @@
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-grade') }}" method="GET">
+                        <form action="{{ route('teacher.student-attendance') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -65,7 +65,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td><a
-                                            href="{{ route('teacher.student-grade-class-data', ['idKelas' => $student_class->id]) }}">{{ $student_class->nama_kelas }}</a>
+                                            href="{{ route('teacher.student-attendance-class-data', ['idKelas' => $student_class->id]) }}">{{ $student_class->nama_kelas }}</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,7 +78,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('teacher.student-grade-class') }}">
+                            <form method="GET" action="{{ route('teacher.student-attendance-class') }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -106,7 +106,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('teacher.student-grade-class') }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('teacher.student-attendance-class') }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });

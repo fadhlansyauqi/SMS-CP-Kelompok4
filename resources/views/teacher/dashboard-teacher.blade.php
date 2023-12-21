@@ -50,7 +50,7 @@
 
                 <!-- Grade Card -->
                 <div class="col-lg-3 col-md-6">
-                    <a href="{{ route('teacher.student-grade-class') }}" class="text-decoration-none text-reset">
+                    <a href="{{ route('teacher.student-grade') }}" class="text-decoration-none text-reset">
                         <div class="card bg-primary text-white mb-4">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fas fa-calendar-alt" style="color: #FFD700;"></i> Grade

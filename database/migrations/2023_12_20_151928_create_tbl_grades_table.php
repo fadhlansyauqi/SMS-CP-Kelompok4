@@ -15,11 +15,20 @@ class CreateTblGradesTable extends Migration
     {
         Schema::create('tbl_grades', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_siswa');
-            $table->string('nama_siswa', 150);
-            $table->string('jenis_nilai', 50);
-            $table->integer('nilai');
+            $table->date('date');
+            $table->bigInteger('id_course')->unsigned()->nullable();
+            $table->bigInteger('id_kelas')->unsigned();
             $table->timestamps();
+
+            // Add foreign key constraint
+            $table
+                ->foreign('id_course')
+                ->references('id')
+                ->on('tbl_courses');
+            $table
+                ->foreign('id_kelas')
+                ->references('id')
+                ->on('tbl_classes');
         });
     }
 

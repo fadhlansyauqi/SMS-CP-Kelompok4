@@ -4,8 +4,10 @@ namespace App\Http\Controllers\teacher;
 
 use App\Student;
 use App\Course;
+use Carbon\Carbon;
 use App\StudentClass;
 use App\Grade;
+use App\SubGrade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,49 +15,88 @@ class StudentGradeController extends Controller
 {
     public function index(Request $request)
     {
-        $search   = $request->input('search');
-        $perPage  = $request->input('per_page', 5);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
         $grades = Grade::where(function ($query) use ($search) {
-            $query
-                ->where('id_mapel', 'like', "%$search%")
-                ->orWhere('jenis_nilai', 'like', "%$search%")
-                ->orWhere('nilai', 'like', "%$search%");
-        })->orderBy('id_siswa', 'ASC')
+            $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
+        })
+            ->orderBy('date', 'ASC')
             ->paginate($perPage);
-        return view('teacher/student-grade', compact('grades'));
+
+        return view('teacher.student-grade', compact('grades'));
     }
 
-    public function indexData(Request $request)
+    public function indexClass(Request $request)
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
         $student_classes = StudentClass::where('nama_kelas', 'like', "%$search%")
             ->orderBy('nama_kelas', 'ASC')
             ->paginate($perPage);
+
         return view('teacher/student-grade-class', compact('student_classes'));
     }
 
-    public function indexCourse(Request $request)
+    public function indexClassData($idKelas, Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('per_page', 5);
-        $courses = Course::where(function ($query) use ($search) {
-            $query->where('kode_mapel', 'like', "%$search%")
-                ->orWhere('nama_mapel', 'like', "%$search%");
-        })
-            ->paginate($perPage);
 
-        return view('teacher/student-grade-course', compact('courses'));
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 10);
+
+        $students = Student::where('id_kelas', $idKelas);
+        $courses = Course::all();
+
+        if ($search) {
+            $students = $students->where('nama', 'like', '%' . $search . '%');
+        }
+
+        $students = $students->paginate($perPage);
+
+        return view('teacher.student-grade-class-data', compact('students', 'idKelas', 'search', 'perPage', 'courses'));
+    }
+    public function store(Request $request, $idKelas)
+    {
+        $id_grade = 0;
+
+        // dd($request->all());
+        $grade = Grade::where('id_kelas', $idKelas)
+            ->where('id_course', $request->input('id_course'))
+            ->whereDate('date', Carbon::now())
+            ->first();
+        if (is_null($grade)) {
+            $grade            = new Grade;
+            $grade->date      = date('Y-m-d');
+            $grade->id_kelas  = $idKelas;
+            $grade->id_course = $request->input('id_course');
+            $grade->save();
+        }
+
+        $id_grade = $grade->id;
+
+        foreach ($request->jenis_nilai as $key => $jenis_nilai) {
+            // Assuming $request->nilai is an array corresponding to each student's grade
+            $nilai = $request->nilai[$key];
+
+            $subGrade                = new SubGrade;
+            $subGrade->id_grade      = $id_grade;
+            $subGrade->id_student    = $key;
+            $subGrade->jenis_nilai   = $jenis_nilai;
+            $subGrade->nilai         = $nilai;
+            $subGrade->desc          = '';
+            $subGrade->save();
+        }
+
+
+        return redirect()->back();
     }
 
-    public function indexName(Request $request)
+    public function detailGrade($idGrade)
     {
-        $students = \App\Student::select('nis', 'nama')->get();
-        return view('teacher.student-grade-name', [
-            'students' => $students
-        ]);
-    }
+        $detailGrades = SubGrade::where('id_grade', $idGrade)
+            ->with("grade", "student")->get();
 
+        return view('teacher.student-grade-detail', compact('detailGrades'));
+    }
 
     public function create()
     {
@@ -67,20 +108,20 @@ class StudentGradeController extends Controller
             'students' => $students
         ]);
     }
-    public function store(Request $request)
-    {
-        $validateData = validator($request->all(), [
-            'id_mapel' => 'required|int',
-            'id_siswa'  => 'required|int',
-            'jenis_nilai' => 'required|string|max:255',
-            'nilai' => 'required|int',
-        ])->validate();
+    // public function store(Request $request)
+    // {
+    //     $validateData = validator($request->all(), [
+    //         'id_mapel' => 'required|int',
+    //         'id_siswa'  => 'required|int',
+    //         'jenis_nilai' => 'required|string|max:255',
+    //         'nilai' => 'required|int',
+    //     ])->validate();
 
-        $grades = new Grade($validateData);
-        $grades->save();
+    //     $grades = new Grade($validateData);
+    //     $grades->save();
 
-        return redirect(route('teacher.student-grade'));
-    }
+    //     return redirect(route('teacher.student-grade'));
+    // }
 
     public function edit(Grade $grade)
     {

@@ -37,7 +37,7 @@
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
-                <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
                         <form action="{{ route('teacher.student-grade') }}" method="GET">
@@ -50,24 +50,34 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-3"></div>
+                    <div class="col-5 text-right">
+                        <a href="{{ route('teacher.student-grade-class') }}" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                    </div>
                 </div>
-
                 <div class="row table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kelas</th>
+                                <th>Siswa</th>
+                                <th>Jenis Nilai</th>
+                                <th>Nilai</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($student_classes as $student_class)
+                            @foreach ($detailGrades as $detailGrade)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><a
-                                            href="{{ route('teacher.student-grade-class-data', ['idKelas' => $student_class->id]) }}">{{ $student_class->nama_kelas }}</a>
-                                    </td>
-                                </tr>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $detailGrade->student->nama }}</td>
+                                    <td> {{ $detailGrade->jenis_nilai }} </td>
+                                    <td> {{ $detailGrade->nilai }} </td>
+                                    <td> {{ $detailGrade->desc }} </td>
+                                    {{-- <td> <a href="" type="button"
+                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td> --}}
+                                <tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -78,7 +88,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('teacher.student-grade-class') }}">
+                            <form method="GET" action="{{ route('teacher.student-grade') }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -91,9 +101,9 @@
                             </form>
                         </div>
 
-                        <div id="paginationLinks">
-                            {{ $student_classes->links() }}
-                        </div>
+                        {{-- <div id="paginationLinks">
+                            {{ $attendances->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -106,7 +116,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('teacher.student-grade-class') }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('teacher.student-grade') }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });
