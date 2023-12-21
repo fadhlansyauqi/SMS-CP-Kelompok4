@@ -139,7 +139,7 @@ Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
 
     Route::get('/student/attendance', 'student\AttendanceController@index')->name('student.attendance');
-    Route::get('/student/create-attendace', 'student\AttendanceController@create')->name('student.create-attendance.create');
+    Route::get('/student/create-attendance/{id_attendance}', 'student\AttendanceController@detailAttendance')->name('student.create-attendance');
     Route::post('/student/create-attendace', 'student\AttendanceController@store')->name('student.create-attendance.store');
     Route::get('/student/{attendance}/edit-attendance', 'student\AttendanceController@edit')->name('student.edit-attendance.edit');
     Route::get('/student/{attendance}/attendance', 'student\AttendanceController@destroy')->name('student.edit-attendance.delete');

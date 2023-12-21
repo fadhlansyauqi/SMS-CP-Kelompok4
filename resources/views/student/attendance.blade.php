@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Saya</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Angga</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -23,7 +23,7 @@
                         <a href="{{ route('student.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Saya</a>
+                        <a href="" class="text-muted">Absen Siswa</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -44,48 +44,64 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
-        <div class="card">
+    <div class="container">
+        <div class="card card-custom">
             <div class="card-body">
-            <div class="row">
-                <!-- <div class="col-4">
-                    <form action="{{ route('student.attendance') }}" method="GET">
-                        <div class="form-group">
-                            <div class="input-icon input-icon-right">
-                            <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search..." />
-                                <span><i class="flaticon2-search-1 icon-md"></i></span>
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
+                <div class="row">
+                    <div class="col-4">
+                        <form action="{{ route('teacher.student-attendance') }}" method="GET">
+                            <div class="form-group">
+                                <div class="input-icon input-icon-right">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        class="form-control" placeholder="Search..." />
+                                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                </div>
                             </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="row table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Kelas</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($attendances as $attendance)
+                                <tr>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $attendance->date }}</td>
+                                    <td> {{ $attendance->course->nama_mapel }} </td>
+                                    <td> {{ $attendance->student_class->nama_kelas }} </td>
+                                    <td> <a href="{{ route('student.create-attendance', ['id_attendance' => $attendance->id]) }}"
+                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                <tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="d-flex align-items-center py-3">
+                            <div class="d-flex align-items-center">
+                                <span class="text-muted mr-2">Show</span>
+                            </div>
+
+                            
                         </div>
-                    </form>
-                </div> -->
-                <table class="table mb-0 table-bordered">
-                    <thead class="text-center bg-secondary">
-                        <tr >
-                            <td>No.</td>
-                            <td>Nama Siswa</td>
-                            <td>Nama Pembelajaran</td>
-                            <td>Pertemuan</td>
-                            <td>Tanggal</td>
-                            <td>Keterangan</td> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($attendance as $attendances)
-                            <tr class="text-center">
-                                <td> {{ $loop->index + 1 }} </td>
-                                <td> {{ $attendances->student ? $attendances->student->nama : '-' }}</td>
-                                <td> {{ $attendances->materi }} </td>
-                                <td> {{ $attendances->pertemuan }} </td>
-                                <td> {{ $attendances->tgl }} </td>
-                                <td> {{ $attendances->ket }} </td> 
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table>
+
+                    </div>
+                </div>
             </div>
         </div>
-        </div><!-- /.container-fluid -->
+
     </div>
-    <!-- /.content -->
+
+    <!--end::content-->
 @endsection

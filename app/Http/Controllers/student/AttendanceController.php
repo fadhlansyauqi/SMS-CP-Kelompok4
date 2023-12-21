@@ -3,71 +3,53 @@
 namespace App\Http\Controllers\student;
 
 use App\Attendance;
+use App\Student;
+use Carbon\Carbon;
+use App\StudentClass;
+use App\SubAttendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class AttendanceController extends Controller
 {
     public function index()
     {
+        // return $user = User::with('student_class')->where('id', auth()->user()->id)->get();
+    
         $attendance = Attendance::all(); 
         return view('student/attendance', [ 
-            'attendance' => $attendance
+            'attendances' => $attendance
         ]);
+        
     }
 
-    public function create()
+    public function detailAttendance($idAttendance)
     {
-        return view('student.create-attendance');
+        $detailAttendance = SubAttendance::where('id', $idAttendance)
+            ->with("attendance", "student")->get();
+
+        return view('student/create-attendance', compact('detailAttendance'));
     }
 
     public function store(request $request)
     {
-        $validateData = validator($request->all(),[
-            'nis' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
-            'jam_masuk' => 'required|date_format:H:i',
-            'keterangan' => 'required|string|max:255',
-        ])->validate();
-
-        $attendance = new Attendance($validateData);
-        $attendance->save();
-
-        return redirect(route('student.attendance'));
+        
     }
 
     public function edit(Attendance $attendance)
     {
-        return view('student.edit-attendance', [
-            'attendance' => $attendance
-        ]);
+       
     }
 
     public function update(Request $request, Attendance $attendance)
     {
-        $validateData = validator($request->all(),[
-            'nis' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
-            'jam_masuk' => 'required|date_format:H:i',
-            'keterangan' => 'required|string|max:255',
-        ])->validate();
-
-        $attendance->nis = $validateData['nis'];
-        $attendance->nama = $validateData['nama'];
-        $attendance->tanggal_masuk = $validateData['tanggal_masuk'];
-        $attendance->jam_masuk = $validateData['jam_masuk'];
-        $attendance->keterangan = $validateData['keterangan'];
-        $attendance->save();
         
-        return redirect(route('student.attendance'));
     }
 
     public function destroy(Attendance $attendance)
     {
-        $attendance->delete();
-        return redirect(route('student.attendance'));
+        
     }
 
 }

@@ -44,46 +44,54 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
-        <div class="card">
-			<div class="card-body">
-				<form action="{{route('student.create-attendance.store')}}" method="post">
-					@csrf
+    <div class="container">
+        <div class="card card-custom">
+            <div class="card-body">
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
+                <div class="row">
+                    <div class="col-4">
+                        <form action="{{ route('student.attendance') }}" method="GET">
+                            <div class="form-group">
+                                <div class="input-icon input-icon-right">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        class="form-control" placeholder="Search..." />
+                                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="row table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>NIS</th>
+                                <th>Siswa</th>
+                                <th>Status</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($detailAttendance as $attendances)
+                                <tr>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td>{{ $attendances->student->nis}}</td>
+                                    <td> {{ $attendances->student->nama }}</td>
+                                    <td> {{ $attendances->status }} </td>
+                                    
+                                    {{-- <td> <a href="" type="button"
+                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td> --}}
+                                <tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-					<div class="form-group">
-						<label for="nis">NIS</label>
-						<input type="text" name="nis" id="nis" class="form-control" required="required" placeholder="Masukkan NIS">
-					</div>
+                    
+                </div>
+            </div>
+        </div>
 
-                    <div class="form-group">
-						<label for="nama">Nama Siswa</label>
-						<input type="text" name="nama" id="nama" class="form-control" required="required" placeholder="Masukkan Nama Siswa">
-					</div>
-
-					<div class="form-group">
-						<label for="tanggal_masuk">Tanggal</label>
-                        <input type="date" name="tanggal_masuk" id="tanggal_masuk" class="form-control" required="required">
-					</div>
-
-                    <div class="form-group">
-						<label for="jam_masuk">Jam Masuk</label>
-                        <input type="time" name="jam_masuk" id="jam_masuk" class="form-control" required="required">
-					</div>
-
-                    <div class="form-group">
-						<label for="keterangan">Keterangan</label>
-						<textarea name="keterangan" id="keterangan" rows="3" class="form-control" required="required" placeholder="Masukkan Keterangan"></textarea>
-					</div>
-
-					<div class="text-right">
-						<a href="{{route('student.attendance')}}" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
-						<button type="submit" class="btn btn-primary">Simpan</button>
-					</div>
-				</form>
-			</div>
-		</div>                 
-        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
 @endsection
