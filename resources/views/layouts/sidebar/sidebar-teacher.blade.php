@@ -139,9 +139,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <h4 class="menu-text">Penilaian</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                             </li>
-                            <li class="menu-item {{ Route::currentRouteNamed('teacher.student-grade-class') ? 'menu-item-active' : '' }}"
+                            <li class="menu-item {{ Route::currentRouteNamed('teacher.student-grade') ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('teacher.student-grade-class') }}" class="menu-link">
+                                <a href="{{ route('teacher.student-grade') }}" class="menu-link">
                                     <i class="menu-icon flaticon2-open-text-book"></i>
                                     <span class="menu-text">Nilai Siswa</span>
                                 </a>
