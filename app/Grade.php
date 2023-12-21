@@ -9,18 +9,23 @@ class Grade extends Model
     protected $table = 'tbl_grades';
 
     protected $fillable = [
-        'id_mapel',
-        'id_siswa',
-        'jenis_nilai',
-        'nilai',
+        'id',
+        'date',
+        'id_course',
+        'id_kelas',
     ];
+
     public function course()
     {
-        return $this->belongsTo('App\Course', 'id_mapel');
+        return $this->belongsTo(Course::class, 'id_course');
     }
 
-    public function student()
+    public function student_class()
     {
-        return $this->belongsTo('App\Student', 'id_siswa');
+        return $this->belongsTo(StudentClass::class, 'id_kelas');
+    }
+    public function sub_grade()
+    {
+        return $this->hasOne(SubGrade::class);
     }
 }
