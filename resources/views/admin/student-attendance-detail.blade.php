@@ -74,8 +74,9 @@
                                     <td> {{ $detailAttendance->student->nama }}</td>
                                     <td> {{ $detailAttendance->status }} </td>
                                     <td> {{ $detailAttendance->desc }} </td>
-                                    {{-- <td> <a href="" type="button"
-                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td> --}}
+                                    <td>
+                                            <a href="{{ route('admin.student-attendance.edit', $detailAttendance->id) }}"><i class="flaticon2-edit mr-3"></i></a>                                    
+                                    </td>
                                 <tr>
                             @endforeach
                         </tbody>
