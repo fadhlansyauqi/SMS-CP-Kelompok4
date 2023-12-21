@@ -6,7 +6,13 @@
     </div>
 
     <div class="content-header">
-        <!-- ... (Your existing code) ... -->
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="content">
