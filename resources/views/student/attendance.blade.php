@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Angga</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Siswa</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -63,13 +63,13 @@
                     
                 </div>
                 <div class="row table-responsive">
-                    <table class="table">
+                    <table class="table text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Mata Pelajaran</th>
                                 <th>Kelas</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -77,9 +77,9 @@
                             @foreach ($attendances as $attendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $attendance->date }}</td>
-                                    <td> {{ $attendance->course->nama_mapel }} </td>
                                     <td> {{ $attendance->student_class->nama_kelas }} </td>
+                                    <td> {{ $attendance->course->nama_mapel }} </td>
+                                    <td> {{ $attendance->date }}</td>
                                     <td> <a href="{{ route('student.create-attendance', ['id_attendance' => $attendance->id]) }}"
                                             type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
                                 <tr>
