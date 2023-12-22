@@ -140,34 +140,56 @@
                 <button onclick="printBukti()">Cetak Bukti Pembayaran</button>
             </div>
 
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
             <script>
-        function submitForm() {
-            // Simulasi proses pembayaran, Anda perlu menyesuaikan ini dengan backend Anda
-            var nama = document.getElementById('nama').value;
-            var kelas = document.getElementById('kelas').value;
-            var sppbulan = document.getElementById('spp_bulan').value;
-            var tanggalPembayaran = document.getElementById('tanggal_pembayaran').value;
-            var nominal = document.getElementById('nominal').value;
+                function submitForm() {
+                    // Validasi formulir
+                    var nama = document.getElementById('nama').value;
+                    var kelas = document.getElementById('kelas').value;
+                    var sppbulan = document.getElementById('spp_bulan').value;
+                    var tanggalPembayaran = document.getElementById('tanggal_pembayaran').value;
+                    var nominal = document.getElementById('nominal').value;
 
-            // Tampilkan informasi bukti pembayaran
-            var buktiPembayaran = document.getElementById('bukti-pembayaran');
-            buktiPembayaran.innerHTML = `
-                <p>Nama Siswa: ${nama}</p>
-                <p>Kelas: ${kelas}</p>
-                <p>Spp Bulan: ${sppbulan}</p>
-                <p>Tanggal Pembayaran: ${tanggalPembayaran}</p>
-                <p>Nominal Pembayaran: ${nominal}</p>
-            `;
+                    if (nama === '' || kelas === '' || sppbulan === '' || tanggalPembayaran === '' || nominal === '') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Silakan lengkapi semua kolom formulir!',
+                        });
+                        return;
+                    }
 
-            // Tampilkan container bukti pembayaran
-            document.getElementById('bukti-container').style.display = 'block';
-        }
+                    // Tampilkan informasi bukti pembayaran
+                    var buktiPembayaran = document.getElementById('bukti-pembayaran');
+                    buktiPembayaran.innerHTML = `
+                        <p>Nama Siswa: ${nama}</p>
+                        <p>Kelas: ${kelas}</p>
+                        <p>Spp Bulan: ${sppbulan}</p>
+                        <p>Tanggal Pembayaran: ${tanggalPembayaran}</p>
+                        <p>Nominal Pembayaran: ${nominal}</p>
+                        <p>TTD Petugas:</p>
+                        <p></p>
+                        <p></p>
+                        <p>...........</p>
+                    `;
 
-        function printBukti() {
-            // Cetak bukti pembayaran
-            window.print();
-        }
-    </script>
+                    // Tampilkan container bukti pembayaran
+                    document.getElementById('bukti-container').style.display = 'block';
+
+                    // Tampilkan Sweet Alert sukses
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: 'Formulir pembayaran telah berhasil diisi!',
+                    });
+                }
+
+                function printBukti() {
+                    // Cetak bukti pembayaran
+                    window.print();
+                }
+            </script>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

@@ -50,8 +50,13 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
+<<<<<<< HEAD
         <a href="index.html">
-            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" />
+            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" height="52" width="92" />
+=======
+        <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" class="img-fluid" style="max-width: 30%; height: auto;">
+>>>>>>> 59db0827971fffdd22afdaf76f8b9b9ba2f53a39
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -93,8 +98,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--begin::Brand-->
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
-                    <a href="index.html" class="brand-logo">
-                        <img alt="Logo" src="assets/media/logos/sms-logo.png" height="52" width="50%" />
+                    <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+                        <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" style="max-width: 100%; height: auto;">
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->

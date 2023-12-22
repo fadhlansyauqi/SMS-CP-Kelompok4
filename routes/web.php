@@ -56,8 +56,9 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/student-attendance/{id_attendance}', 'admin\StudentAttendanceController@detailAttendance')->name('admin.student-attendance-detail');
     Route::get('admin/student-attendance-class', 'admin\StudentAttendanceController@indexClass')->name('admin.student-attendance-class');
     Route::get('admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@indexClassData')->name('admin.student-attendance-class-data');
-    // Route::post('/admin/student-attendance-class-data/{idKelas}/{idStudent}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
     Route::post('/admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
+    Route::get('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance.edit');
+  
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
@@ -139,7 +140,7 @@ Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
 
     Route::get('/student/attendance', 'student\AttendanceController@index')->name('student.attendance');
-    Route::get('/student/create-attendace', 'student\AttendanceController@create')->name('student.create-attendance.create');
+    Route::get('/student/create-attendance/{id_attendance}', 'student\AttendanceController@detailAttendance')->name('student.create-attendance');
     Route::post('/student/create-attendace', 'student\AttendanceController@store')->name('student.create-attendance.store');
     Route::get('/student/{attendance}/edit-attendance', 'student\AttendanceController@edit')->name('student.edit-attendance.edit');
     Route::get('/student/{attendance}/attendance', 'student\AttendanceController@destroy')->name('student.edit-attendance.delete');
