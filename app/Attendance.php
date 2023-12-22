@@ -33,5 +33,15 @@ class Attendance extends Model
     {
         return $this->hasOne(SubAttendance::class);
     }
+    
+    public function attendance()
+    {
+        return $this->belongsTo(Attendance::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
 

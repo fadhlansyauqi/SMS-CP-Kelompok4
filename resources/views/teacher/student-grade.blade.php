@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Nilaiiswa</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Nilai Siswa</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Nilaiiswa</a>
+                        <a href="" class="text-muted">Nilai Siswa</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -53,7 +53,7 @@
                     <div class="col-3"></div>
                     <div class="col-5 text-right">
                         <a href="{{ route('teacher.student-grade-class') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                                class="flaticon2-add-1"></i><strong>Nilai Baru</strong></a>
                     </div>
                 </div>
                 <div class="row table-responsive">
