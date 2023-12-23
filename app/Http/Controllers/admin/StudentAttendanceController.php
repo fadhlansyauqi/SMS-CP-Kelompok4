@@ -40,7 +40,7 @@ class StudentAttendanceController extends Controller
     public function indexClassData($idKelas, Request $request)
     {
         $search = $request->get('search');
-        $perPage = $request->get('per_page', 10);
+        $perPage = $request->get('per_page', 5);
 
         $students = Student::where('id_kelas', $idKelas);
         $courses = Course::all();
@@ -85,10 +85,32 @@ class StudentAttendanceController extends Controller
         return redirect()->back();
     }
 
-    public function edit($id)
+    public function edit($idAttendance, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        // $detailAttendances = SubAttendance::where('id', $id)->first();
+        // return view('admin/student-attendance-class-data-edit', compact('detailAttendances', 'search', 'perPage'));
+        $attendances = Attendance::with('course')->find($idAttendance);
+        $courses = Course::all();
+        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
+        ->with('attendance', 'student')
+        ->get();
+
+
+    return view('admin/student-attendance-edit', compact('detailAttendances', 'attendances', 'courses'));
+    }
+
+    public function update(Request $request, $id)
     {
         $detailAttendance = SubAttendance::find($id);
-        return view('admin/student-attendance-class-data-edit', compact('detailAttendance'));
+        $detailAttendance->status = $request->status;
+        // Ubah field lainnya sesuai dengan data yang ingin Anda ubah
+        $detailAttendance->save();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Data Updated Successfully');
     }
 
     public function destroy($id)

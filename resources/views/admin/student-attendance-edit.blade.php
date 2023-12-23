@@ -50,33 +50,92 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-5 text-right">
-                        <a href="{{ route('admin.student-attendance-class') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                    <div class="col-2"></div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                value="{{ $attendances->date ?? '' }}">
+                        </div>
                     </div>
+
+                    <div class="col-3 text-right">
+                        <form id="form1" class="form" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <select class="form-control" id="id_course" name="id_course">
+                                    <option value="" disabled selected hidden>Pilih Mapel</option>
+                                    {{-- @foreach ($attendances->course as $course)
+                                       <option value="{{ $course->id}}">{{ $course->nama_mapel ?? '' }}</option>
+                                    @endforeach --}}
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+
                 </div>
                 <div class="row table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIS</th>
                                 <th>Siswa</th>
                                 <th>Status</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
+                                {{-- <th>Keterangan</th> --}}
+                                {{-- <th>Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($detailAttendances as $detailAttendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $detailAttendance->student->nis }}</td>
                                     <td> {{ $detailAttendance->student->nama }}</td>
-                                    <td> {{ $detailAttendance->status }} </td>
-                                    <td> {{ $detailAttendance->desc }} </td>
-                                    {{-- <td>
-                                            <a href="{{ route('admin.student-attendance-class-data.edit', $detailAttendance->id) }}"><i class="flaticon2-edit mr-3"></i></a>                                    
-                                    </td> --}}
+                                    <td>
+                                        <div class="form-group row">
+                                            <div class="col-9 col-form-label">
+                                                <div class="radio-inline">
+                                                    <label class="radio radio-success">
+                                                        <input type="radio"
+                                                            name="status[{{ $detailAttendance->student->id }}]"
+                                                            class="status" value="Hadir"
+                                                            {{ $detailAttendance->status === 'Hadir' ? 'checked' : '' }}
+                                                            form="form2" />
+                                                        <span></span>
+                                                        Hadir
+                                                    </label>
+                                                    <label class="radio radio-primary">
+                                                        <input type="radio"
+                                                            name="status[{{ $detailAttendance->student->id }}]"
+                                                            class="status" value="Izin"
+                                                            {{ $detailAttendance->status === 'Izin' ? 'checked' : '' }}
+                                                            form="form2" />
+                                                        <span></span>
+                                                        Izin
+                                                    </label>
+                                                    <label class="radio radio-warning">
+                                                        <input type="radio"
+                                                            name="status[{{ $detailAttendance->student->id }}]"
+                                                            class="status" value="Sakit"
+                                                            {{ $detailAttendance->status === 'Sakit' ? 'checked' : '' }}
+                                                            form="form2" />
+                                                        <span></span>
+                                                        Sakit
+                                                    </label>
+                                                    <label class="radio radio-danger">
+                                                        <input type="radio"
+                                                            name="status[{{ $detailAttendance->student->id }}]"
+                                                            class="status" value="Alfa"
+                                                            {{ $detailAttendance->status === 'Alfa' ? 'checked' : '' }}
+                                                            form="form2" />
+                                                        <span></span>
+                                                        Alfa
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 <tr>
                             @endforeach
                         </tbody>
