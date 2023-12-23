@@ -24,7 +24,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Page Vendors Styles(used by this page)-->
-    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.cs') }}s" rel="stylesheet"
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.cs') }}" rel="stylesheet"
         type="text/css" />
     <!--end::Page Vendors Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
