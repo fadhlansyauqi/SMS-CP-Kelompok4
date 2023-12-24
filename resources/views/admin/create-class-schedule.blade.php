@@ -80,7 +80,7 @@
                                             <input type="hidden" name="id_class[]" value="{{ $class->id }}">
                                             <input type="hidden" name="hari[]" value="{{ $day->hari }}">
                                             <select class="form-control" name="id_course[]">
-                                                <option value="" disabled selected hidden>Pilih Mapel</option>
+                                                {{-- <option value="" disabled selected hidden>Pilih Mapel</option> --}}
                                                 @foreach ($courses as $course)
                                                     <option value="{{ $course->id }}">{{ $course->nama_mapel }}</option>
                                                 @endforeach
