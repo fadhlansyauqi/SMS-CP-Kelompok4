@@ -59,11 +59,15 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::post('/admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
     Route::get('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance.edit');
     Route::post('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance.update');
-    // Route::get('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance-class-data.edit');
-    // Route::put('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance-class-data.update');
+    Route::get('/admin/student-attendance/delete/{id_attendance}', 'admin\StudentAttendanceController@destroy')->name('admin.student-attendance.delete');
 
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
+    Route::get('/admin/student-grade-class', 'admin\StudentGradeController@indexClass')->name('admin.student-grade-class');
+    Route::get('/admin/student-grade-class-data/{idKelas}', 'admin\StudentGradeController@indexClassData')->name('admin.student-grade-class-data');
+    Route::post('/admin/student-grade-class-data/{idKelas}', 'admin\StudentGradeController@store')->name('admin.student-grade-class-data.store');
+    Route::get('/admin/student-grade/{id_grade}', 'admin\StudentGradeController@detailGrade')->name('admin.student-grade-detail');
+
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
 
     Route::get('/admin/teacher', 'admin\TeacherController@index')->name('admin.teacher');
@@ -81,9 +85,7 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{course}/delete-course', 'admin\CourseController@destroy')->name('delete.course');
 
     Route::get('/admin/class-schedule', 'admin\ClassScheduleController@index')->name('admin.class-schedule');
-    Route::get('/admin/create-class-schedule', 'admin\ClassScheduleController@create')->name('create.class-schedule');
-    Route::post('/admin/create-class-schedule', 'admin\ClassScheduleController@store')->name('store.class-schedule');
-    Route::get('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@edit')->name('edit.class-schedule');
+    Route::get('/admin/{id}/edit-class-schedule',  'admin\ClassScheduleController@edit')->name('edit.class-schedule');
     Route::post('/admin/{id}/edit-class-schedule', 'admin\ClassScheduleController@update')->name('update.class-schedule');
 
     Route::get('/admin/account', 'admin\AccountController@index')->name('admin.account');

@@ -22,36 +22,34 @@ class ClassScheduleController extends Controller
     {
         $lessonHours = LessonHours::all();
         $courses = Course::all();
-        $studentClass = StudentClass::all();
+        $studentClasses = StudentClass::all();
         $classSchedules = ClassSchedule::all();
         $days = Days::all();
+        
+        return view('admin.class-schedule', compact('lessonHours', 'courses', 'studentClasses', 'classSchedules', 'days'));
 
-        // Kemudian, kirim data tersebut ke view untuk ditampilkan
-        // return view('admin.class-schedule', compact('lessonHours', 'courses', 'classes'));
-        return view('admin.class-schedule', [
-            // 'dump' => dd($studentClass),
-            'lessonHours' => ($lessonHours),
-            'courses' => ($courses),
-            'studentClasses' => ($studentClass),
-            'classSchedules' => ($classSchedules),
-            'days' => ($days)
-            
-        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function edit(Request $request, $id)
     {
+        // $id_class = (int)$id;
+
         $days = Days::all();
         $lessonHours = LessonHours::all();
         $courses = Course::all();
-        $classes = StudentClass::all();
+        $class = StudentClass::findOrFail($id);
+        $classSchedules = ClassSchedule::all();
 
-        return view('admin.create-class-schedule', compact('lessonHours', 'courses', 'classes', 'days'));
+        // dd($class);
+
+        return view('admin.edit-class-schedule', compact( 'classSchedules','lessonHours', 'courses', 'class', 'days'));
+        
     }
 
     /**
@@ -60,8 +58,13 @@ class ClassScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
+        // $id_class = (int)$id;
+
+        // dd($id_class);
+        $class = StudentClass::find($id);
+
         $validateData = validator($request->all(), [
             'id_lesson_hours.*' => 'integer',
             'id_course.*' => 'integer',
@@ -80,70 +83,23 @@ class ClassScheduleController extends Controller
         }
 
         for ($i = 0; $i < $count; $i++) {
-            ClassSchedule::create([
+            $criteria = [
                 'id_lesson_hours' => $validateData['id_lesson_hours'][$i],
-                'id_course' => $validateData['id_course'][$i],
-                'id_class' => $validateData['id_class'][$i],
+                'id_class' => $class->id,
                 'hari' => $validateData['hari'][$i],
-            ]);
+            ];
+        
+            $updateData = [
+                'id_course' => $validateData['id_course'][$i],
+            ];
+
+            // dd($class);
+        
+            ClassSchedule::updateOrCreate($criteria, $updateData);
         }
+        
 
         return redirect(route('admin.class-schedule'))->with('success', 'Data Berhasil Ditambahkan');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ClassSchedule $id)
-    {
-        
-        // return redirect('/admin/edit-class-schedule');
-        // try {
-        //     $class = ClassSchedule::findOrFail($id);
-
-        //     return view('admin.edit-class-schedule', [
-        //         'class' => $class,
-        //     ]);
-        // } catch (ModelNotFoundException $e) {
-
-        //     return redirect('/admin/edit-class-schedule');
-        // }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

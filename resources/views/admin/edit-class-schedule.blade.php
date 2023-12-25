@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Tambah Jadwal Pelajaran</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Tambah Jadwal Pelajaran</h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -48,18 +48,13 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('update.class-schedule', ['id_class' => $class->id_class]) }}" method="POST">
+                <form action="{{ route('update.class-schedule', ['id_class' => $class->id]) }}" method="POST">
                     @csrf
                     <table class="table">
                         <div>
-                            <p class="h3 text-center mb-10">Kelas <select name="id_kelas" id="id_kelas">
-                                    <option value="" disabled selected hidden>Pilih Kelas</option>
-                                    @foreach ($classes as $class)
-                                        <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
-                                    @endforeach
-                                </select></p>
+                            <p class="h3 text-center mb-10">Kelas {{ $class->nama_kelas }} </p>
                         </div>
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Jam</th>
                                 <th>Senin</th>
@@ -78,11 +73,15 @@
                                         <td>
                                             <input type="hidden" name="id_lesson_hours[]" value="{{ $lh->id }}">
                                             <input type="hidden" name="id_class[]" value="{{ $class->id }}">
+                                            
                                             <input type="hidden" name="hari[]" value="{{ $day->hari }}">
                                             <select class="form-control" name="id_course[]">
-                                                <option value="" disabled selected hidden>Pilih Mapel</option>
+                                                {{-- <option disabled selected hidden>Pilih Mapel</option> --}}
                                                 @foreach ($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->nama_mapel }}</option>
+                                                <option value="{{ $course->id }}"
+                                                    {{ isset($classSchedules[$lh->id][$day->hari]) && $classSchedules[$lh->id][$day->hari]->id_course == $course->id ? 'selected' : '' }}>
+                                                    {{ $course->nama_mapel }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </td>

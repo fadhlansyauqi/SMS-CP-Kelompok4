@@ -47,48 +47,57 @@
     <div class="content">
 
         <div class="container">
-            <a href="{{ route('create.class-schedule') }}" type="button" class="btn btn-primary"><i
-                class="flaticon2-add-1"></i><strong> Tambah Jadwal Pelajaran Kelas</strong></a>
             
-                @foreach ($studentClasses as $class)
-                <div class="card card-custom my-5">
-                    <div class="card-body">
-                       <p class="h4 text-center"> Kelas  {{ $class->nama_kelas }} </p>
-
-                       <a href="{{ route('edit.class-schedule', ['id' => $class->id]) }}"><i class="flaticon2-edit mr-3">Edit</i></a>
-
-                       <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Jam</th>
-                                    <th>Senin</th>
-                                    <th>Selasa</th>
-                                    <th>Rabu</th>
-                                    <th>Kamis</th>
-                                    <th>Jumat</th>
-                                    <th>Sabtu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($lessonHours as $lh)
-                                <tr>
-                                    <td>{{ $lh->waktu }}</td>
-                                    {{-- @foreach ($days as $day) 
-                                    <td>
-                                        @foreach ($classSchedules as $schedule)
-                                        <p>{{ $schedule->course ? $schedule->course->nama_mapel : '-' }}</p>
-                                        @endforeach
-                                    </td>
-                                    @endforeach --}}
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                        
+            @foreach ($studentClasses as $class)
+            <div class="card mb-13">
+                <div class="card-body">
+                    <p class="h3 text-center">Kelas {{ $class->nama_kelas }} </p>
+        
+                    <div class="text-right mb-5">
+                        <a href="{{ route('edit.class-schedule', ['id_class' => $class->id]) }}" type="button" class="btn btn-primary"><i
+                            class="flaticon2-add-1"></i><strong> Tambah Jadwal</strong></a>
                     </div>
+                        
+        
+                    <table class="table">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="width: 9%">Jam</th>
+                                <th style="width: 16%">Senin</th>
+                                <th style="width: 15%">Selasa</th>
+                                <th style="width: 15%">Rabu</th>
+                                <th style="width: 15%">Kamis</th>
+                                <th style="width: 15%">Jumat</th>
+                                <th style="width: 16%">Sabtu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($lessonHours as $lh)
+                            <tr>
+                                <td>{{ $lh->waktu }}</td>
+                                @foreach ($days as $day) 
+                                    <td>
+                                        @php
+                                            $schedule = $classSchedules
+                                                ->where('id_class', $class->id)
+                                                ->where('id_lesson_hours', $lh->id)
+                                                ->where('hari', $day->hari)
+                                                ->first();
+                                        @endphp
+                                        {{-- Tampilkan data jadwal pelajaran --}}
+                                        @if($schedule)
+                                            {{ $schedule->course->nama_mapel }}
+                                        @endif
+                                    </td>
+                                @endforeach
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                 @endforeach
+            </div>
+            @endforeach
+        
         </div>
     </div>
     <!-- /.content -->

@@ -15,10 +15,10 @@ class StudentAttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('per_page', 5);
-        $attendances = Attendance::where(function ($query) use ($search) {
-            $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
+        $search      = $request->input('search');
+        $perPage     = $request->input('per_page', 5);
+        $attendances = Attendance::whereHas('course', function ($query) use ($search) {
+            $query->where('date', 'like', "%$search%")->orWhere('nama_mapel', 'like', "%$search%");
         })
             ->orderBy('date', 'ASC')
             ->paginate($perPage);
@@ -28,8 +28,8 @@ class StudentAttendanceController extends Controller
 
     public function indexClass(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('per_page', 5);
+        $search          = $request->input('search');
+        $perPage         = $request->input('per_page', 5);
         $student_classes = StudentClass::where('nama_kelas', 'like', "%$search%")
             ->orderBy('nama_kelas', 'ASC')
             ->paginate($perPage);
@@ -39,11 +39,11 @@ class StudentAttendanceController extends Controller
 
     public function indexClassData($idKelas, Request $request)
     {
-        $search = $request->get('search');
+        $search  = $request->get('search');
         $perPage = $request->get('per_page', 5);
 
         $students = Student::where('id_kelas', $idKelas);
-        $courses = Course::all();
+        $courses  = Course::all();
 
         if ($search) {
             $students = $students->where('nama', 'like', '%' . $search . '%');
@@ -58,7 +58,6 @@ class StudentAttendanceController extends Controller
     {
         $id_attendance = 0;
 
-        // dd($request->all());
         $attendance = Attendance::where('id_kelas', $idKelas)
             ->where('id_course', $request->input('id_course'))
             ->whereDate('date', Carbon::now())
@@ -82,15 +81,15 @@ class StudentAttendanceController extends Controller
             $subAttendance->save();
         }
 
-        return redirect()->back();
+        return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Ditambah');
     }
 
     public function edit($idAttendance, Request $request)
     {
-        $search = $request->get('search');
-        $perPage = $request->get('per_page', 5);
-        $attendance = Attendance::find($idAttendance)->load('course');
-        $courses = Course::all();
+        $search            = $request->get('search');
+        $perPage           = $request->get('per_page', 5);
+        $attendance        = Attendance::find($idAttendance)->load('course');
+        $courses           = Course::all();
         $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
             ->with('attendance', 'student')
             ->get();
@@ -101,7 +100,7 @@ class StudentAttendanceController extends Controller
     {
         $attendance = Attendance::find($idAttendance);
 
-        $attendance->date = $request->date ?? $attendance->date; // Use existing date if none is provided
+        $attendance->date      = $request->date ?? $attendance->date;
         $attendance->id_course = $request->id_course ?? $attendance->id_course;
         $attendance->save();
 
@@ -109,72 +108,26 @@ class StudentAttendanceController extends Controller
             $subAttendance = subAttendance::where('id_attendance', $idAttendance)
                 ->where('id_student', $key)
                 ->first();
-            $subAttendance->status = $value;
+            $subAttendance->status        = $value;
             $subAttendance->id_attendance = $idAttendance;
-            $subAttendance->id_student = $key;
-            $subAttendance->status = $value;
-            $subAttendance->desc = '';
+            $subAttendance->id_student    = $key;
+            $subAttendance->status        = $value;
+            $subAttendance->desc          = '';
             $subAttendance->save();
         }
 
         return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Diubah');
     }
 
-    // public function update(Request $request, $idAttendance)
-    // {
-    //     $attendance = Attendance::find($idAttendance);
-
-    //         $attendance->date = $request->date ?? $attendance->date;
-    //         $attendance->id_course = $request->id_course ?? $attendance->id_course;
-    //         $attendance->save();
-
-    //         foreach ($request->status as $key => $value) {
-    //             $subAttendance = subAttendance::where('id_attendance', $idAttendance)
-    //                 ->where('id_student', $key)
-    //                 ->first();
-    //                 $subAttendance->status = $value;
-    //                 $subAttendance->save();
-    //         }
-
-    //     return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Diubah');
-    // }
-
-    // public function update(Request $request, $idAttendance)
-    // {
-    //     $attendance = Attendance::find($idAttendance);
-
-    //     if ($attendance !== null) {
-    //         $attendance->date = $request->date ?? $attendance->date; // Use existing date if none is provided
-    //         $attendance->id_course = $request->id_course ?? $attendance->id_course;
-    //         $attendance->save();
-
-    //         foreach ($request->status as $key => $value) {
-    //             $subAttendance = subAttendance::where('id_attendance', $idAttendance)
-    //                 ->where('id_student', $key)
-    //                 ->first();
-
-    //             if ($subAttendance !== null) {
-    //                 $subAttendance->status = $value;
-    //                 $subAttendance->save();
-    //             } else {
-    //                 $subAttendance = new subAttendance();
-    //                 $subAttendance->id_attendance = $idAttendance;
-    //                 $subAttendance->id_student = $key;
-    //                 $subAttendance->status = $value;
-    //                 $subAttendance->desc = '';
-    //                 $subAttendance->save();
-    //             }
-    //         }
-    //     }
-
-    //     return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Diubah');
-    // }
-
-    public function destroy($id)
+    public function destroy($idAttendance)
     {
-        $detailAttendance = SubAttendance::find($id);
-        $detailAttendance->delete();
-        return redirect()->back();
+        $attendance = Attendance::find($idAttendance);
+
+        if ($attendance) {
+            $attendance->attendance()->delete();
+            $attendance->delete();
+            return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Dihapus');
+        }
     }
 
     public function detailAttendance($idAttendance)
@@ -185,4 +138,5 @@ class StudentAttendanceController extends Controller
 
         return view('admin/student-attendance-detail', compact('detailAttendances'));
     }
+
 }

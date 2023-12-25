@@ -10,15 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
-
     protected $table = 'tbl_attendances';
 
-    protected $fillable = [
-        'id',
-        'date',
-        'id_course',
-        'id_kelas',
-    ];
+    protected $fillable = ['id', 'date', 'id_course', 'id_kelas'];
+
 
     public function course()
     {
@@ -33,7 +28,7 @@ class Attendance extends Model
     {
         return $this->hasOne(SubAttendance::class);
     }
-    
+
     public function attendance()
     {
         return $this->belongsTo(Attendance::class);
@@ -44,4 +39,3 @@ class Attendance extends Model
         return $this->belongsTo(Student::class);
     }
 }
-
