@@ -119,18 +119,42 @@ class StudentAttendanceController extends Controller
         return view('teacher/student-attendance-detail', compact('detailAttendances'));
     }
 
-
-
-    public function destroy($attendance)
+    public function edit($idAttendance, Request $request)
     {
-        $attendance = Attendance::find($attendance);
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        $attendance = Attendance::find($idAttendance)->load('course');
+        $courses = Course::all();
+        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
+            ->with('attendance', 'student')
+            ->get();
 
-        if ($attendance) {
-            $attendance->attendance()->delete();
-            $attendance->delete();
-            return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Dihapus');
-        }
+        return view('teacher/student-attendance-edit', compact('detailAttendances', 'attendance', 'courses'));
     }
+    public function update(Request $request, $idAttendance)
+    {
+        $attendance = Attendance::find($idAttendance);
+
+        $attendance->date = $request->date ?? $attendance->date; // Use existing date if none is provided
+        $attendance->id_course = $request->id_course ?? $attendance->id_course;
+        $attendance->save();
+
+        foreach ($request->status as $key => $value) {
+            $subAttendance = subAttendance::where('id_attendance', $idAttendance)
+                ->where('id_student', $key)
+                ->first();
+            $subAttendance->status = $value;
+            $subAttendance->id_attendance = $idAttendance;
+            $subAttendance->id_student = $key;
+            $subAttendance->status = $value;
+            $subAttendance->desc = '';
+            $subAttendance->save();
+        }
+
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Diubah');
+    }
+
+
     // public function edit(Attendance $attendance)
     // {
     //     $students = \App\Student::all();

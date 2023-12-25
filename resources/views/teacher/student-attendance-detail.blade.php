@@ -63,8 +63,6 @@
                                 <th>No</th>
                                 <th>Siswa</th>
                                 <th>Status</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
