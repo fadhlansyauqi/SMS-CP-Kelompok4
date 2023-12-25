@@ -23,20 +23,21 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="javascript:void(0);" class="text-muted">Nilai Siswa</a>
-                    </li>                    
+                        <a href="" class="text-muted">Nilai Siswa</a>
+                    </li>
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Toolbar-->
         </div>
     </div>
-  
+
     <!-- Main content -->
+
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
-                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Nilai Siswa</b></h3>
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
                 <div class="row">
                     <div class="col-4">
                         <form action="{{ route('admin.student-grade') }}" method="GET">
@@ -49,33 +50,24 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-5 text-right">
-                        <a href="{{ route('admin.student-grade-class') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong>Nilai Baru</strong></a>
-                    </div>
                 </div>
+
                 <div class="row table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Mata Pelajaran</th>
                                 <th>Kelas</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($grades as $grade)
+                            @foreach ($student_classes as $student_class)
                                 <tr>
-                                    <td> {{ $loop->iteration }}</td>
-                                    <td> {{ \Carbon\Carbon::parse($grade->date)->format('d-m-Y') }}</td>
-                                    <td> {{ $grade->course->nama_mapel }} </td>
-                                    <td> {{ $grade->student_class->nama_kelas }} </td>
-                                    <td> <a href="{{ route('admin.student-grade-detail', ['id_grade' => $grade->id]) }}"
-                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
-                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><a
+                                            href="{{ route('admin.student-grade-class-data', ['idKelas' => $student_class->id]) }}">{{ $student_class->nama_kelas }}</a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -86,7 +78,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('admin.student-grade') }}">
+                            <form method="GET" action="{{ route('admin.student-grade-class') }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -100,7 +92,7 @@
                         </div>
 
                         <div id="paginationLinks">
-                            {{ $grades->links() }}
+                            {{ $student_classes->links() }}
                         </div>
                     </div>
                 </div>
@@ -114,7 +106,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-grade') }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('admin.student-grade-class') }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });

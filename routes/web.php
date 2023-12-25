@@ -63,6 +63,11 @@ Route::group(['middleware' => 'ADMIN'], function () {
 
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
+    Route::get('/admin/student-grade-class', 'admin\StudentGradeController@indexClass')->name('admin.student-grade-class');
+    Route::get('/admin/student-grade-class-data/{idKelas}', 'admin\StudentGradeController@indexClassData')->name('admin.student-grade-class-data');
+    Route::post('/admin/student-grade-class-data/{idKelas}', 'admin\StudentGradeController@store')->name('admin.student-grade-class-data.store');
+    Route::get('/admin/student-grade/{id_grade}', 'admin\StudentGradeController@detailGrade')->name('admin.student-grade-detail');
+
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
 
     Route::get('/admin/teacher', 'admin\TeacherController@index')->name('admin.teacher');

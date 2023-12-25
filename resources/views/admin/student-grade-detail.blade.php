@@ -23,16 +23,17 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="javascript:void(0);" class="text-muted">Nilai Siswa</a>
-                    </li>                    
+                        <a href="" class="text-muted">Nilai Siswa</a>
+                    </li>
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Toolbar-->
         </div>
     </div>
-  
+
     <!-- Main content -->
+
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
@@ -60,21 +61,20 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
+                                <th>Siswa</th>
+                                <th>Jenis Nilai</th>
+                                <th>Nilai</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($grades as $grade)
+                            @foreach ($detailGrades as $detailGrade)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ \Carbon\Carbon::parse($grade->date)->format('d-m-Y') }}</td>
-                                    <td> {{ $grade->course->nama_mapel }} </td>
-                                    <td> {{ $grade->student_class->nama_kelas }} </td>
-                                    <td> <a href="{{ route('admin.student-grade-detail', ['id_grade' => $grade->id]) }}"
-                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                    <td> {{ $detailGrade->student->nama }}</td>
+                                    <td> {{ $detailGrade->jenis_nilai }} </td>
+                                    <td> {{ $detailGrade->nilai }} </td>
+                                    <td> {{ $detailGrade->desc }} </td>
                                 <tr>
                             @endforeach
                         </tbody>
@@ -99,9 +99,9 @@
                             </form>
                         </div>
 
-                        <div id="paginationLinks">
-                            {{ $grades->links() }}
-                        </div>
+                        {{-- <div id="paginationLinks">
+                            {{ $attendances->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </div>
