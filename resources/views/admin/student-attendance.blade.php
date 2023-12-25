@@ -75,9 +75,11 @@
                                     <td> {{ $attendance->course->nama_mapel }} </td>
                                     <td> {{ $attendance->student_class->nama_kelas }} </td>
                                     <td>
-                                        <a
-                                            href="{{ route('admin.student-attendance.edit', ['id_attendance' => $attendance->id]) }}"><i
+                                        <a href="{{ route('admin.student-attendance.edit', ['id_attendance' => $attendance->id]) }}"><i
                                                 class="flaticon2-edit mr-3"></i></a>
+                                        <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('admin.student-attendance.delete', ['id_attendance' => $attendance->id]) }}"><i
+                                                class="flaticon2-trash mr-3"></i></a>
                                         <a href="{{ route('admin.student-attendance-detail', ['id_attendance' => $attendance->id]) }}"
                                             type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a>
                                     </td>
@@ -127,4 +129,23 @@
         });
     </script>
     <!--end::content-->
+@endsection
+
+@section('addJavascript')
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script>
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangermode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    window.location = url;
+                }
+            })
+        }
+    </script>
 @endsection

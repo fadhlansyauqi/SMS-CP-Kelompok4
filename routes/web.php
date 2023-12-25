@@ -59,8 +59,7 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::post('/admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
     Route::get('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance.edit');
     Route::post('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance.update');
-    // Route::get('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance-class-data.edit');
-    // Route::put('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance-class-data.update');
+    Route::get('/admin/student-attendance/delete/{id_attendance}', 'admin\StudentAttendanceController@destroy')->name('admin.student-attendance.delete');
 
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
