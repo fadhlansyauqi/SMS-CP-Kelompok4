@@ -46,32 +46,51 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
+            @foreach ($studentClasses as $class)
+                <div class="card mb-13">
+                    <div class="card-body">
+                        <p class="h3 text-center">Kelas {{ $class->nama_kelas }} </p>
 
-            <div class="card">
-                <div class="card-body p-0">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Mata Pelajaran</th>
-                                <th>Nama Kelas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($class_schedules as $class_schedule)
+                        <table class="table">
+                            <thead class="text-center">
                                 <tr>
-                                    <td> {{ $loop->index + 1 }} </td>
-                                    <td> {{ $class_schedule->id_course }} </td>
-                                    <td> {{ $class_schedule->id_class }} </td>
+                                    <th style="width: 9%">Jam</th>
+                                    <th style="width: 16%">Senin</th>
+                                    <th style="width: 15%">Selasa</th>
+                                    <th style="width: 15%">Rabu</th>
+                                    <th style="width: 15%">Kamis</th>
+                                    <th style="width: 15%">Jumat</th>
+                                    <th style="width: 16%">Sabtu</th>
                                 </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($lessonHours as $lh)
+                                    <tr>
+                                        <td>{{ $lh->waktu }}</td>
+                                        @foreach ($days as $day)
+                                            <td>
+                                                @php
+                                                    $schedule = $classSchedules
+                                                        ->where('id_class', $class->id)
+                                                        ->where('id_lesson_hours', $lh->id)
+                                                        ->where('hari', $day->hari)
+                                                        ->first();
+                                                @endphp
+                                                {{-- Tampilkan data jadwal pelajaran --}}
+                                                @if ($schedule)
+                                                    {{ $schedule->course->nama_mapel }}
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
     <!-- /.content -->
 @endsection
