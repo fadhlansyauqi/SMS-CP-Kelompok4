@@ -120,6 +120,17 @@ class StudentAttendanceController extends Controller
     }
 
 
+
+    public function destroy($attendance)
+    {
+        $attendance = Attendance::find($attendance);
+
+        if ($attendance) {
+            $attendance->attendance()->delete();
+            $attendance->delete();
+            return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Dihapus');
+        }
+    }
     // public function edit(Attendance $attendance)
     // {
     //     $students = \App\Student::all();

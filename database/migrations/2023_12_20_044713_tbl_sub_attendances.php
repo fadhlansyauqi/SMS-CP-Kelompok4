@@ -20,15 +20,16 @@ class TblSubAttendances extends Migration
             $table->string('status')->nullable();
             $table->string('desc')->nullable();
             $table->timestamps();
-            
-            $table
-                ->foreign('id_attendance')
+
+            $table->foreign('id_attendance')
                 ->references('id')
-                ->on('tbl_attendances');
-            $table
-            ->foreign('id_student')
+                ->on('tbl_attendances')
+                ->onDelete('cascade');
+
+            $table->foreign('id_student')
                 ->references('id')
-                ->on('tbl_students');
+                ->on('tbl_students')
+                ->onDelete('cascade');
         });
 
     }
