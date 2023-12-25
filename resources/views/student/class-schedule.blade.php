@@ -75,196 +75,55 @@ p{
 
     <!-- Main content -->
     <div class="content">
-        <div class="container-fluid">
-        <table class="table">
-					<thead>
-						<tr>
-							<th class="hari"></th>
-							<th class="hari">Senin</th>
-							<th class="hari">Selasa</th>
-							<th class="hari">Rabu</th>
-              <th class="hari">Kamis</th>
-              <th class="hari">Jumat</th>
-						</tr>
-					</thead>
-					<tbody>
-				
-              <tr>
-              	<th class="jam">07.00</th>
-                <td style="background-color: #ff7aa2;">
-                  <div class="abu">
-                    <p>Biologi <br> Pak. rijal</p>
-                  </div>
-                </td>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
-                <td style="background-color: #ff7aa2;">
-                  <div class="abu">
-                    <p>Biologi <br> Pak. rijal</p>
-                  </div>
-                </td>
-                <td style="background-color: #FF6868;">
-                  <div class="abu">
-                    <p>Olahraga <br> Pak.Warjo</p>
-                  </div>
-                </td>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
 
-              </tr>
-         
-              <tr>
-              	<th class="jam">08.00</th>
-                <td style="background-color:#ff7aa2;"></td>
-                <td style="background-color: #FEED30;"></td>
-                <td style="background-color: #ff7aa2;"></td>
-                <td style="background-color: #FF6868;"></td>
-                <td style="background-color: #FEED30;"></td>
-              </tr>
-
-              <tr>
-              	<th class="jam">09.00</th>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-              	<th class="jam">10.00</th>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
-                <td style="background-color: #ff7aa2;">
-                  <div class="abu">
-                    <p>Biologi <br> Pak. rijal</p>
-                  </div>
-                </td>
-                <td style="background-color: #FF6868;">
-                  <div class="abu">
-                    <p>Olahraga <br> Pak.Warjo</p>
-                  </div>
-                </td>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
-                <td style="background-color: #FF6868;">
-                  <div class="abu">
-                    <p>Olahraga <br> Pak.Warjo</p>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-              	<th class="jam">11.00</th>
-                <td style="background-color:#FEED30;"></td>
-                <td style="background-color: #ff7aa2;"></td>
-                <td style="background-color: #FF6868;"></td>
-                <td style="background-color: #FEED30;"></td>
-                <td style="background-color: #FF6868;"></td>
-              </tr>
-
-              <tr>
-              	<th class="jam">12.00</th>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-                <td style="background-color: #5C5470;">
-                  <div class="abu">
-                    <p>ISTIRAHAT</p>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-              	<th class="jam">13.00</th>
-                <td style="background-color: #FF6868;">
-                  <div class="abu">
-                    <p>Olahraga <br> Pak.Warjo</p>
-                  </div>
-                </td>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
-                <td style="background-color: #ff7aa2;">
-                  <div class="abu">
-                    <p>Biologi <br> Pak. rijal</p>
-                  </div>
-                </td>
-                <td style="background-color: #FF6868;">
-                  <div class="abu">
-                    <p>Olahraga <br> Pak.Warjo</p>
-                  </div>
-                </td>
-                <td style="background-color: #FEED30;">
-                  <div class="abu">
-                    <p>Matematika <br> pak. Dalton</p>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-              	<th class="jam">14.00</th>
-                <td style="background-color: #FF6868;"></td>
-                <td style="background-color: #FEED30;"></td>
-                <td style="background-color: #ff7aa2;"></td>
-                <td style="background-color: #FF6868;"></td>
-                <td style="background-color: #FEED30;"></td>
-              </tr>
-
-					</tbody>
-				</table>
-        </div><!-- /.container-fluid -->
+        <div class="container">
+            
+            @foreach ($studentClasses as $class)
+            <div class="card mb-13">
+                <div class="card-body">
+                    <p class="h3 text-center">Kelas {{ $class->nama_kelas }} </p>
+                        
+        
+                    <table class="table">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="width: 9%">Jam</th>
+                                <th style="width: 16%">Senin</th>
+                                <th style="width: 15%">Selasa</th>
+                                <th style="width: 15%">Rabu</th>
+                                <th style="width: 15%">Kamis</th>
+                                <th style="width: 15%">Jumat</th>
+                                <th style="width: 16%">Sabtu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($lessonHours as $lh)
+                            <tr>
+                                <td>{{ $lh->waktu }}</td>
+                                @foreach ($days as $day) 
+                                    <td>
+                                        @php
+                                            $schedule = $classSchedules
+                                                ->where('id_class', $class->id)
+                                                ->where('id_lesson_hours', $lh->id)
+                                                ->where('hari', $day->hari)
+                                                ->first();
+                                        @endphp
+                                        {{-- Tampilkan data jadwal pelajaran --}}
+                                        @if($schedule)
+                                            {{ $schedule->course->nama_mapel }}
+                                        @endif
+                                    </td>
+                                @endforeach
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endforeach
+        
+        </div>
     </div>
     <!-- /.content -->
 @endsection

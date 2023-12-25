@@ -62,11 +62,21 @@
                                 placeholder="Masukkan nomor induk siswa">
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="nama">Nama Lengkap</label>
                             <input type="text" name="nama" id="nama" class="form-control"
                                 placeholder="Masukkan nama siswa">
+                        </div> -->
+                        <div class="form-group">
+                            <label for="user_id">Nama siswa</label>
+                            <select class="form-control" name="user_id" id="user_id">
+                                <option value="" disabled selected hidden>Pilih siswa</option>
+                                @foreach ($user_students as $user_student)
+                                    <option value="{{ $user_student->id }}">{{ $user_student->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
 
                         <div class="form-group">
                             <label for="id_kelas">Class</label>

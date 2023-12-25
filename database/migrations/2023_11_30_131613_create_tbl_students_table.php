@@ -15,9 +15,9 @@ class CreateTblStudentsTable extends Migration
     {
         Schema::create('tbl_students', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_kelas')->unsigned();
             $table->integer('nis');
-            $table->string('nama', 255);
             $table->string('tempat_lahir', 255);
             $table->date('tanggal_lahir');
             $table->string('jk', 20);
@@ -31,7 +31,13 @@ class CreateTblStudentsTable extends Migration
                 ->foreign('id_kelas')
                 ->references('id')
                 ->on('tbl_classes');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('tbl_users');
         });
+
+        
     }
 
     /**

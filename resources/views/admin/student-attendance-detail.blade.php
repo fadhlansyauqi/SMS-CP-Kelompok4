@@ -71,7 +71,7 @@
                             @foreach ($detailAttendances as $detailAttendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailAttendance->student->nama }}</td>
+                                    <td> {{ $detailAttendance->student->user->name }}</td>
                                     <td> {{ $detailAttendance->status }} </td>
                                     <td> {{ $detailAttendance->desc }} </td>
                                     {{-- <td>

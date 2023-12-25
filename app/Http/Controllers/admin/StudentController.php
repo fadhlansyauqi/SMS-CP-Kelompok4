@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Student;
+use App\User;
 use App\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,12 +22,17 @@ class StudentController extends Controller
         $perPage  = $request->input('per_page', 5);
         $students = Student::where(function ($query) use ($search) {
             $query
+                
                 ->where('nis', 'like', "%$search%")
-                ->orWhere('nama', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
                 ->orWhere('jk', 'like', "%$search%");
-        })  ->orderBy('id_kelas', 'ASC')
+        })
+                ->join('tbl_users', 'tbl_users.id', '=', 'tbl_students.user_id') 
+                ->select('tbl_students.*', 'tbl_users.name') 
+                ->orderBy('id_kelas', 'ASC')
             ->paginate($perPage);
-        return view('admin.student', compact('students'));
+        // return $students;
+        return view('admin.student', compact('students')); 
     }
 
     /**
@@ -37,7 +43,8 @@ class StudentController extends Controller
     public function create()
     {
         $student_classes = DB::table('tbl_classes')->get();
-        return view('admin/create-student', compact('student_classes'));
+        $user_students = User::where('role','STUDENT')->get();
+        return view('admin/create-student', compact('student_classes','user_students'));
     }
 
     /**
@@ -51,7 +58,7 @@ class StudentController extends Controller
         $validateData = validator($request->all(), [
             'id_kelas'      => 'required',
             'nis'           => 'required|integer',
-            'nama'          => 'required|string|max:255',
+            'user_id'       => 'required|integer',
             'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jk'            => 'required|string|max:20',
