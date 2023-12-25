@@ -64,7 +64,6 @@
                                 <th>Siswa</th>
                                 <th>Jenis Nilai</th>
                                 <th>Nilai</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

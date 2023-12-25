@@ -48,21 +48,13 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('update.class-schedule', $id_class) }}" method="POST">
+                <form action="{{ route('update.class-schedule', ['id_class' => $class->id]) }}" method="POST">
                     @csrf
                     <table class="table">
                         <div>
-                            <p class="h3 text-center mb-10">Kelas 
-                                {{-- <select name="id_class" id="id_class"> --}}
-                                    {{-- <option value="" disabled selected hidden>Pilih Kelas</option> --}}
-                                    {{-- @foreach ($studentClasses as $class) --}}
-                                        {{-- <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option> --}}
-                                    {{-- @endforeach --}}
-                                {{-- </select> --}}
-                                {{-- <input type="hidden" id="id_class_hidden" name="id_class_hidden"> --}}
-                            </p>
+                            <p class="h3 text-center mb-10">Kelas {{ $class->nama_kelas }} </p>
                         </div>
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Jam</th>
                                 <th>Senin</th>
@@ -80,7 +72,7 @@
                                     @foreach ($days as $day)
                                         <td>
                                             <input type="hidden" name="id_lesson_hours[]" value="{{ $lh->id }}">
-                                            <input type="hidden" name="id_class[]" value="{{ $id_class }}">
+                                            <input type="hidden" name="id_class[]" value="{{ $class->id }}">
                                             
                                             <input type="hidden" name="hari[]" value="{{ $day->hari }}">
                                             <select class="form-control" name="id_course[]">

@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Siswa</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Nilai Siswa</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted">Absen Siswa</a>
+                        <a href="" class="text-muted">Nilai Siswa</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -37,10 +37,10 @@
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
-                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Nilai Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-attendance') }}" method="GET">
+                        <form action="{{ route('admin.student-grade') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -52,8 +52,8 @@
                     </div>
                     <div class="col-3"></div>
                     <div class="col-5 text-right">
-                        <a href="{{ route('teacher.student-attendance-class') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                        <a href="{{ route('admin.student-grade-class') }}" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong>Nilai Baru</strong></a>
                     </div>
                 </div>
                 <div class="row table-responsive">
@@ -62,18 +62,19 @@
                             <tr>
                                 <th>No</th>
                                 <th>Siswa</th>
-                                <th>Status</th>
+                                <th>Jenis Nilai</th>
+                                <th>Nilai</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($detailAttendances as $detailAttendance)
+                            @foreach ($detailGrades as $detailGrade)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailAttendance->student->user->name }}</td>
-                                    <td> {{ $detailAttendance->status }} </td>
-                                    <td> {{ $detailAttendance->desc }} </td>
-                                    {{-- <td> <a href="" type="button"
-                                            class="btn btn-success btn-sm"><strong>Detail</strong></a> </td> --}}
+                                    <td> {{ $detailGrade->student->nama }}</td>
+                                    <td> {{ $detailGrade->jenis_nilai }} </td>
+                                    <td> {{ $detailGrade->nilai }} </td>
+                                    <td> {{ $detailGrade->desc }} </td>
                                 <tr>
                             @endforeach
                         </tbody>
@@ -85,7 +86,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('teacher.student-attendance') }}">
+                            <form method="GET" action="{{ route('admin.student-grade') }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -113,7 +114,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('teacher.student-attendance') }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('admin.student-grade') }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });
