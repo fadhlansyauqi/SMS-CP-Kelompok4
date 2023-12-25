@@ -26,7 +26,6 @@ class ClassScheduleController extends Controller
         $classSchedules = ClassSchedule::all();
         $days = Days::all();
         
-    
         return view('admin.class-schedule', compact('lessonHours', 'courses', 'studentClasses', 'classSchedules', 'days'));
 
     }
@@ -39,15 +38,17 @@ class ClassScheduleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $id_class = (int)$id;
+        // $id_class = (int)$id;
 
         $days = Days::all();
         $lessonHours = LessonHours::all();
         $courses = Course::all();
-        $studentClasses = StudentClass::all();
+        $class = StudentClass::findOrFail($id);
         $classSchedules = ClassSchedule::all();
 
-        return view('admin.edit-class-schedule', compact('id_class', 'classSchedules','lessonHours', 'courses', 'studentClasses', 'days'));
+        // dd($class);
+
+        return view('admin.edit-class-schedule', compact( 'classSchedules','lessonHours', 'courses', 'class', 'days'));
         
     }
 
@@ -59,9 +60,10 @@ class ClassScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id_class = (int)$id;
+        // $id_class = (int)$id;
 
         // dd($id_class);
+        $class = StudentClass::find($id);
 
         $validateData = validator($request->all(), [
             'id_lesson_hours.*' => 'integer',
@@ -83,13 +85,15 @@ class ClassScheduleController extends Controller
         for ($i = 0; $i < $count; $i++) {
             $criteria = [
                 'id_lesson_hours' => $validateData['id_lesson_hours'][$i],
-                'id_class' => $id_class,
+                'id_class' => $class->id,
                 'hari' => $validateData['hari'][$i],
             ];
         
             $updateData = [
                 'id_course' => $validateData['id_course'][$i],
             ];
+
+            // dd($class);
         
             ClassSchedule::updateOrCreate($criteria, $updateData);
         }
