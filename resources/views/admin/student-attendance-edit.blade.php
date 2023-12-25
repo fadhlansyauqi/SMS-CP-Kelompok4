@@ -51,95 +51,108 @@
                         </form>
                     </div>
                     <div class="col-2"></div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input type="date" class="form-control" id="tanggal" name="tanggal"
-                                value="{{ $attendances->date ?? '' }}">
-                        </div>
-                    </div>
 
-                    <div class="col-3 text-right">
+                    <div class="col-6 text-right">
                         <form id="form1" class="form" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <select class="form-control" id="id_course" name="id_course">
-                                    <option value="" disabled selected hidden>Pilih Mapel</option>
-                                    {{-- @foreach ($attendances->course as $course)
-                                       <option value="{{ $course->id}}">{{ $course->nama_mapel ?? '' }}</option>
-                                    @endforeach --}}
-                                </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="date" name="date"
+                                            value="{{ $attendance->date ?? '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="id_course" name="id_course">
+                                            <option value="" disabled selected hidden>Pilih Mapel</option>
+                                            @foreach ($courses as $course)
+                                                <option value="{{ $course->id }}"
+                                                    {{ $course->id == $attendance->course->id ? 'selected' : '' }}>
+                                                    {{ $course->nama_mapel ?? '' }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-
                         </form>
                     </div>
 
+
                 </div>
                 <div class="row table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>NIS</th>
-                                <th>Siswa</th>
-                                <th>Status</th>
-                                {{-- <th>Keterangan</th> --}}
-                                {{-- <th>Aksi</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($detailAttendances as $detailAttendance)
+                    <form action="{{ route('admin.student-attendance.update', $attendance->id) }}" id="form2"
+                        method="POST">
+                        @csrf
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailAttendance->student->nis }}</td>
-                                    <td> {{ $detailAttendance->student->nama }}</td>
-                                    <td>
-                                        <div class="form-group row">
-                                            <div class="col-9 col-form-label">
-                                                <div class="radio-inline">
-                                                    <label class="radio radio-success">
-                                                        <input type="radio"
-                                                            name="status[{{ $detailAttendance->student->id }}]"
-                                                            class="status" value="Hadir"
-                                                            {{ $detailAttendance->status === 'Hadir' ? 'checked' : '' }}
-                                                            form="form2" />
-                                                        <span></span>
-                                                        Hadir
-                                                    </label>
-                                                    <label class="radio radio-primary">
-                                                        <input type="radio"
-                                                            name="status[{{ $detailAttendance->student->id }}]"
-                                                            class="status" value="Izin"
-                                                            {{ $detailAttendance->status === 'Izin' ? 'checked' : '' }}
-                                                            form="form2" />
-                                                        <span></span>
-                                                        Izin
-                                                    </label>
-                                                    <label class="radio radio-warning">
-                                                        <input type="radio"
-                                                            name="status[{{ $detailAttendance->student->id }}]"
-                                                            class="status" value="Sakit"
-                                                            {{ $detailAttendance->status === 'Sakit' ? 'checked' : '' }}
-                                                            form="form2" />
-                                                        <span></span>
-                                                        Sakit
-                                                    </label>
-                                                    <label class="radio radio-danger">
-                                                        <input type="radio"
-                                                            name="status[{{ $detailAttendance->student->id }}]"
-                                                            class="status" value="Alfa"
-                                                            {{ $detailAttendance->status === 'Alfa' ? 'checked' : '' }}
-                                                            form="form2" />
-                                                        <span></span>
-                                                        Alfa
-                                                    </label>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Siswa</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($detailAttendances as $detailAttendance)
+                                    <tr>
+                                        <td> {{ $loop->iteration }}</td>
+                                        <td> {{ $detailAttendance->student->nis }}</td>
+                                        <td> {{ $detailAttendance->student->nama }}</td>
+                                        <td>
+                                            <div class="form-group row">
+                                                <div class="col-9 col-form-label">
+                                                    <div class="radio-inline">
+                                                        <label class="radio radio-success">
+                                                            <input type="radio"
+                                                                name="status[{{ $detailAttendance->student->id }}]"
+                                                                class="status" value="Hadir"
+                                                                {{ $detailAttendance->status === 'Hadir' ? 'checked' : '' }}
+                                                                form="form2" />
+                                                            <span></span>
+                                                            Hadir
+                                                        </label>
+                                                        <label class="radio radio-primary">
+                                                            <input type="radio"
+                                                                name="status[{{ $detailAttendance->student->id }}]"
+                                                                class="status" value="Izin"
+                                                                {{ $detailAttendance->status === 'Izin' ? 'checked' : '' }}
+                                                                form="form2" />
+                                                            <span></span>
+                                                            Izin
+                                                        </label>
+                                                        <label class="radio radio-warning">
+                                                            <input type="radio"
+                                                                name="status[{{ $detailAttendance->student->id }}]"
+                                                                class="status" value="Sakit"
+                                                                {{ $detailAttendance->status === 'Sakit' ? 'checked' : '' }}
+                                                                form="form2" />
+                                                            <span></span>
+                                                            Sakit
+                                                        </label>
+                                                        <label class="radio radio-danger">
+                                                            <input type="radio"
+                                                                name="status[{{ $detailAttendance->student->id }}]"
+                                                                class="status" value="Alfa"
+                                                                {{ $detailAttendance->status === 'Alfa' ? 'checked' : '' }}
+                                                                form="form2" />
+                                                            <span></span>
+                                                            Alfa
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                <tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        </td>
+                                    <tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="text-right mt-5">
+                            <a href="{{ route('admin.student-attendance') }}" class="btn btn-outline-danger mr-2"
+                                role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
 
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div class="d-flex align-items-center py-3">
@@ -178,6 +191,33 @@
                     "{{ route('admin.student-attendance') }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#form2').on('submit', function(e) {
+                e.preventDefault();
+
+                let id_course = $("#id_course").val();
+                let date = $("#date").val();
+
+                let newInputCourse = document.createElement("input");
+                newInputCourse.setAttribute("type", "hidden");
+                newInputCourse.setAttribute("name", "id_course");
+                newInputCourse.setAttribute("value", id_course);
+
+                let newInputDate = document.createElement("input");
+                newInputDate.setAttribute("type", "hidden");
+                newInputDate.setAttribute("name", "date");
+                newInputDate.setAttribute("value", date);
+
+                this.appendChild(newInputCourse);
+                this.appendChild(newInputDate);
+
+                // Submit the first form
+                this.submit();
             });
         });
     </script>
