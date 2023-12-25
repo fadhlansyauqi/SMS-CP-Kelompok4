@@ -9,6 +9,8 @@ use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;//ambil user
+
 class ClassController extends Controller
 {
     
@@ -18,8 +20,8 @@ class ClassController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $tbl_students = Student::where('id_kelas');
-        return view('student.class', ['tbl_students' => $tbl_students]);
+        $student_classes = StudentClass::paginate(10);//model studentclass
+        return view('student.class', compact('student_classes'));
     }
     
 }

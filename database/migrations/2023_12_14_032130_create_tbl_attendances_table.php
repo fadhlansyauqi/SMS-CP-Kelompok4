@@ -16,18 +16,11 @@ class CreateTblAttendancesTable extends Migration
         Schema::create('tbl_attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date');
-            $table->bigInteger('id_student')->unsigned();
             $table->bigInteger('id_course')->unsigned()->nullable();
             $table->bigInteger('id_kelas')->unsigned();
-            $table->string('status')->nullable();
-            $table->string('desc', 255)->nullable();
             $table->timestamps();
 
              // Add foreign key constraint
-             $table
-             ->foreign('id_student')
-             ->references('id')
-             ->on('tbl_students');
              $table
              ->foreign('id_course')
              ->references('id')

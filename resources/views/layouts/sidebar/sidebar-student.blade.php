@@ -14,8 +14,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
 <!--begin::Head-->
 
-<head>
-    <base href="../../">
+<head><base href="../../">
     <meta charset="utf-8" />
     <meta name="description" content="Page with empty content" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -24,21 +23,20 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Page Vendors Styles(used by this page)-->
-    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.cs') }}s" rel="stylesheet" type="text/css" />
     <!--end::Page Vendors Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
-    <link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/aside/light.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/themes/layout/header/menu/light.css' )}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 
 </head>
 <!--end::Head-->
@@ -50,8 +48,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
-        <a href="index.html">
-            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" />
+        <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+            <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" class="img-fluid" style="max-width: 30%; height: auto;">
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -93,8 +91,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--begin::Brand-->
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
-                    <a href="index.html" class="brand-logo">
-                        <img alt="Logo" src="assets/media/logos/sms-logo.png" height="52" width="50%" />
+                    <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+                        <img alt="Logo" src="{{ asset('assets/media/logos/sms-logo.png') }}" style="max-width: 100%; height: auto;">
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->
@@ -267,25 +265,12 @@ License: You must have a valid license purchased only from themeforest(the above
                 };
             </script>
             <!--end::Global Config-->
-            <!--begin::Global Theme Bundle(used by all pages)-->
-            <script src="assets/plugins/global/plugins.bundle.js"></script>
-            <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-            <script src="assets/js/scripts.bundle.js"></script>
-            <!--end::Global Theme Bundle-->
-            <!--begin::Page Vendors(used by this page)-->
-            <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-            <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
-            <script src="assets/plugins/custom/gmaps/gmaps.js"></script>
-            <!--end::Page Vendors-->
-            <!--begin::Page Scripts(used by this page)-->
-            <script src="assets/js/pages/widgets.js"></script>
-            <!--end::Page Scripts-->
-
-
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-            <x-livewire-alert::scripts />
-            @stack('script')
+           <!--begin::Global Theme Bundle(used by all pages)-->
+		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
+		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+		<!--end::Global Theme Bundle-->
+    	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 <!--end::Body-->
 

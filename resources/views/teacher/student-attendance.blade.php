@@ -20,7 +20,7 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('teacher.dashboard') }}" class="text-muted">Dashboard</a>
+                        <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
                         <a href="" class="text-muted">Absen Siswa</a>
@@ -31,64 +31,122 @@
             <!--end::Toolbar-->
         </div>
     </div>
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
 
-    <div class="card">
-        <div class="card-header text-right">
-            <a href="{{ route('create.attendance') }}" class="btn btn-primary" role="button">Tambah
-                Absen</a>
-        </div>
-        <div class="card">
+    <div class="container">
+        <div class="card card-custom">
             <div class="card-body">
-                <table class="table mb-0 table-bordered">
-                    <thead class="text-center bg-secondary">
-                        <tr>
-                            <td>No.</td>
-                            <td>ID Absen</td>
-                            <td>Nama Siswa</td>
-                            <td>Nama Pembelajaran</td>
-                            <td>Pertemuan</td>
-                            <td>Tanggal</td>
-                            <td>Keterangan</td>
-                            <td style="width: 15%">Aksi</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($attendances as $attendance)
+                <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
+                <div class="row">
+                    <div class="col-4">
+                        <form action="{{ route('teacher.student-attendance') }}" method="GET">
+                            <div class="form-group">
+                                <div class="input-icon input-icon-right">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        class="form-control" placeholder="Search..." />
+                                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-3"></div>
+                    <div class="col-5 text-right">
+                        <a href="{{ route('teacher.student-attendance-class') }}" type="button" class="btn btn-primary"><i
+                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
+                    </div>
+                </div>
+                <div class="row table-responsive">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td> {{ $loop->index + 1 }} </td>
-                                <td> {{ $attendance->id_absen }}</td>
-                                <td> {{ $attendance->student ? $attendance->student->nama : '-' }}</td>
-                                <td> {{ $attendance->materi }} </td>
-                                <td> {{ $attendance->pertemuan }} </td>
-                                <td> {{ $attendance->tgl }} </td>
-                                <td> {{ $attendance->ket }} </td>
-                                <td class="text-center">
-                                    <a href="{{ route('edit.attendance', ['id' => $attendance->id]) }}"
-                                        class="btn btn-warning btn-sm" role="button">Edit</a>
-                                    <a href="{{ route('delete.attendance', ['id' => $attendance->id]) }}"
-                                        class="btn btn-danger btn-sm" role="button">Hapus</a>
-                                </td>
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Kelas</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($attendances as $attendance)
+                                <tr>
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td> {{ $attendance->date }}</td>
+                                    <td> {{ $attendance->course->nama_mapel }} </td>
+                                    <td> {{ $attendance->student_class->nama_kelas }} </td>
+                                    <td>
+
+                                        <a href="{{ route('edit.teacher', ['id_attendance' => $attendance->id]) }}"><i
+                                                class="flaticon2-edit mr-3"></i></a>
+                                        <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('delete.attendance', ['id_attendance' => $attendance->id]) }}"><i
+                                                class="flaticon2-trash mr-3"></i></a></a>
+                                        <a href="{{ route('teacher.student-attendance-detail', ['id_attendance' => $attendance->id]) }}"
+                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a>
+                                    </td>
+                                <tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="d-flex align-items-center py-3">
+                            <div class="d-flex align-items-center">
+                                <span class="text-muted mr-2">Show</span>
+                            </div>
+
+                            <form method="GET" action="{{ route('teacher.student-attendance') }}">
+                                <select id="entries"
+                                    class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
+                                    style="width: 75px;" name="per_page" onchange="this.form.submit()">
+                                    <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                    <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
+                                    <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                </select>
+                            </form>
+                        </div>
+
+                        <div id="paginationLinks">
+                            {{ $attendances->links() }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-    </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#entries', function() {
+                window.location =
+                    "{{ route('teacher.student-attendance') }}?search={{ request('search') }}&per_page=" +
+                    $(this)
+                    .val();
+            });
+        });
+    </script>
+    <!--end::content-->
+@endsection
+
+@section('addJavascript')
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script>
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangermode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    window.location = url;
+                }
+            })
+        }
+    </script>
 @endsection

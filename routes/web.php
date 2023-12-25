@@ -53,9 +53,15 @@ Route::group(['middleware' => 'ADMIN'], function () {
     Route::get('/admin/{student_class}/student-class-delete', 'admin\StudentClassController@destroy')->name('admin.student-class.delete');
 
     Route::get('/admin/student-attendance', 'admin\StudentAttendanceController@index')->name('admin.student-attendance');
+    Route::get('/admin/student-attendance/{id_attendance}', 'admin\StudentAttendanceController@detailAttendance')->name('admin.student-attendance-detail');
     Route::get('admin/student-attendance-class', 'admin\StudentAttendanceController@indexClass')->name('admin.student-attendance-class');
     Route::get('admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@indexClassData')->name('admin.student-attendance-class-data');
-    Route::post('/admin/student-attendance-class-data/{idKelas}/{idStudent}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
+    Route::post('/admin/student-attendance-class-data/{idKelas}', 'admin\StudentAttendanceController@store')->name('admin.student-attendance-class-data.store');
+    Route::get('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance.edit');
+    Route::post('/admin/student-attendance-edit/{id_attendance}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance.update');
+    // Route::get('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@edit')->name('admin.student-attendance-class-data.edit');
+    // Route::put('admin/student-attendance-class-data-edit/{id}', 'admin\StudentAttendanceController@update')->name('admin.student-attendance-class-data.update');
+
 
     Route::get('/admin/student-grade', 'admin\StudentGradeController@index')->name('admin.student-grade');
     Route::get('/admin/student-tuition-payment', 'admin\StudentTuitionPaymentController@index')->name('admin.student-tuition-payment');
@@ -90,11 +96,12 @@ Route::group(['middleware' => 'ADMIN'], function () {
 Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/dashboard-teacher', 'teacher\DashboardTeacherController@index')->name('teacher.dashboard');
 
-    Route::get('/teacher/student-grade-class', 'teacher\StudentGradeController@indexData')->name('teacher.student-grade-class');
-    Route::get('/teacher/student-grade-course', 'teacher\StudentGradeController@indexCourse')->name('teacher.student-grade-course');
-    Route::get('/teacher/student-grade-name', 'teacher\StudentGradeController@indexName')->name('teacher.student-grade-name');
-
     Route::get('/teacher/student-grade', 'teacher\StudentGradeController@index')->name('teacher.student-grade');
+    Route::get('/teacher/student-grade-class', 'teacher\StudentGradeController@indexClass')->name('teacher.student-grade-class');
+    Route::get('/teacher/student-grade-class-data/{idKelas}', 'teacher\StudentGradeController@indexClassData')->name('teacher.student-grade-class-data');
+    Route::post('/teacher/student-grade-class-data/{idKelas}', 'teacher\StudentGradeController@store')->name('teacher.student-grade-class-data.store');
+    Route::get('/teacher/student-grade/{id_grade}', 'teacher\StudentGradeController@detailGrade')->name('teacher.student-grade-detail');
+
     Route::get('/teacher/create-grade', 'teacher\StudentGradeController@create')->name('create.grade');
     Route::post('/teacher/create-grade', 'teacher\StudentGradeController@store')->name('store.grade');
     Route::get('/teacher/{grade}/edit-grade', 'teacher\StudentGradeController@edit')->name('edit.grade');
@@ -102,14 +109,21 @@ Route::group(['middleware' => 'TEACHER'], function () {
     Route::get('/teacher/{grade}/delete-grade', 'teacher\StudentGradeController@destroy')->name('delete.grade');
 
     Route::get('/teacher/student-attendance', 'teacher\StudentAttendanceController@index')->name('teacher.student-attendance');
-    Route::get('/teacher/create-attendance', 'teacher\StudentAttendanceController@create')->name('create.attendance');
-    Route::post('/teacher/create-attendance', 'teacher\StudentAttendanceController@store')->name('store.attendance');
-    Route::get('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@edit')->name('edit.attendance');
-    Route::post('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@update')->name('update.attendance');
+    Route::get('/teacher/student-attendance-class', 'teacher\StudentAttendanceController@indexClass')->name('teacher.student-attendance-class');
+    Route::get('teacher/student-attendance-class-data/{idKelas}', 'teacher\StudentAttendanceController@indexClassData')->name('teacher.student-attendance-class-data');
+    Route::post('/teacher/student-attendance-class-data/{idKelas}', 'teacher\StudentAttendanceController@store')->name('teacher.student-attendance-class-data.store');
+    Route::get('/teacher/student-attendance/{id_attendance}', 'teacher\StudentAttendanceController@detailAttendance')->name('teacher.student-attendance-detail');
+
+    // Route::get('/teacher/create-attendance', 'teacher\StudentAttendanceController@create')->name('create.attendance');
+    // Route::post('/teacher/create-attendance', 'teacher\StudentAttendanceController@store')->name('store.attendance');
+    // Route::get('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@edit')->name('edit.attendance');
+    // Route::post('/teacher/{attendance}/edit-attendance', 'teacher\StudentAttendanceController@update')->name('update.attendance');
     Route::get('/teacher/{attendance}/delete-attendance', 'teacher\StudentAttendanceController@destroy')->name('delete.attendance');
 
     Route::get('/teacher/class-schedule', 'teacher\ClassScheduleController@index')->name('teacher.class-schedule');
+
     Route::get('/teacher/student-class', 'teacher\StudentClassController@index')->name('teacher.student-class');
+    Route::get('teacher/student-class-data/{idKelas}', 'teacher\StudentClassController@indexClassData')->name('teacher.student-class-data');
 
     Route::get('/teacher/student-grade-create', 'teacher\StudentGradeController@create')->name('teacher.student-grade-create');
     Route::post('/teacher/student-grade-create', 'teacher\StudentGradeController@store')->name('teacher.store-student-grade');
@@ -127,7 +141,7 @@ Route::group(['middleware' => 'STUDENT'], function () {
     Route::get('/student/grade', 'student\GradeController@index')->name('student.grade');
 
     Route::get('/student/attendance', 'student\AttendanceController@index')->name('student.attendance');
-    Route::get('/student/create-attendace', 'student\AttendanceController@create')->name('student.create-attendance.create');
+    Route::get('/student/create-attendance/{id_attendance}', 'student\AttendanceController@detailAttendance')->name('student.create-attendance');
     Route::post('/student/create-attendace', 'student\AttendanceController@store')->name('student.create-attendance.store');
     Route::get('/student/{attendance}/edit-attendance', 'student\AttendanceController@edit')->name('student.edit-attendance.edit');
     Route::get('/student/{attendance}/attendance', 'student\AttendanceController@destroy')->name('student.edit-attendance.delete');

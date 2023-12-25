@@ -47,9 +47,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!--begin: Aside Container-->
 					<div class="d-flex flex-column-fluid flex-column justify-content-between py-9 px-7 py-lg-13 px-lg-35">
 						<!--begin::Logo-->
-						<a href="#" class="text-center pt-2">
-							<img src="assets/media/logos/logo.png" class="max-h-75px" alt="" />
+						<a href="#" class="text-center pt-2" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+							<img src="{{ asset('assets/media/logos/sms-logo.png') }}" class="max-h-75px" alt="" />
 						</a>
+
+						{{-- <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
+							<img alt="Logo" src="assets/media/logos/sms-logo.png" style="max-width: 100%; height: auto;">
+						</a> --}}
 						<!--end::Logo-->
 						<!--begin::Aside body-->
 						<div class="d-flex flex-column-fluid flex-column flex-center">
@@ -116,6 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<p class="font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70">Platform pengelolaan berbagai aspek operasional 
 						<br/>dan administratif di lingkungan sekolah</p>
 					</div>
+
 					<!--end::Title-->
 					<!--begin::Image-->
 					<div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/media/svg/illustrations/login-visual-2.svg);"></div>

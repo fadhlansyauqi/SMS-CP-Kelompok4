@@ -8,7 +8,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Absen Siswa</b></h3>
+                    <h3 class="text-dark font-weight-bold my-1 mr-5"><b>Nilai Siswa</b></h3>
                     <!--end::Page Title-->
 
                 </div>
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('admin.student-attendance') }}" class="text-muted">Absen Siswa</a>
+                        <a href="{{ route('teacher.student-grade') }}" class="text-muted">Nilai Siswa</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
                         <a href="javascript:void(0)" class="text-muted" disabled>List Data Siswa</a>
@@ -40,13 +40,13 @@
     <div class="container">
         <div class="card card-custom ">
             <div class="card-body">
-                <a href="{{ route('admin.student-attendance-class') }}">
+                <a href="{{ route('teacher.student-grade-class') }}">
                     <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
                 </a>
                 <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>List Data Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('admin.student-attendance-class-data', ['idKelas' => $idKelas]) }}"
+                        <form action="{{ route('teacher.student-grade-class-data', ['idKelas' => $idKelas]) }}"
                             method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
@@ -65,7 +65,7 @@
                                 <select class="form-control" id="id_course" name="id_course">
                                     <option value="" disabled selected hidden>Pilih Mapel</option>
                                     @foreach ($courses as $course)
-                                        <option value="{{ $course->id}}">{{ $course->nama_mapel ?? '' }}</option>
+                                        <option value="{{ $course->id }}">{{ $course->nama_mapel ?? '' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -73,73 +73,80 @@
                     </div>
                 </div>
                 <div class="row table-responsive mx-3">
-                    <form action="{{ route('admin.student-attendance-class-data.store', $idKelas) }}" id="form2" method="POST">
+                    <form action="{{ route('teacher.student-grade-class-data.store', $idKelas) }}" id="form2"
+                        method="POST">
                         @csrf
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>NIS</th>
-                                <th>Nama</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Kelas</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($students as $student)
-                                <tr id_student="{{ $student->id }}">
-                                    <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $student->nis }}</td>
-                                    <td> {{ $student->nama }} </td>
-                                    <td> {{ $student->jk }} </td>
-                                    <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
-                                    </td>
-                                    <td>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
+                                    <th style="width: 15%">Jenis Nilai</th>
+                                    <th>Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($students as $student)
+                                    <tr id_student="{{ $student->id }}">
+                                        <td> {{ $loop->iteration }}</td>
+                                        <td> {{ $student->nis }}</td>
+                                        <td> {{ $student->nama }} </td>
+                                        <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
+                                        </td>
+                                        <td>
                                             <div class="form-group row">
                                                 <div class="col-9 col-form-label">
                                                     <div class="radio-inline">
                                                         <label class="radio radio-success">
-                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Hadir"
-                                                                form="form2" />
+                                                            <input type="radio" name="jenis_nilai[{{ $student->id }}]"
+                                                                class="jenis_nilai" value="Quiz" form="form2" />
                                                             <span></span>
-                                                            Hadir
+                                                            Quiz
                                                         </label>
-                                                        <label class="radio radio-primary">
-                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Izin"
-                                                                form="form2" />
+                                                        <label class="radio radio-success">
+                                                            <input type="radio" name="jenis_nilai[{{ $student->id }}]"
+                                                                class="jenis_nilai" value="Ulangan" form="form2" />
                                                             <span></span>
-                                                            Izin
+                                                            Ulangan
                                                         </label>
-                                                        <label class="radio radio-warning">
-                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Sakit"
-                                                                form="form2" />
+                                                        <label class="radio radio-success">
+                                                            <input type="radio" name="jenis_nilai[{{ $student->id }}]"
+                                                                class="jenis_nilai" value="UTS" form="form2" />
                                                             <span></span>
-                                                            Sakit
+                                                            UTS
                                                         </label>
-                                                        <label class="radio radio-danger">
-                                                            <input type="radio" name="status[{{ $student->id }}]" class="status" value="Alfa"
-                                                                form="form2" />
+                                                        <label class="radio radio-success">
+                                                            <input type="radio" name="jenis_nilai[{{ $student->id }}]"
+                                                                class="jenis_nilai" value="UAS" form="form2" />
                                                             <span></span>
-                                                            Alfa
+                                                            UAS
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                    </td><!-- Display class name -->
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        </td><!-- Display class name -->
+                                        <td>
+                                            <!--begin::Group-->
+                                            <div class="form-group">
+                                                <input type="text" name="nilai[{{ $student->id }}]" id="nilai"
+                                                    class="form-control">
+                                            </div>
+                                            <!--end::Group-->
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 
-                     
+
                         <div class="text-right mt-5">
-                            <a href="{{ route('admin.student-attendance-class') }}"
-                                class="btn btn-outline-danger mr-2" role="button">Batal</a>
+                            <a href="{{ route('teacher.student-attendance-class') }}" class="btn btn-outline-danger mr-2"
+                                role="button">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
-                     </form>
+                    </form>
 
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div class="d-flex align-items-center py-3">
@@ -148,7 +155,7 @@
                             </div>
 
                             <form method="GET"
-                                action="{{ route('admin.student-attendance-class-data', ['idKelas' => $idKelas]) }}">
+                                action="{{ route('teacher.student-attendance-class-data', ['idKelas' => $idKelas]) }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -179,7 +186,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-attendance-class-data', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('teacher.student-attendance-class-data', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });
@@ -207,6 +214,11 @@
                 // Submit the first form
                 this.submit();
             });
+
+            // $('#form1').on('submit', function() {
+            //     // Submit the second form
+            //     $('#form2')[0].submit();
+            // });
         });
     </script>
     <!--end::content-->

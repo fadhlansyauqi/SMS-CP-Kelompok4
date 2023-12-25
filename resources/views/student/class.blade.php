@@ -20,7 +20,7 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('student.dashboard') }}" class="text-muted">Dashboard</a>
+                        <a href="{{ route('teacher.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
                         <a href="" class="text-muted">Kelas Saya</a>
@@ -31,38 +31,100 @@
             <!--end::Toolbar-->
         </div>
     </div>
-   
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-body p-0">
-                    <table class="table table-hover table-bordered mb-0">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>No Induk Siswa</th>
-                                <th>Nama Siswa</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Kelas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($tbl_students as $index => $student)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $student->nis }}</td>
-                                    <td>{{ $student->nama }}</td>
-                                    <td>{{ $student->jk }}</td>
-                                    <td>{{ $student->kelas->nama_kelas }}</td> <!-- Pastikan properti sesuai -->
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
+
+    <div class="container">
+        <div class="card card-custom">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <form action="{{ route('teacher.student-class') }}" method="GET">
+                            <div class="form-group">
+                                <div class="input-icon input-icon-right">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        class="form-control" placeholder="Search..." />
+                                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div><!-- /.container-fluid -->
+
+                    <div class="row table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kelas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($student_classes) && is_array($student_classes) && count($student_classes) > 0)
+                                    @foreach ($student_classes as $student_class)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><a href="{{ route('teacher.student-class-data', ['idKelas'=>$student_class->id]) }}">{{ $student_class->nama_kelas }}</a></td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <p>No class available</p>
+                                @endif
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex align-items-center py-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="text-muted mr-2">Show</span>
+                                </div>
+
+                                <form method="GET" action="{{ route('teacher.student-class') }}">
+                                    <select id="entries"
+                                        class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
+                                        style="width: 75px;" name="per_page" onchange="this.form.submit()">
+                                        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                        <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30
+                                        </option>
+                                        <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                    </select>
+                                </form>
+                            </div>
+
+                            <div id="paginationLinks">
+                                {{ $student_classes->links() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-    <!-- /.content -->
-@endsection
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $(document).on('change', '#entries', function() {
+                    window.location =
+                        "{{ route('teacher.student-class') }}?search={{ request('search') }}&per_page=" + $(
+                            this)
+                        .val();
+                });
+            });
+        </script>
+        <!--end::content-->
+    @endsection
