@@ -69,10 +69,7 @@ class TeacherController extends Controller
 
         $teacher = new Teacher($validateData);
         $teacher->save();
-<<<<<<< HEAD
-=======
         
->>>>>>> e1e22df7b1dace62e9b1e71ae9424f329dfe7ec6
         return redirect(route('admin.teacher'))->with('success', 'Data Berhasil Ditambahkan');
     }
 

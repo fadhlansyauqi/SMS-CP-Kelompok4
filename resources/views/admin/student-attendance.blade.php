@@ -71,7 +71,7 @@
                             @foreach ($attendances as $attendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ \Carbon\Carbon::parse($attendance->date)->format('d M Y') }}</td>
+                                    <td> {{ \Carbon\Carbon::parse($attendance->date)->format('d-m-Y') }}</td>
                                     <td> {{ $attendance->course->nama_mapel }} </td>
                                     <td> {{ $attendance->student_class->nama_kelas }} </td>
                                     <td>
