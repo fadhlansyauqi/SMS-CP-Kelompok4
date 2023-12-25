@@ -11,7 +11,7 @@ class Student extends Model
 {
     protected $table = 'tbl_students';
 
-    protected $fillable = ['id', 'id_kelas', 'nis', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jk', 'nama_ortu', 'alamat', 'status'];
+    protected $fillable = ['id', 'id_kelas', 'user_id', 'nis', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jk', 'nama_ortu', 'alamat', 'status'];
 
     public function student_class()
     {
@@ -21,5 +21,10 @@ class Student extends Model
     public function attendance()
     {
         return $this->hasMany(SubAttendance::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

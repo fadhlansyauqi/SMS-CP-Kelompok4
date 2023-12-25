@@ -27,7 +27,7 @@ class AttendanceController extends Controller
     public function detailAttendance($idAttendance)
     {
         
-        $detailAttendance = SubAttendance::where('id', $idAttendance)
+        $detailAttendance = SubAttendance::where('id_attendance', $idAttendance)
             ->with("attendance", "student")->get();
 
         return view('student/create-attendance', compact('detailAttendance'));

@@ -93,7 +93,7 @@ class StudentGradeController extends Controller
     public function detailGrade($idGrade)
     {
         $detailGrades = SubGrade::where('id_grade', $idGrade)
-            ->with("grade", "student")->get();
+            ->with("grade", "student.user")->get();
 
         return view('teacher.student-grade-detail', compact('detailGrades'));
     }

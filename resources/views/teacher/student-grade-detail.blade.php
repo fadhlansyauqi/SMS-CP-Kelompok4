@@ -71,7 +71,7 @@
                             @foreach ($detailGrades as $detailGrade)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailGrade->student->nama }}</td>
+                                    <td> {{ $detailGrade->student->user->name }}</td>
                                     <td> {{ $detailGrade->jenis_nilai }} </td>
                                     <td> {{ $detailGrade->nilai }} </td>
                                     <td> {{ $detailGrade->desc }} </td>

@@ -74,7 +74,7 @@
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
                                     <td> {{ $student->nis }}</td>
-                                    <td> {{ $student->nama }} </td>
+                                    <td> {{ $student->user->name }} </td>
                                     <td> {{ $student->jk }} </td>
                                     <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}</td>
                                 </tr>
