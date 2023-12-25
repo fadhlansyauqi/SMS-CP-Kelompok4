@@ -26,6 +26,6 @@ class Grade extends Model
     }
     public function sub_grade()
     {
-        return $this->hasOne(SubGrade::class);
+        return $this->belongsTo(SubGrade::class);
     }
 }

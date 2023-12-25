@@ -74,8 +74,15 @@
                                     <td> {{ $grade->date }}</td>
                                     <td> {{ $grade->course->nama_mapel }} </td>
                                     <td> {{ $grade->student_class->nama_kelas }} </td>
-                                    <td> <a href="{{ route('teacher.student-grade-detail', ['id_grade' => $grade->id]) }}"
-                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                    <td>
+                                        <a href="{{ route('teacher.student-grade.edit', ['id_grade' => $grade->id]) }}"><i
+                                                class="flaticon2-edit mr-3"></i></a>
+                                        <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('delete.grade', ['id_grade' => $grade->id]) }}"><i
+                                                class="flaticon2-trash mr-3"></i></a></a>
+                                        <a href="{{ route('teacher.student-grade-detail', ['id_grade' => $grade->id]) }}"
+                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a>
+                                    </td>
                                 <tr>
                             @endforeach
                         </tbody>
@@ -122,4 +129,23 @@
         });
     </script>
     <!--end::content-->
+@endsection
+
+@section('addJavascript')
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script>
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangermode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    window.location = url;
+                }
+            })
+        }
+    </script>
 @endsection

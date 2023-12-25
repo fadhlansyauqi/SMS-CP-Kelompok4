@@ -22,14 +22,16 @@ class CreateTblSubGradesTable extends Migration
             $table->string('desc')->nullable();
             $table->timestamps();
 
-            $table
-                ->foreign('id_grade')
+
+            $table->foreign('id_grade')
                 ->references('id')
-                ->on('tbl_grades');
-            $table
-                ->foreign('id_student')
+                ->on('tbl_grades')
+                ->onDelete('cascade');
+
+            $table->foreign('id_student')
                 ->references('id')
-                ->on('tbl_students');
+                ->on('tbl_students')
+                ->onDelete('cascade');
         });
     }
 
