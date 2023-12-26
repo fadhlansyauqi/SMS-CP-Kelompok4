@@ -73,7 +73,6 @@ class StudentGradeController extends Controller
         $id_grade = $grade->id;
 
         foreach ($request->jenis_nilai as $key => $jenis_nilai) {
-            // Assuming $request->nilai is an array corresponding to each student's grade
             $nilai = $request->nilai[$key];
 
             $subGrade = new SubGrade();
@@ -95,5 +94,60 @@ class StudentGradeController extends Controller
             ->get();
 
         return view('teacher.student-grade-detail', compact('detailGrades'));
+    }
+
+    public function edit($idGrade, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        $grade = Grade::find($idGrade)->load('course');
+        $courses = Course::all();
+        $detailGrades = SubGrade::where('id_grade', $idGrade)
+            ->with('grade', 'student')
+            ->get();
+
+        return view('admin/student-grade-edit', compact('detailGrades', 'grade', 'courses'));
+    }
+    public function update(Request $request, $idGrade)
+    {
+        $grade = Grade::find($idGrade);
+
+        $grade->date = $request->date ?? $grade->date;
+        $grade->id_course = $request->id_course ?? $grade->id_course;
+        $grade->save();
+
+        $id_grade = $grade->id;
+        foreach ($request->jenis_nilai as $key => $jenis_nilai) {
+            $nilai = $request->nilai[$key];
+            $subGrade = SubGrade::where('id_grade', $idGrade)
+                ->where('id_student', $key)
+                ->first();
+
+            if ($subGrade) {
+                $subGrade->jenis_nilai = $jenis_nilai;
+                $subGrade->nilai = $nilai;
+                $subGrade->save();
+            } else {
+                $subGrade = new SubGrade();
+                $subGrade->id_grade = $id_grade;
+                $subGrade->id_student = $key;
+                $subGrade->jenis_nilai = $jenis_nilai;
+                $subGrade->nilai = $nilai;
+                $subGrade->desc = '';
+                $subGrade->save();
+            }
+        }
+        return redirect(route('admin.student-grade'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function destroy($idGrade)
+    {
+        $grade = Grade::find($idGrade);
+
+        if ($grade) {
+            $grade->sub_grade()->delete();
+            $grade->delete();
+            return redirect(route('admin.student-grade'))->with('success', 'Data Berhasil Dihapus');
+        }
     }
 }
