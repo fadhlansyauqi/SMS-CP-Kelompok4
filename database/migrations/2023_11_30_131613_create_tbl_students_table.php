@@ -18,6 +18,7 @@ class CreateTblStudentsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('id_kelas')->unsigned();
             $table->integer('nis');
+            $table->string('nama');
             $table->string('tempat_lahir', 255);
             $table->date('tanggal_lahir');
             $table->string('jk', 20);
