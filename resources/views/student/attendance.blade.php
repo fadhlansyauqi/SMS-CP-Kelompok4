@@ -50,7 +50,7 @@
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-attendance') }}" method="GET">
+                        <!-- <form action="{{ route('student.attendance') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -58,7 +58,7 @@
                                     <span><i class="flaticon2-search-1 icon-md"></i></span>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                     
                 </div>
@@ -90,7 +90,7 @@
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div class="d-flex align-items-center py-3">
                             <div class="d-flex align-items-center">
-                                <span class="text-muted mr-2">Show</span>
+                                <span class="text-muted mr-2"></span>
                             </div>
 
                             

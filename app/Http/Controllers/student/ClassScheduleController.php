@@ -7,6 +7,7 @@ use App\LessonHours;
 use App\Course;
 use App\StudentClass;
 use App\Days;
+use App\Attendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,7 +24,6 @@ class ClassScheduleController extends Controller
         $studentClasses = StudentClass::all();
         $classSchedules = ClassSchedule::all();
         $days = Days::all();
-        
         return view('student.class-schedule', compact('lessonHours', 'courses', 'studentClasses', 'classSchedules', 'days'));
     }
 

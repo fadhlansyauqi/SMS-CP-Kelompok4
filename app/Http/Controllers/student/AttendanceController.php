@@ -4,6 +4,7 @@ namespace App\Http\Controllers\student;
 
 use App\Attendance;
 use App\Student;
+use App\Course;
 use Carbon\Carbon;
 use App\StudentClass;
 use App\SubAttendance;
@@ -13,12 +14,24 @@ use App\User;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // return $user = User::with('student_class')->where('id', auth()->user()->id)->get();
-    
-        $attendance = Attendance::all(); 
-        return view('student/attendance', [ 
+        // $search   = $request->input('search');
+        // $perPage  = $request->input('per_page', 5);
+        // $students = Attendance::where(function ($query) use ($search) {
+        //     $query
+                
+        //         ->where('nis', 'like', "%$search%")
+        //         ->orWhere('name', 'like', "%$search%")
+        //         ->orWhere('jk', 'like', "%$search%");
+        // })
+        //         ->orderBy('id_kelas', 'ASC')
+        //         ->paginate($perPage);
+
+        $attendance = Attendance::where('id_kelas','1')->get();
+        // $attendance = Attendance::all(); 
+        return view('student.attendance', [ 
             'attendances' => $attendance
         ]);
         
