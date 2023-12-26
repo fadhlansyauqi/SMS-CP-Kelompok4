@@ -63,40 +63,30 @@
                     
                 </div>
                 <div class="row table-responsive">
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kelas</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($attendances as $attendance)
-                                <tr>
-                                    <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $attendance->student_class->nama_kelas }} </td>
-                                    <td> {{ $attendance->course->nama_mapel }} </td>
-                                    <td> {{ $attendance->date }}</td>
-                                    <td> <a href="{{ route('student.create-attendance', ['id_attendance' => $attendance->id]) }}"
-                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
-                                <tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kelas</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($attendances as $attendance)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $attendance->student_class->nama_kelas }}</td>
+                            <td>{{ $attendance->course->nama_mapel }}</td>
+                            <td>{{ \Carbon\Carbon::parse($attendance->date)->format('d-m-Y') }}</td>
+                            <td> <a href="{{ route('student.create-attendance', ['id_attendance' => $attendance->id]) }}"
+                                type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="d-flex align-items-center py-3">
-                            <div class="d-flex align-items-center">
-                                <span class="text-muted mr-2"></span>
-                            </div>
-
-                            
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
