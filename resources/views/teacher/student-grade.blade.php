@@ -71,7 +71,7 @@
                             @foreach ($grades as $grade)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $grade->date }}</td>
+                                    <td> {{ \Carbon\Carbon::parse($grade->date)->format('d-m-Y') }}</td>
                                     <td> {{ $grade->course->nama_mapel }} </td>
                                     <td> {{ $grade->student_class->nama_kelas }} </td>
                                     <td>

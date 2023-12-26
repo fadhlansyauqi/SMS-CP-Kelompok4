@@ -86,7 +86,7 @@ class StudentGradeController extends Controller
         }
 
 
-        return redirect()->back();
+        return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function detailGrade($idGrade)

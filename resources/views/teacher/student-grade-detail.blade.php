@@ -37,6 +37,9 @@
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
+                <a href="{{ route('teacher.student-grade') }}">
+                    <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
+                </a><br><br>
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Data Nilai Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">

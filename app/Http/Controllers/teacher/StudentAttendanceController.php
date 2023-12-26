@@ -108,7 +108,7 @@ class StudentAttendanceController extends Controller
             $subAttendance->save();
         }
 
-        return redirect()->back();
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Absen Berhasil Ditambahkan');
     }
 
     public function detailAttendance($idAttendance)
@@ -151,7 +151,7 @@ class StudentAttendanceController extends Controller
             $subAttendance->save();
         }
 
-        return redirect(route('teacher.student-attendance'))->with('success', 'Data Berhasil Diubah');
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Absen Berhasil Diubah');
     }
 
 
