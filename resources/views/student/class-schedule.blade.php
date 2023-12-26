@@ -98,6 +98,7 @@ p{
                         </thead>
                         <tbody>
                             @foreach($lessonHours as $lh)
+                            
                             <tr>
                                 <td>{{ $lh->waktu }}</td>
                                 @foreach ($days as $day) 

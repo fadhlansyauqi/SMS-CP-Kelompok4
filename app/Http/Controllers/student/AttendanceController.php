@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\student;
-
+use Illuminate\Support\Facades\Auth;
 use App\Attendance;
 use App\Student;
 use App\Course;
@@ -28,8 +28,10 @@ class AttendanceController extends Controller
         // })
         //         ->orderBy('id_kelas', 'ASC')
         //         ->paginate($perPage);
-
-        $attendance = Attendance::where('id_kelas','1')->get();
+        $student = Student::where('user_id', Auth::user()->id)->first('id_kelas');
+        $attendance = Attendance::with('student_class')->where('id_kelas', $student->id_kelas)->get();
+        
+        // $attendance = Attendance::where('id_kelas','1')->get();
         // $attendance = Attendance::all(); 
         return view('student.attendance', [ 
             'attendances' => $attendance
