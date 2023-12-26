@@ -24,20 +24,20 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Custom Styles(used by this page)-->
-		<link href="assets/css/pages/login/login-2.css" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/pages/login/login-2.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Page Custom Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('plugins-metronics/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('plugins-metronics/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="{{ asset('media-metronics/logos/favicon.ico') }}" />
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" style="background-image: url(assets/media/bg/bg-10.jpg)" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
+	<body id="kt_body" style="background-image: url(media-metronics/bg/bg-10.jpg)" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
 		<!--begin::Main-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Login-->
@@ -48,12 +48,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="d-flex flex-column-fluid flex-column justify-content-between py-9 px-7 py-lg-13 px-lg-35">
 						<!--begin::Logo-->
 						<a href="#" class="text-center pt-2" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
-							<img src="{{ asset('assets/media/logos/sms-logo.png') }}" class="max-h-75px" alt="" />
+							<img src="{{ asset('media-metronics/logos/sms-logo.png') }}" class="max-h-75px" alt="" />
 						</a>
-
-						{{-- <a href="index.html" class="brand-logo" onclick="return false;" onmouseover="this.style.pointerEvents='none';">
-							<img alt="Logo" src="assets/media/logos/sms-logo.png" style="max-width: 100%; height: auto;">
-						</a> --}}
 						<!--end::Logo-->
 						<!--begin::Aside body-->
 						<div class="d-flex flex-column-fluid flex-column flex-center">
@@ -123,7 +119,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!--end::Title-->
 					<!--begin::Image-->
-					<div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/media/svg/illustrations/login-visual-2.svg);"></div>
+					<div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(media-metronics/svg/illustrations/login-visual-2.svg);"></div>
 					<!--end::Image-->
 				</div>
 				<!--end::Content-->
@@ -136,12 +132,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
 		<!--end::Global Config-->
 		<!--begin::Global Theme Bundle(used by all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="{{ asset('plugins-metronics/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('plugins-metronics/custom/prismjs/prismjs.bundle.js') }}"></script>
+		<script src="{{ asset('js-metronics/scripts.bundle.js') }}"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
-		<script src="assets/js/pages/custom/login/login-general.js"></script>
+		<script src="{{ asset('js-metronics/pages/custom/login/login-general.js') }}"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

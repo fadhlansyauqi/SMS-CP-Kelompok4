@@ -10,27 +10,24 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Theme Styles(used by all pages)-->
-		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('plugins-metronics/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('plugins-metronics/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
-		<link href="{{ asset('assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/custom-modal.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset('assets/css/pages/wizard/wizard-4.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/custom-modal.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('css-metronics/pages/wizard/wizard-4.css') }}" rel="stylesheet" type="text/css" />
 
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="{{ asset ('assets/media/logos/favicon.ico') }}" />
-
-    <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+		<link rel="shortcut icon" href="{{ asset ('media-metronics/logos/favicon.ico') }}" />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css-metronics/fontawesome.min.css') }}">
     <!-- Theme style -->
     
     @yield('addCss')
@@ -133,7 +130,9 @@
     </script>
     <!--end::Global Config-->
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('plugins-metronics/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('plugins-metronics/custom/prismjs/prismjs.bundle.js') }}"></script>
+    <script src="{{ asset('js-metronics/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
     
 
