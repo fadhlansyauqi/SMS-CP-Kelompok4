@@ -33,10 +33,8 @@
     </div>
 
     <!-- Main content -->
-
-    <div class="container">
-        <div class="card card-custom">
-            <div class="card-body">
+        <div class="content card">
+            <div class="container-fluid card-body">
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Data Nilai Saya</b></h3>
                 <div class="row">
                     <div class="col-4">
@@ -64,7 +62,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($grades) && is_array($grades) && count($grades) > 0)
+                          
                                 @foreach ($grades as $grade)
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
@@ -73,9 +71,7 @@
                                         <td> {{ $grade->student_class->nama_kelas }} </td>
                                     <tr>
                                 @endforeach
-                            @else
-                                <p>No grades available</p>
-                            @endif
+                            
                         </tbody>
                     </table>
 
@@ -105,8 +101,6 @@
                 </div>
             </div>
         </div>
-
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

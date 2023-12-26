@@ -79,7 +79,7 @@
                                                 class="flaticon2-edit mr-3"></i></a>
                                         <a onclick="confirmDelete(this)"
                                             data-url="{{ route('delete.grade', ['id_grade' => $grade->id]) }}"><i
-                                                class="flaticon2-trash mr-3"></i></a></a>
+                                                class="flaticon2-trash mr-3"></i></a>
                                         <a href="{{ route('teacher.student-grade-detail', ['id_grade' => $grade->id]) }}"
                                             type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a>
                                     </td>
