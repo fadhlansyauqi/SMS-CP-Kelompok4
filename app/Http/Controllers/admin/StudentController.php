@@ -112,7 +112,7 @@ class StudentController extends Controller
             'id_kelas'      => 'required',
             'nis'           => 'required|integer',
             'nama'          => 'required|string|max:255',
-            'user_id'       => 'integer',
+            // 'user_id'       => 'integer',
             'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jk'            => 'required|string|max:20',
@@ -124,7 +124,7 @@ class StudentController extends Controller
         $student->id_kelas      = $validateData['id_kelas'];
         $student->nis           = $validateData['nis'];
         $student->nama          = $validateData['nama'];
-        $student->user_id       = $validateData['user_id'];
+        // $student->user_id       = $validateData['user_id'];
         $student->tempat_lahir  = $validateData['tempat_lahir'];
         $student->tanggal_lahir = $validateData['tanggal_lahir'];
         $student->jk            = $validateData['jk'];

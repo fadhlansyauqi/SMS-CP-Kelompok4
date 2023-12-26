@@ -40,7 +40,7 @@
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Data Absensi Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('admin.student-attendance') }}" method="GET">
+                        <form action="{{ route('admin.student-attendance-detail', ['idAttendance' => $idAttendance]) }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -50,33 +50,26 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-5 text-right">
-                        <a href="{{ route('admin.student-attendance-class') }}" type="button" class="btn btn-primary"><i
-                                class="flaticon2-add-1"></i><strong>Absensi Baru</strong></a>
-                    </div>
                 </div>
                 <div class="row table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIS</th>
                                 <th>Siswa</th>
                                 <th>Status</th>
                                 <th>Keterangan</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($detailAttendances as $detailAttendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailAttendance->student->user->name }}</td>
+                                    <td> {{ $detailAttendance->student->nis }}</td>
+                                    <td> {{ $detailAttendance->student->nama }}</td>
                                     <td> {{ $detailAttendance->status }} </td>
                                     <td> {{ $detailAttendance->desc }} </td>
-                                    {{-- <td>
-                                            <a href="{{ route('admin.student-attendance-class-data.edit', $detailAttendance->id) }}"><i class="flaticon2-edit mr-3"></i></a>                                    
-                                    </td> --}}
                                 <tr>
                             @endforeach
                         </tbody>
@@ -88,7 +81,7 @@
                                 <span class="text-muted mr-2">Show</span>
                             </div>
 
-                            <form method="GET" action="{{ route('admin.student-attendance') }}">
+                            <form method="GET" action="{{ route('admin.student-attendance-detail', ['idAttendance' => $idAttendance]) }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -101,9 +94,9 @@
                             </form>
                         </div>
 
-                        {{-- <div id="paginationLinks">
-                            {{ $attendances->links() }}
-                        </div> --}}
+                        <div id="paginationLinks">
+                            {{ $detailAttendances->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +109,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-attendance') }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('admin.student-attendance-detail', ['idAttendance' => $idAttendance]) }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });

@@ -98,7 +98,7 @@
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
                                         <td> {{ $detailAttendance->student->nis }}</td>
-                                        <td> {{ $detailAttendance->student->user->name }}</td>
+                                        <td> {{ $detailAttendance->student->nama }}</td>
                                         <td>
                                             <div class="form-group row">
                                                 <div class="col-9 col-form-label">

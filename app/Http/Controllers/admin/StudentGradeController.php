@@ -17,8 +17,11 @@ class StudentGradeController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
+
         $grades = Grade::where(function ($query) use ($search) {
-            $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
+            $query->where('date', 'like', "%$search%")->orWhereHas('course', function ($query) use ($search) {
+                $query->where('nama_mapel', 'like', "%$search%");
+            });
         })
             ->orderBy('date', 'ASC')
             ->paginate($perPage);
@@ -40,13 +43,13 @@ class StudentGradeController extends Controller
     public function indexClassData($idKelas, Request $request)
     {
         $search = $request->get('search');
-        $perPage = $request->get('per_page', 10);
+        $perPage = $request->get('per_page', 5);
 
         $students = Student::where('id_kelas', $idKelas);
         $courses = Course::all();
 
         if ($search) {
-            $students = $students->where('nama', 'like', '%' . $search . '%');
+            $students = $students->where('nama', 'like', '%' . $search . '%')->orWhere('nis', 'like', '%' . $search . '%');
         }
 
         $students = $students->paginate($perPage);

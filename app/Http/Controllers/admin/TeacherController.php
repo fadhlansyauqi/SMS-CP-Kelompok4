@@ -20,14 +20,10 @@ class TeacherController extends Controller
         $perPage = $request->input('per_page', 5);
         $teachers = Teacher::where(function ($query) use ($search) {
             $query->where('nip', 'like', "%$search%")
-                  ->orWhere('nama', 'like', "%$search%")
-                  ->orWhere('jk', 'like', "%$search%")
-                  ->orWhere('alamat', 'like', "%$search%");
+                  ->orWhere('nama', 'like', "%$search%");
         })
         ->paginate($perPage);
-        // $teachers = Teacher::all();
         return view('admin.teacher', compact('teachers'));
-        // return view('admin.teacher')->with('teachers', $teachers);
     }
 
     /**

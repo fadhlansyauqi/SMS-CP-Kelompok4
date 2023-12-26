@@ -15,8 +15,8 @@ class StudentAttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $search      = $request->input('search');
-        $perPage     = $request->input('per_page', 5);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
         $attendances = Attendance::whereHas('course', function ($query) use ($search) {
             $query->where('date', 'like', "%$search%")->orWhere('nama_mapel', 'like', "%$search%");
         })
@@ -28,8 +28,8 @@ class StudentAttendanceController extends Controller
 
     public function indexClass(Request $request)
     {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
         $student_classes = StudentClass::where('nama_kelas', 'like', "%$search%")
             ->orderBy('nama_kelas', 'ASC')
             ->paginate($perPage);
@@ -39,19 +39,34 @@ class StudentAttendanceController extends Controller
 
     public function indexClassData($idKelas, Request $request)
     {
-        $search  = $request->get('search');
+        $search = $request->get('search');
         $perPage = $request->get('per_page', 5);
 
         $students = Student::where('id_kelas', $idKelas);
-        $courses  = Course::all();
+        $courses = Course::all();
 
         if ($search) {
-            $students = $students->where('nama', 'like', '%' . $search . '%');
+            $students = $students->where('nama', 'like', '%' . $search . '%')->orWhere('nis', 'like', "%$search%");
         }
 
         $students = $students->paginate($perPage);
 
         return view('admin/student-attendance-class-data', compact('students', 'idKelas', 'search', 'perPage', 'courses'));
+    }
+
+    public function detailAttendance($idAttendance, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+
+        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
+            ->whereHas('student', function ($query) use ($search) {
+                $query->where('nama', 'like', "%$search%")->orWhere('nis', 'like', "%$search%");
+            })
+            ->with('attendance', 'student')
+            ->paginate($perPage);
+
+        return view('admin/student-attendance-detail', compact('detailAttendances', 'idAttendance'));
     }
 
     public function store(Request $request, $idKelas)
@@ -86,10 +101,10 @@ class StudentAttendanceController extends Controller
 
     public function edit($idAttendance, Request $request)
     {
-        $search            = $request->get('search');
-        $perPage           = $request->get('per_page', 5);
-        $attendance        = Attendance::find($idAttendance)->load('course');
-        $courses           = Course::all();
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        $attendance = Attendance::find($idAttendance)->load('course');
+        $courses = Course::all();
         $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
             ->with('attendance', 'student')
             ->get();
@@ -100,7 +115,7 @@ class StudentAttendanceController extends Controller
     {
         $attendance = Attendance::find($idAttendance);
 
-        $attendance->date      = $request->date ?? $attendance->date;
+        $attendance->date = $request->date ?? $attendance->date;
         $attendance->id_course = $request->id_course ?? $attendance->id_course;
         $attendance->save();
 
@@ -108,11 +123,11 @@ class StudentAttendanceController extends Controller
             $subAttendance = subAttendance::where('id_attendance', $idAttendance)
                 ->where('id_student', $key)
                 ->first();
-            $subAttendance->status        = $value;
+            $subAttendance->status = $value;
             $subAttendance->id_attendance = $idAttendance;
-            $subAttendance->id_student    = $key;
-            $subAttendance->status        = $value;
-            $subAttendance->desc          = '';
+            $subAttendance->id_student = $key;
+            $subAttendance->status = $value;
+            $subAttendance->desc = '';
             $subAttendance->save();
         }
 
@@ -129,14 +144,4 @@ class StudentAttendanceController extends Controller
             return redirect(route('admin.student-attendance'))->with('success', 'Data Berhasil Dihapus');
         }
     }
-
-    public function detailAttendance($idAttendance)
-    {
-        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
-            ->with('attendance', 'student')
-            ->get();
-
-        return view('admin/student-attendance-detail', compact('detailAttendances'));
-    }
-
 }

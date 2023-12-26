@@ -40,7 +40,7 @@
     <div class="container">
         <div class="card card-custom ">
             <div class="card-body">
-                <a href="{{ route('teacher.student-grade-class') }}">
+                <a href="{{ route('admin.student-grade-class') }}">
                     <i class="flaticon2-back icon-xm text-primary"> Kembali</i>
                 </a>
                 <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>List Data Siswa</b></h3>
@@ -92,7 +92,7 @@
                                     <tr id_student="{{ $student->id }}">
                                         <td> {{ $loop->iteration }}</td>
                                         <td> {{ $student->nis }}</td>
-                                        <td> {{ $student->user->name }} </td>
+                                        <td> {{ $student->nama }} </td>
                                         <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
                                         </td>
                                         <td>
@@ -142,7 +142,7 @@
 
 
                         <div class="text-right mt-5">
-                            <a href="{{ route('admin.student-attendance-class') }}" class="btn btn-outline-danger mr-2"
+                            <a href="{{ route('admin.student-grade-class') }}" class="btn btn-outline-danger mr-2"
                                 role="button">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
@@ -155,7 +155,7 @@
                             </div>
 
                             <form method="GET"
-                                action="{{ route('admin.student-attendance-class-data', ['idKelas' => $idKelas]) }}">
+                                action="{{ route('admin.student-grade-class-data', ['idKelas' => $idKelas]) }}">
                                 <select id="entries"
                                     class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                     style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -186,7 +186,7 @@
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
-                    "{{ route('admin.student-attendance-class-data', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" +
+                    "{{ route('admin.student-grade-class-data', ['idKelas' => $idKelas]) }}?search={{ request('search') }}&per_page=" +
                     $(this)
                     .val();
             });

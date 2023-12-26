@@ -63,16 +63,16 @@ class AccountController extends Controller
     public function update(Request $request, User $user)
     {
         $validateData = validator($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name'     => 'required',
+            'email'    => 'required|email',
             'password' => 'required|min:3',
-            'role' => ['required', Rule::in(['TEACHER', 'STUDENT'])],
+            'role'     => ['required', Rule::in(['TEACHER', 'STUDENT'])],
         ])->validate();
 
-        $user->name = $validateData['name'];
-        $user->email = $validateData['email'];
+        $user->name     = $validateData['name'];
+        $user->email    = $validateData['email'];
         $user->password = Hash::make($validateData['password']);
-        $user->role = $validateData['role'];
+        $user->role     = $validateData['role'];
         $user->save();
 
         return redirect(route('admin.account'))->with('success', 'User Berhasil Diupdate');
