@@ -46,8 +46,7 @@
                 <h3 class="text-dark font-weight-bold mt-5 mb-5 "><b>List Data Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-class-data', ['idKelas' => $idKelas]) }}"
-                            method="GET">
+                        <form action="{{ route('teacher.student-class-data', ['idKelas' => $idKelas]) }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ $search }}" class="form-control"
@@ -74,9 +73,10 @@
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
                                     <td> {{ $student->nis }}</td>
-                                    <td> {{ $student->nama }} </td>
+                                    <td> {{ $student->user->name }} </td>
                                     <td> {{ $student->jk }} </td>
-                                    <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}</td>
+                                    <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

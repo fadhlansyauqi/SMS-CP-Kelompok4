@@ -27,4 +27,9 @@ class StudentClass extends Model
     {
         return $this->hasOne(User::class);
     }
+
+   public function classSchedules()
+    {
+        return $this->hasMany(ClassSchedule::class, 'id_class');
+    }
 }

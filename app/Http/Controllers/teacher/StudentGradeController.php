@@ -74,7 +74,6 @@ class StudentGradeController extends Controller
         $id_grade = $grade->id;
 
         foreach ($request->jenis_nilai as $key => $jenis_nilai) {
-            // Assuming $request->nilai is an array corresponding to each student's grade
             $nilai = $request->nilai[$key];
 
             $subGrade                = new SubGrade;
@@ -87,27 +86,85 @@ class StudentGradeController extends Controller
         }
 
 
-        return redirect()->back();
+        return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function detailGrade($idGrade)
     {
         $detailGrades = SubGrade::where('id_grade', $idGrade)
-            ->with("grade", "student")->get();
+            ->with("grade", "student.user")->get();
 
         return view('teacher.student-grade-detail', compact('detailGrades'));
     }
 
-    public function create()
-    {
-        $courses = \App\Course::all();
-        $students = \App\Student::all();
 
-        return view('teacher/create-grade', [
-            'courses' => $courses,
-            'students' => $students
-        ]);
+
+    public function edit($idGrade, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        $grade = Grade::find($idGrade)->load('course');
+        $courses = Course::all();
+        $detailGrades = SubGrade::where('id_grade', $idGrade)
+            ->with('grade', 'student')
+            ->get();
+
+        return view('teacher/student-grade-edit', compact('detailGrades', 'grade', 'courses'));
     }
+    public function update(Request $request, $idGrade)
+    {
+        $grade = Grade::find($idGrade);
+
+        $grade->date = $request->date ?? $grade->date;
+        $grade->id_course = $request->id_course ?? $grade->id_course;
+        $grade->save();
+
+        $id_grade = $grade->id;
+        foreach ($request->jenis_nilai as $key => $jenis_nilai) {
+            $nilai = $request->nilai[$key];
+            $subGrade = SubGrade::where('id_grade', $idGrade)
+                ->where('id_student', $key)
+                ->first();
+
+            if ($subGrade) {
+                // Update the existing record
+                $subGrade->jenis_nilai   = $jenis_nilai;
+                $subGrade->nilai         = $nilai;
+                $subGrade->save();
+            } else {
+                // Create a new record
+                $subGrade = new SubGrade;
+                $subGrade->id_grade      = $id_grade;
+                $subGrade->id_student    = $key;
+                $subGrade->jenis_nilai   = $jenis_nilai;
+                $subGrade->nilai         = $nilai;
+                $subGrade->desc          = '';
+                $subGrade->save();
+            }
+        }
+        return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function destroy($grade)
+    {
+        $grade = Grade::find($grade);
+
+        if ($grade) {
+            $grade->sub_grade()->delete();
+            $grade->delete();
+            return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Dihapus');
+        }
+    }
+    // public function create()
+    // {
+    //     $courses = \App\Course::all();
+    //     $students = \App\Student::all();
+
+    //     return view('teacher/create-grade', [
+    //         'courses' => $courses,
+    //         'students' => $students
+    //     ]);
+    // }
     // public function store(Request $request)
     // {
     //     $validateData = validator($request->all(), [
@@ -123,40 +180,40 @@ class StudentGradeController extends Controller
     //     return redirect(route('teacher.student-grade'));
     // }
 
-    public function edit(Grade $grade)
-    {
-        $courses = \App\Course::all();
-        $students = \App\Student::all();
+    // public function edit(Grade $grade)
+    // {
+    //     $courses = \App\Course::all();
+    //     $students = \App\Student::all();
 
-        return view('teacher/edit-grade', [
-            'grade' => $grade,
-            'courses' => $courses,
-            'students' => $students
-        ]);
-    }
+    //     return view('teacher/edit-grade', [
+    //         'grade' => $grade,
+    //         'courses' => $courses,
+    //         'students' => $students
+    //     ]);
+    // }
 
 
-    public function update(Request $request, Grade $grade)
-    {
-        $validateData = validator($request->all(), [
-            'id_mapel' => 'required|int',
-            'id_siswa'  => 'required|int',
-            'jenis_nilai' => 'required|string|max:255',
-            'nilai' => 'required|int',
-        ])->validate();
+    // public function update(Request $request, Grade $grade)
+    // {
+    //     $validateData = validator($request->all(), [
+    //         'id_mapel' => 'required|int',
+    //         'id_siswa'  => 'required|int',
+    //         'jenis_nilai' => 'required|string|max:255',
+    //         'nilai' => 'required|int',
+    //     ])->validate();
 
-        $grade->id_mapel = $validateData['id_mapel'];
-        $grade->id_siswa = $validateData['id_siswa'];
-        $grade->jenis_nilai = $validateData['jenis_nilai'];
-        $grade->nilai = $validateData['nilai'];
-        $grade->save();
+    //     $grade->id_mapel = $validateData['id_mapel'];
+    //     $grade->id_siswa = $validateData['id_siswa'];
+    //     $grade->jenis_nilai = $validateData['jenis_nilai'];
+    //     $grade->nilai = $validateData['nilai'];
+    //     $grade->save();
 
-        return redirect(route('teacher.student-grade'));
-    }
+    //     return redirect(route('teacher.student-grade'));
+    // }
 
-    public function destroy(Grade $grade)
-    {
-        $grade->delete();
-        return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Dihapus');
-    }
+    // public function destroy(Grade $grade)
+    // {
+    //     $grade->delete();
+    //     return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Dihapus');
+    // }
 }

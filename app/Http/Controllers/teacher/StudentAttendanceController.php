@@ -108,15 +108,50 @@ class StudentAttendanceController extends Controller
             $subAttendance->save();
         }
 
-        return redirect()->back();
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Absen Berhasil Ditambahkan');
     }
 
     public function detailAttendance($idAttendance)
     {
         $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
-            ->with("attendance", "student")->get();
+            ->with("attendance", "student.user")->get();
 
         return view('teacher/student-attendance-detail', compact('detailAttendances'));
+    }
+
+    public function edit($idAttendance, Request $request)
+    {
+        $search = $request->get('search');
+        $perPage = $request->get('per_page', 5);
+        $attendance = Attendance::find($idAttendance)->load('course');
+        $courses = Course::all();
+        $detailAttendances = SubAttendance::where('id_attendance', $idAttendance)
+            ->with('attendance', 'student')
+            ->get();
+
+        return view('teacher/student-attendance-edit', compact('detailAttendances', 'attendance', 'courses'));
+    }
+    public function update(Request $request, $idAttendance)
+    {
+        $attendance = Attendance::find($idAttendance);
+
+        $attendance->date = $request->date ?? $attendance->date; // Use existing date if none is provided
+        $attendance->id_course = $request->id_course ?? $attendance->id_course;
+        $attendance->save();
+
+        foreach ($request->status as $key => $value) {
+            $subAttendance = subAttendance::where('id_attendance', $idAttendance)
+                ->where('id_student', $key)
+                ->first();
+            $subAttendance->status = $value;
+            $subAttendance->id_attendance = $idAttendance;
+            $subAttendance->id_student = $key;
+            $subAttendance->status = $value;
+            $subAttendance->desc = '';
+            $subAttendance->save();
+        }
+
+        return redirect(route('teacher.student-attendance'))->with('success', 'Data Absen Berhasil Diubah');
     }
 
 

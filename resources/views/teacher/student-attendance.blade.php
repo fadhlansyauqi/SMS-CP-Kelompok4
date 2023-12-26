@@ -71,11 +71,17 @@
                             @foreach ($attendances as $attendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $attendance->date }}</td>
+                                    <td> {{ \Carbon\Carbon::parse($attendance->date)->format('d-m-Y') }}</td>
                                     <td> {{ $attendance->course->nama_mapel }} </td>
                                     <td> {{ $attendance->student_class->nama_kelas }} </td>
-                                    <td> <a href="{{ route('teacher.student-attendance-detail', ['id_attendance' => $attendance->id]) }}"
-                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a> </td>
+                                    <td>
+
+                                        <a
+                                            href="{{ route('teacher.student-attendance.edit', ['id_attendance' => $attendance->id]) }}"><i
+                                                class="flaticon2-edit mr-3"></i></a>
+                                        <a href="{{ route('teacher.student-attendance-detail', ['id_attendance' => $attendance->id]) }}"
+                                            type="button" class="btn btn-success btn-sm"><strong>Detail</strong></a>
+                                    </td>
                                 <tr>
                             @endforeach
                         </tbody>

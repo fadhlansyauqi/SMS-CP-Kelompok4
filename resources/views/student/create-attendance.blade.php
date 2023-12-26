@@ -77,7 +77,7 @@
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
                                     <td>{{ $attendances->student->nis}}</td>
-                                    <td> {{ $attendances->student->nama }}</td>
+                                    <td> {{ $attendances->student->user->name }}</td>
                                     <td> {{ $attendances->status }} </td>
                                     
                                     {{-- <td> <a href="" type="button"

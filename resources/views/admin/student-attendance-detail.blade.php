@@ -71,12 +71,12 @@
                             @foreach ($detailAttendances as $detailAttendance)
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
-                                    <td> {{ $detailAttendance->student->nama }}</td>
+                                    <td> {{ $detailAttendance->student->user->name }}</td>
                                     <td> {{ $detailAttendance->status }} </td>
                                     <td> {{ $detailAttendance->desc }} </td>
-                                    <td>
-                                            <a href="{{ route('admin.student-attendance.edit', $detailAttendance->id) }}"><i class="flaticon2-edit mr-3"></i></a>                                    
-                                    </td>
+                                    {{-- <td>
+                                            <a href="{{ route('admin.student-attendance-class-data.edit', $detailAttendance->id) }}"><i class="flaticon2-edit mr-3"></i></a>                                    
+                                    </td> --}}
                                 <tr>
                             @endforeach
                         </tbody>
