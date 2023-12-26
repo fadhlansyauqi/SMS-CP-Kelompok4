@@ -17,8 +17,8 @@ class StudentAttendanceController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        $attendances = Attendance::where(function ($query) use ($search) {
-            $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
+        $attendances = Attendance::whereHas('course', function ($query) use ($search) {
+            $query->where('date', 'like', "%$search%")->orWhere('nama_mapel', 'like', "%$search%");
         })
             ->orderBy('date', 'ASC')
             ->paginate($perPage);

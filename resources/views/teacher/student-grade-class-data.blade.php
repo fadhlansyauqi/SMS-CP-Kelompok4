@@ -92,7 +92,7 @@
                                     <tr id_student="{{ $student->id }}">
                                         <td> {{ $loop->iteration }}</td>
                                         <td> {{ $student->nis }}</td>
-                                        <td> {{ $student->user->user->name }} </td>
+                                        <td> {{ $student->nama }} </td>
                                         <td> {{ $student->student_class ? $student->student_class->nama_kelas : 'No class' }}
                                         </td>
                                         <td>

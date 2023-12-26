@@ -96,7 +96,7 @@
                                 @foreach ($detailGrades as $detailGrade)
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
-                                        <td> {{ $detailGrade->student->user->name }}</td>
+                                        <td> {{ $detailGrade->student->nama }}</td>
                                         <td>
                                             <div class="form-group row">
                                                 <div class="col-9 col-form-label">

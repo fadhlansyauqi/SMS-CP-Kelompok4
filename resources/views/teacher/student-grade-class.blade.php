@@ -43,7 +43,7 @@
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Silahkan Pilih Kelas</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-grade') }}" method="GET">
+                        <form action="{{ route('teacher.student-grade-class') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"

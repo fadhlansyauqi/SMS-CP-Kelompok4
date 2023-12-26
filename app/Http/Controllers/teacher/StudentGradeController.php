@@ -17,8 +17,11 @@ class StudentGradeController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
+
         $grades = Grade::where(function ($query) use ($search) {
-            $query->where('date', 'like', "%$search%")->orWhere('id_course', 'like', "%$search%");
+            $query->where('date', 'like', "%$search%")->orWhereHas('course', function ($query) use ($search) {
+                $query->where('nama_mapel', 'like', "%$search%");
+            });
         })
             ->orderBy('date', 'ASC')
             ->paginate($perPage);
@@ -39,15 +42,14 @@ class StudentGradeController extends Controller
 
     public function indexClassData($idKelas, Request $request)
     {
-
         $search = $request->get('search');
-        $perPage = $request->get('per_page', 10);
+        $perPage = $request->get('per_page', 5);
 
         $students = Student::where('id_kelas', $idKelas);
         $courses = Course::all();
 
         if ($search) {
-            $students = $students->where('nama', 'like', '%' . $search . '%');
+            $students = $students->where('nama', 'like', '%' . $search . '%')->orWhere('nis', 'like', '%' . $search . '%');
         }
 
         $students = $students->paginate($perPage);
@@ -64,9 +66,9 @@ class StudentGradeController extends Controller
             ->whereDate('date', Carbon::now())
             ->first();
         if (is_null($grade)) {
-            $grade            = new Grade;
-            $grade->date      = date('Y-m-d');
-            $grade->id_kelas  = $idKelas;
+            $grade = new Grade();
+            $grade->date = date('Y-m-d');
+            $grade->id_kelas = $idKelas;
             $grade->id_course = $request->input('id_course');
             $grade->save();
         }
@@ -76,15 +78,14 @@ class StudentGradeController extends Controller
         foreach ($request->jenis_nilai as $key => $jenis_nilai) {
             $nilai = $request->nilai[$key];
 
-            $subGrade                = new SubGrade;
-            $subGrade->id_grade      = $id_grade;
-            $subGrade->id_student    = $key;
-            $subGrade->jenis_nilai   = $jenis_nilai;
-            $subGrade->nilai         = $nilai;
-            $subGrade->desc          = '';
+            $subGrade = new SubGrade();
+            $subGrade->id_grade = $id_grade;
+            $subGrade->id_student = $key;
+            $subGrade->jenis_nilai = $jenis_nilai;
+            $subGrade->nilai = $nilai;
+            $subGrade->desc = '';
             $subGrade->save();
         }
-
 
         return redirect(route('teacher.student-grade'))->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -92,12 +93,11 @@ class StudentGradeController extends Controller
     public function detailGrade($idGrade)
     {
         $detailGrades = SubGrade::where('id_grade', $idGrade)
-            ->with("grade", "student.user")->get();
+            ->with('grade', 'student.user')
+            ->get();
 
         return view('teacher.student-grade-detail', compact('detailGrades'));
     }
-
-
 
     public function edit($idGrade, Request $request)
     {
@@ -128,17 +128,17 @@ class StudentGradeController extends Controller
 
             if ($subGrade) {
                 // Update the existing record
-                $subGrade->jenis_nilai   = $jenis_nilai;
-                $subGrade->nilai         = $nilai;
+                $subGrade->jenis_nilai = $jenis_nilai;
+                $subGrade->nilai = $nilai;
                 $subGrade->save();
             } else {
                 // Create a new record
-                $subGrade = new SubGrade;
-                $subGrade->id_grade      = $id_grade;
-                $subGrade->id_student    = $key;
-                $subGrade->jenis_nilai   = $jenis_nilai;
-                $subGrade->nilai         = $nilai;
-                $subGrade->desc          = '';
+                $subGrade = new SubGrade();
+                $subGrade->id_grade = $id_grade;
+                $subGrade->id_student = $key;
+                $subGrade->jenis_nilai = $jenis_nilai;
+                $subGrade->nilai = $nilai;
+                $subGrade->desc = '';
                 $subGrade->save();
             }
         }
@@ -191,7 +191,6 @@ class StudentGradeController extends Controller
     //         'students' => $students
     //     ]);
     // }
-
 
     // public function update(Request $request, Grade $grade)
     // {
