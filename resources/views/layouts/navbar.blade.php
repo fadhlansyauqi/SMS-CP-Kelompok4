@@ -97,9 +97,9 @@
                                     </span>
                                 </span>
 
-                                <span class="navi-text text-muted text-hover-primary">{{ Auth::user()->email }}</span>
+                                <span class="navi-text text-hover-primary">{{ Auth::user()->email }}</span>
                             </span>
-                            <span class="text-muted">{{ Auth::user()->role }}</span>
+                            <span class="navi-text text-hover-primary">{{ Auth::user()->role }}</span>
                         </a>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

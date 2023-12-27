@@ -14,7 +14,7 @@ class AccountController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        $users = User::where('email', 'like', "%$search%")->paginate($perPage);
+        $users = User::where('email', 'like', "%$search%")->orWhere('name', 'like', "%$search%")->paginate($perPage);
 
         return view('admin.account', compact('users'));
     }
@@ -29,7 +29,7 @@ class AccountController extends Controller
         $validatedData = $request->validate(
             [
                 'name'     => 'required',
-                'email'    => 'required|email',
+                'email'    => 'required|email|unique:tbl_users,email',
                 'password' => 'required|min:3',
                 'role'     => ['required', Rule::in(['TEACHER', 'STUDENT'])],
             ],
@@ -37,6 +37,7 @@ class AccountController extends Controller
                 'name.required'     => 'Nama harus diisi',
                 'email.required'    => 'Email harus diisi',
                 'email.email'       => 'Format email tidak valid',
+                'email.unique'       => 'Email sudah digunakan',
                 'password.required' => 'Password harus diisi',
                 'password.min'      => 'Password minimal harus 3 karakter',
                 'role.required'     => 'Role harus dipilih',

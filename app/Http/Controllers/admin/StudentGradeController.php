@@ -96,7 +96,7 @@ class StudentGradeController extends Controller
             ->with('grade', 'student')
             ->get();
 
-        return view('teacher.student-grade-detail', compact('detailGrades'));
+        return view('admin.student-grade-detail', compact('detailGrades'));
     }
 
     public function edit($idGrade, Request $request)
