@@ -43,7 +43,7 @@
                 <h3 class="text-dark font-weight-bold mb-5 "><b>Data Nilai Siswa</b></h3>
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('teacher.student-grade-detail', ['id_grade' => $grade->id]) }}" method="GET">
+                        <form action="" method="GET">
                             <div class="form-group">
                                 <div class="input-icon input-icon-right">
                                     <input type="text" name="search" value="{{ request('search') }}"
@@ -85,7 +85,7 @@
                     </table>
 
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="d-flex align-items-center py-3">
+                        {{-- <div class="d-flex align-items-center py-3">
                             <div class="d-flex align-items-center">
                                 <span class="text-muted mr-2">Show</span>
                             </div>
@@ -101,7 +101,7 @@
                                     <!-- Tambahkan lebih banyak opsi jika diperlukan -->
                                 </select>
                             </form>
-                        </div>
+                        </div> --}}
 
                         {{-- <div id="paginationLinks">
                             {{ $attendances->links() }}
@@ -114,7 +114,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(document).on('change', '#entries', function() {
                 window.location =
@@ -123,6 +123,6 @@
                     .val();
             });
         });
-    </script>
+    </script> --}}
     <!--end::content-->
 @endsection
